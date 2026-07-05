@@ -42,6 +42,8 @@
 {"@type":"Question","name":"What is the difference between 72 DPI and 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"72 DPI is a legacy screen convention; 300 DPI is print density. A 3000×2000 px photo prints at 10×6.7 inches at 300 DPI, but the same file at 72 DPI is interpreted as 41.7×27.8 inches — blurry when printed. Same pixels, different printed size."}},
 {"@type":"Question","name":"Can I change the DPI of a PNG?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG stores print density in its pHYs chunk. SetDPI writes it losslessly, just like the JFIF and EXIF resolution fields in JPG files."}},
 {"@type":"Question","name":"How do I change the DPI of an image without Photoshop?","acceptedAnswer":{"@type":"Answer","text":"You don't need Photoshop. This free image DPI changer runs in your browser: drop your JPG or PNG, pick or type the DPI you need (300 for print), and download. Pixels stay untouched, so there's zero quality loss."}},
+{"@type":"Question","name":"Is DPI the same as PPI?","acceptedAnswer":{"@type":"Answer","text":"Nearly. PPI (pixels per inch) describes screens, DPI (dots per inch) describes print. In file metadata both are stored in the same resolution field, so tools treat the terms interchangeably. If a form asks for 300 PPI, setting 300 DPI here satisfies it."}},
+{"@type":"Question","name":"What DPI should I use for scanning photos and documents?","acceptedAnswer":{"@type":"Answer","text":"Scan documents at 300 DPI for clean reprints and reliable OCR. Scan photos you may want to enlarge at 600 DPI. If your scanner saved a file with the wrong DPI value, drop it here and correct the metadata without rescanning anything."}},
 {"@type":"Question","name":"Are my photos uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"Never. Everything runs locally in your browser using JavaScript — your files never leave your device. It even keeps working offline once the page is loaded."}}]}
 </script>
 <style>
@@ -248,6 +250,31 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p>Print shops and photo labs, academic journals and conference papers, Amazon KDP book covers and interiors, Etsy printables, embroidery and engraving services, passport and ID photo requirements, magazine ads — all of them routinely reject files whose DPI metadata isn't set to 300. Fixing it takes seconds here and costs nothing.</p>
   </section>
 
+  <section class="block" id="requirements">
+    <h2>Common DPI requirements at a glance</h2>
+    <p>Different platforms and print services ask for different resolution settings. These are the values you will most often be asked for:</p>
+    <table class="print">
+      <thead><tr><th>Use case</th><th>Required DPI</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Amazon KDP covers &amp; interiors</td><td>300 DPI</td><td>Files below 300 DPI trigger print-quality warnings</td></tr>
+        <tr><td>Academic journals &amp; papers</td><td>300–600 DPI</td><td>Line art and charts often need 600 DPI</td></tr>
+        <tr><td>Etsy printables &amp; wall art</td><td>300 DPI</td><td>Buyers expect crisp prints up to A4 and beyond</td></tr>
+        <tr><td>US passport photo (2 × 2 in)</td><td>300 DPI</td><td>600 × 600 px at 300 DPI meets the official spec</td></tr>
+        <tr><td>Magazine &amp; newspaper ads</td><td>300 DPI</td><td>CMYK delivery is usually requested as well</td></tr>
+        <tr><td>Large-format posters &amp; banners</td><td>150 DPI</td><td>Viewed from a distance, so lower density is fine</td></tr>
+        <tr><td>Web &amp; social media</td><td>72–96 DPI</td><td>Screens ignore DPI — only pixel dimensions matter</td></tr>
+      </tbody>
+    </table>
+    <p>When a submission form rejects your file for "low resolution", it is almost always this single metadata number — change the image DPI to the required value above and re-upload the very same picture.</p>
+  </section>
+
+  <section class="block" id="alternatives">
+    <h2>Changing image DPI without Photoshop</h2>
+    <p>You can change DPI in desktop software, but every route is slower than a browser tool — and some quietly resample your pixels along the way:</p>
+    <p><strong>Photoshop</strong> — Image → Image Size, untick "Resample", type a new resolution. Safe, but it needs a subscription and a download. <strong>GIMP</strong> — Image → Print Size, set the X and Y resolution. Free, yet a 200&nbsp;MB install is overkill for a metadata edit. <strong>macOS Preview</strong> — Tools → Adjust Size can resample your image if the wrong boxes are ticked, silently changing your pixels. <strong>Windows</strong> — offers no built-in way to change DPI at all.</p>
+    <p>SetDPI performs the same lossless metadata edit in one drag-and-drop, with no install, no account and no upload — which is exactly why an image DPI changer belongs in the browser.</p>
+  </section>
+
   <section class="block" id="faq">
     <h2>Frequently asked questions</h2>
     <div class="faq">
@@ -259,6 +286,8 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <details><summary>What's the difference between 72 DPI and 300 DPI?</summary><div class="a">72 DPI is a legacy screen convention; 300 DPI is print density. A 3000×2000 px photo prints at 10×6.7 in at 300 DPI, but at 72 DPI it's interpreted as 41.7×27.8 in — and looks blurry on paper. Same pixels, different printed size.</div></details>
       <details><summary>Can I change the DPI of a PNG?</summary><div class="a">Yes. PNG stores print density in its <code>pHYs</code> chunk, and SetDPI writes it losslessly — just like the JFIF and EXIF resolution fields in JPG files.</div></details>
       <details><summary>How do I change the DPI of an image without Photoshop?</summary><div class="a">You don't need Photoshop. This free image DPI changer runs in your browser: drop your JPG or PNG above, pick or type the DPI you need (300 for print), and download. Pixels stay untouched, so there's zero quality loss.</div></details>
+      <details><summary>Is DPI the same as PPI?</summary><div class="a">Nearly. PPI (pixels per inch) describes screens, DPI (dots per inch) describes print. In file metadata both are stored in the same resolution field, so tools — including this one — treat the terms interchangeably. If a form asks for 300 PPI, setting 300 DPI here satisfies it.</div></details>
+      <details><summary>What DPI should I use for scanning photos and documents?</summary><div class="a">Scan documents at 300 DPI for clean reprints and reliable OCR. Scan photos you may want to enlarge at 600 DPI. If your scanner saved a file with the wrong DPI value, drop it here and correct the metadata without rescanning anything.</div></details>
       <details><summary>Are my photos uploaded to a server?</summary><div class="a">Never. Everything runs locally in your browser with JavaScript — files never leave your device, and the page even works offline once loaded.</div></details>
     </div>
   </section>
