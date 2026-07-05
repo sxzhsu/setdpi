@@ -10,10 +10,15 @@
 <meta property="og:url" content="https://sxzhsu.github.io/setdpi/">
 <meta property="og:title" content="Image DPI Converter — Convert Image to 300 DPI Online Free">
 <meta property="og:description" content="Change image DPI to 300 online, losslessly. Check current DPI, set a new one, download — nothing is uploaded.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://sxzhsu.github.io/setdpi/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sxzhsu.github.io/setdpi/og.png">
 <meta name="twitter:title" content="Image DPI Converter — Convert Image to 300 DPI Online Free">
 <meta name="twitter:description" content="Lossless JPG & PNG DPI changer. 100% in your browser — no upload, no quality loss, no signup.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"SetDPI — Image DPI Converter","url":"https://sxzhsu.github.io/setdpi/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free online image DPI converter. Change JPG or PNG DPI to 300, 600 or any custom value losslessly — files never leave your browser.","featureList":["Convert image to 300 DPI online","Check image DPI instantly","Lossless — pixels are never re-encoded","Batch convert up to 50 images","Works offline — no upload"]}
 </script>
@@ -87,6 +92,7 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.85);ba
 .btn.ghost{background:var(--accent-soft);color:var(--accent)}
 .btn.ghost:hover{filter:brightness(.97)}
 .toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
 .hint{font-size:12.5px;color:var(--muted)}
 section.block{padding:34px 0 6px}
 section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
@@ -109,6 +115,12 @@ table.print tr:last-child td{border-bottom:none}
 .faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
 footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
 footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.calc{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin:14px 0}
+.calc label{font-size:13px;color:var(--muted)}
+.calc input{width:96px;border:1.5px solid var(--line);border-radius:9px;padding:8px 10px;font-size:14px;font-weight:600;color:var(--ink)}
+.calc input:focus{border-color:var(--accent);outline:none}
+.calc .x{color:var(--muted)}
+.calc .res{flex:1 1 220px;font-size:14.5px;font-weight:700;color:var(--accent)}
 @media (max-width:560px){.row .print{flex-basis:100%}.nav-links{gap:12px}}
 </style>
 </head>
@@ -192,6 +204,27 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </tbody>
     </table>
     <p>Drop an image into the tool above and it shows the exact print size at your chosen DPI automatically.</p>
+  </section>
+
+  <section class="block" id="calculator">
+    <h2>Image DPI calculator — pixels ⇄ print size</h2>
+    <p>Use this quick image DPI calculator to see how large your photo will print, or how many pixels you need for a target print size.</p>
+    <div class="calc" aria-label="Pixels to print size calculator">
+      <label for="calW">Pixels:</label>
+      <input id="calW" type="number" min="1" value="3000" aria-label="Width in pixels"> <span class="x">×</span>
+      <input id="calH" type="number" min="1" value="2000" aria-label="Height in pixels">
+      <label for="calD">at DPI:</label>
+      <input id="calD" type="number" min="1" value="300">
+      <span class="res" id="calOut"></span>
+    </div>
+    <div class="calc" aria-label="Print size to pixels calculator">
+      <label for="cal2W">Print size (inches):</label>
+      <input id="cal2W" type="number" min="0.1" step="0.1" value="8" aria-label="Print width in inches"> <span class="x">×</span>
+      <input id="cal2H" type="number" min="0.1" step="0.1" value="10" aria-label="Print height in inches">
+      <label for="cal2D">at DPI:</label>
+      <input id="cal2D" type="number" min="1" value="300">
+      <span class="res" id="cal2Out"></span>
+    </div>
   </section>
 
   <section class="block" id="who">
@@ -431,8 +464,9 @@ function writePngDpi(src, dpi){
 /* ---------- UI ---------- */
 document.querySelectorAll('.chip').forEach(function(ch){
   ch.addEventListener('click', function(){
-    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
     ch.classList.add('on');
+    ch.setAttribute('aria-pressed','true');
     $('customDpi').value = '';
     targetDpi = parseInt(ch.dataset.dpi, 10);
     renderAll();
@@ -441,7 +475,7 @@ document.querySelectorAll('.chip').forEach(function(ch){
 $('customDpi').addEventListener('input', function(){
   var v = parseInt(this.value, 10);
   if(v>=1 && v<=10000){
-    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
     targetDpi = v;
     renderAll();
   }
@@ -526,6 +560,20 @@ $('clearBtn').addEventListener('click', function(){
   files = [];
   renderAll();
 });
+/* DPI calculator */
+function calc1(){
+  var w = +($('calW').value), h = +($('calH').value), d = +($('calD').value);
+  $('calOut').textContent = (w>0 && h>0 && d>0)
+    ? 'Prints ' + (w/d).toFixed(2) + '″ × ' + (h/d).toFixed(2) + '″ (' + (w/d*2.54).toFixed(1) + ' × ' + (h/d*2.54).toFixed(1) + ' cm)' : '';
+}
+function calc2(){
+  var w = +($('cal2W').value), h = +($('cal2H').value), d = +($('cal2D').value);
+  $('cal2Out').textContent = (w>0 && h>0 && d>0)
+    ? 'You need ' + Math.round(w*d) + ' × ' + Math.round(h*d) + ' px' : '';
+}
+['calW','calH','calD'].forEach(function(id){ $(id).addEventListener('input', calc1); });
+['cal2W','cal2H','cal2D'].forEach(function(id){ $(id).addEventListener('input', calc2); });
+calc1(); calc2();
 /* test hook: byte-level API surface for automated verification */
 window.__setdpi = {readJpegDpi:readJpegDpi, writeJpegDpi:writeJpegDpi, readPngDpi:readPngDpi, writePngDpi:writePngDpi, isJpeg:isJpeg, isPng:isPng};
 })();
