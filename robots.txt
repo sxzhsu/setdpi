@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sxzhsu.github.io/setdpi/sitemap.xml
+Sitemap: https://setdpi.com/sitemap.xml
