@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image DPI Converter — Convert Image to 300 DPI Online Free | SetDPI</title>
+<meta name="description" content="Free image DPI converter: change image DPI to 300 (or any value) online without losing quality. Lossless JPG & PNG DPI changer — runs 100% in your browser, no upload, no signup.">
+<link rel="canonical" href="https://sxzhsu.github.io/setdpi/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sxzhsu.github.io/setdpi/">
+<meta property="og:title" content="Image DPI Converter — Convert Image to 300 DPI Online Free">
+<meta property="og:description" content="Change image DPI to 300 online, losslessly. Check current DPI, set a new one, download — nothing is uploaded.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Image DPI Converter — Convert Image to 300 DPI Online Free">
+<meta name="twitter:description" content="Lossless JPG & PNG DPI changer. 100% in your browser — no upload, no quality loss, no signup.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"SetDPI — Image DPI Converter","url":"https://sxzhsu.github.io/setdpi/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free online image DPI converter. Change JPG or PNG DPI to 300, 600 or any custom value losslessly — files never leave your browser.","featureList":["Convert image to 300 DPI online","Check image DPI instantly","Lossless — pixels are never re-encoded","Batch convert up to 50 images","Works offline — no upload"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to convert an image to 300 DPI online","step":[
+{"@type":"HowToStep","name":"Add your images","text":"Drop JPG or PNG files into the tool, or click to browse. The current DPI of each image is shown instantly."},
+{"@type":"HowToStep","name":"Choose the target DPI","text":"Pick a preset such as 300 DPI (standard for printing) or type any custom value."},
+{"@type":"HowToStep","name":"Download","text":"Click Download. The DPI metadata is rewritten losslessly in your browser — pixels are untouched and nothing is uploaded."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert an image to 300 DPI online for free?","acceptedAnswer":{"@type":"Answer","text":"Drop your JPG or PNG into the converter above, select the 300 DPI preset and click Download. The tool rewrites the DPI metadata directly in your browser — free, instant, and with no watermark or signup."}},
+{"@type":"Question","name":"Does changing DPI reduce image quality?","acceptedAnswer":{"@type":"Answer","text":"Not here. SetDPI only rewrites the DPI metadata (JFIF/EXIF for JPG, pHYs for PNG) and never re-encodes your pixels, so quality is 100% preserved. Many other tools decompress and re-save the image, which degrades quality — this one doesn't."}},
+{"@type":"Question","name":"Will changing DPI change the file size or resolution?","acceptedAnswer":{"@type":"Answer","text":"No. The pixel dimensions (resolution) and file size stay essentially identical. DPI only tells printers how densely to place those pixels on paper, which changes the printed size — not the digital image."}},
+{"@type":"Question","name":"How do I check the DPI of an image?","acceptedAnswer":{"@type":"Answer","text":"Drop the image into the tool above — its current DPI is displayed instantly, before any conversion. (On Windows you can also check via Properties → Details; on Mac via Preview → Tools → Adjust Size.)"}},
+{"@type":"Question","name":"What DPI do I need for printing?","acceptedAnswer":{"@type":"Answer","text":"300 DPI is the standard for high-quality photo and document printing. 150 DPI is acceptable for large-format posters viewed from a distance, and 600 DPI is used for fine line art. Journals, print shops, Amazon KDP and Etsy printables typically require 300 DPI."}},
+{"@type":"Question","name":"What is the difference between 72 DPI and 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"72 DPI is a legacy screen convention; 300 DPI is print density. A 3000×2000 px photo prints at 10×6.7 inches at 300 DPI, but the same file at 72 DPI is interpreted as 41.7×27.8 inches — blurry when printed. Same pixels, different printed size."}},
+{"@type":"Question","name":"Can I change the DPI of a PNG?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG stores print density in its pHYs chunk. SetDPI writes it losslessly, just like the JFIF and EXIF resolution fields in JPG files."}},
+{"@type":"Question","name":"Are my photos uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"Never. Everything runs locally in your browser using JavaScript — your files never leave your device. It even keeps working offline once the page is loaded."}}]}
+</script>
+<style>
+:root{--bg:#f6f7fb;--card:#ffffff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#4f46e5;--accent-ink:#ffffff;--accent-soft:#eef2ff;--ok:#10b981;--warn:#d97706;--radius:14px;--shadow:0 1px 2px rgba(17,24,39,.05),0 8px 24px rgba(17,24,39,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+.brand .logo{width:26px;height:26px;border-radius:7px;background:var(--accent);color:#fff;font-size:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:14px;color:var(--muted);margin-right:4px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #c7cbe0;border-radius:12px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbfbfe}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--accent)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 6px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.step .n{width:28px;height:28px;border-radius:8px;background:var(--accent);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step b{display:block;margin-bottom:6px;font-size:15px}
+.step p{font-size:13.5px;color:var(--muted);margin:0}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){.row .print{flex-basis:100%}.nav-links{gap:12px}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <span class="brand"><span class="logo">DPI</span>SetDPI</span>
+    <nav class="nav-links" aria-label="Site">
+      <a href="#how">How it works</a>
+      <a href="#print-size">Print size</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Image DPI Converter</h1>
+    <p class="sub">Convert image to <strong>300 DPI</strong> (or any value) online — <strong>free and lossless</strong>. Check the current DPI of any JPG or PNG, set a new one, and download. Your files <strong>never leave your browser</strong>.</p>
+    <div class="trust">
+      <span>🔒 100% private — no upload</span>
+      <span>⚡ Lossless — pixels untouched</span>
+      <span>🆓 Free — no signup, no watermark</span>
+    </div>
+  </div>
+
+  <div class="tool" id="tool">
+    <div class="presets" role="group" aria-label="Target DPI">
+      <span class="lbl">Target DPI:</span>
+      <button class="chip" data-dpi="72">72</button>
+      <button class="chip" data-dpi="96">96</button>
+      <button class="chip" data-dpi="150">150</button>
+      <button class="chip" data-dpi="200">200</button>
+      <button class="chip on" data-dpi="300">300</button>
+      <button class="chip" data-dpi="600">600</button>
+      <input id="customDpi" type="number" min="1" max="10000" placeholder="Custom" aria-label="Custom DPI value">
+    </div>
+    <div id="drop" tabindex="0" role="button" aria-label="Add images: drop files here or press Enter to browse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round"/></svg>
+      <div class="big">Drop images here, or click to browse</div>
+      <div class="small">JPG &amp; PNG · up to 50 files · checked &amp; converted instantly, never uploaded</div>
+    </div>
+    <input type="file" id="fileInput" accept=".jpg,.jpeg,.jfif,.png,image/jpeg,image/png" multiple>
+    <div id="rows"></div>
+    <div class="toolbar" id="toolbar" hidden>
+      <span class="hint" id="count"></span>
+      <div>
+        <button class="btn ghost" id="clearBtn">Clear</button>
+        <button class="btn primary" id="dlAll">Download all</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="how">
+    <h2>How to convert an image to 300 DPI online</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>Add your images</b><p>Drop JPG or PNG files above. The current DPI of each image is detected and shown instantly — this doubles as a free DPI checker.</p></div>
+      <div class="step"><span class="n">2</span><b>Choose the target DPI</b><p>Pick 300 DPI — the print standard — or 72, 150, 200, 600, or any custom value your print shop, journal, or marketplace requires.</p></div>
+      <div class="step"><span class="n">3</span><b>Download</b><p>Click Download. The DPI metadata is rewritten losslessly on your device: pixels are untouched, quality is identical, and nothing is uploaded.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="what">
+    <h2>What is DPI — and why it doesn't change your pixels</h2>
+    <p>DPI (dots per inch) is a single metadata value that tells printers how densely to place your image's pixels on paper. A 3000&times;2000&nbsp;px photo contains exactly the same pixels at 72 DPI and at 300 DPI — the only difference is the intended print size: 41.7&times;27.8&nbsp;inches versus 10&times;6.7&nbsp;inches.</p>
+    <p>That's why this image DPI converter never re-encodes your picture. It rewrites the resolution fields (JFIF &amp; EXIF for JPG, the pHYs chunk for PNG) and leaves every pixel byte exactly as it was. Tools that "convert DPI" by re-saving the image quietly degrade quality — there is no reason to.</p>
+  </section>
+
+  <section class="block" id="print-size">
+    <h2>Print size at 300 DPI — quick reference</h2>
+    <p>To print sharp at 300 DPI, your image needs roughly these pixel dimensions:</p>
+    <table class="print">
+      <thead><tr><th>Print size</th><th>Pixels needed @ 300 DPI</th><th>Common use</th></tr></thead>
+      <tbody>
+        <tr><td>4 &times; 6 in (10&times;15 cm)</td><td>1200 &times; 1800 px</td><td>Standard photo print</td></tr>
+        <tr><td>5 &times; 7 in (13&times;18 cm)</td><td>1500 &times; 2100 px</td><td>Portrait print</td></tr>
+        <tr><td>8 &times; 10 in (20&times;25 cm)</td><td>2400 &times; 3000 px</td><td>Framed photo</td></tr>
+        <tr><td>8.5 &times; 11 in (US Letter)</td><td>2550 &times; 3300 px</td><td>Documents, KDP interiors</td></tr>
+        <tr><td>A4 (21 &times; 29.7 cm)</td><td>2480 &times; 3508 px</td><td>Posters, printables</td></tr>
+        <tr><td>12 &times; 18 in</td><td>3600 &times; 5400 px</td><td>Large prints</td></tr>
+      </tbody>
+    </table>
+    <p>Drop an image into the tool above and it shows the exact print size at your chosen DPI automatically.</p>
+  </section>
+
+  <section class="block" id="who">
+    <h2>Who needs a 300 DPI image?</h2>
+    <p>Print shops and photo labs, academic journals and conference papers, Amazon KDP book covers and interiors, Etsy printables, embroidery and engraving services, passport and ID photo requirements, magazine ads — all of them routinely reject files whose DPI metadata isn't set to 300. Fixing it takes seconds here and costs nothing.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>How do I convert an image to 300 DPI online for free?</summary><div class="a">Drop your JPG or PNG into the converter above, select the <b>300</b> preset and click Download. The DPI metadata is rewritten directly in your browser — free, instant, no watermark, no signup.</div></details>
+      <details><summary>Does changing DPI reduce image quality?</summary><div class="a">Not here. SetDPI only rewrites the DPI metadata (JFIF/EXIF for JPG, pHYs for PNG) and never re-encodes your pixels, so quality is 100% preserved. Many other tools decompress and re-save the image, which degrades quality — this one doesn't.</div></details>
+      <details><summary>Will changing DPI change the file size or resolution?</summary><div class="a">No. The pixel dimensions and file size stay essentially identical. DPI only tells printers how densely to place those pixels on paper — it changes the printed size, not the digital image.</div></details>
+      <details><summary>How do I check the DPI of an image?</summary><div class="a">Drop the image into the tool above — its current DPI is displayed instantly, before any conversion. On Windows: right-click → Properties → Details. On Mac: open in Preview → Tools → Adjust Size.</div></details>
+      <details><summary>What DPI do I need for printing?</summary><div class="a"><b>300 DPI</b> is the standard for high-quality photo and document printing. 150 DPI works for large-format posters viewed from a distance; 600 DPI is used for fine line art. Journals, print shops, Amazon KDP and Etsy printables typically require 300 DPI.</div></details>
+      <details><summary>What's the difference between 72 DPI and 300 DPI?</summary><div class="a">72 DPI is a legacy screen convention; 300 DPI is print density. A 3000×2000 px photo prints at 10×6.7 in at 300 DPI, but at 72 DPI it's interpreted as 41.7×27.8 in — and looks blurry on paper. Same pixels, different printed size.</div></details>
+      <details><summary>Can I change the DPI of a PNG?</summary><div class="a">Yes. PNG stores print density in its <code>pHYs</code> chunk, and SetDPI writes it losslessly — just like the JFIF and EXIF resolution fields in JPG files.</div></details>
+      <details><summary>Are my photos uploaded to a server?</summary><div class="a">Never. Everything runs locally in your browser with JavaScript — files never leave your device, and the page even works offline once loaded.</div></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI converter</span>
+    <span>Private by design: your images are processed locally and never uploaded.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+/* ---------- state ---------- */
+var targetDpi = 300;
+var files = []; // {name, bytes:Uint8Array, kind:'jpeg'|'png', w, h, dpi, url}
+var $ = function(id){ return document.getElementById(id); };
+
+/* ---------- CRC32 (PNG) ---------- */
+var CRC_T = (function(){
+  var t = new Uint32Array(256), c, n, k;
+  for(n=0;n<256;n++){ c=n; for(k=0;k<8;k++) c = (c&1) ? (0xEDB88320 ^ (c>>>1)) : (c>>>1); t[n]=c; }
+  return t;
+})();
+function crc32(u8, start, end){
+  var c = 0xFFFFFFFF, i;
+  for(i=start;i<end;i++) c = CRC_T[(c ^ u8[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+/* ---------- byte helpers ---------- */
+function be16(u,i){ return (u[i]<<8) | u[i+1]; }
+function be32(u,i){ return ((u[i]<<24)|(u[i+1]<<16)|(u[i+2]<<8)|u[i+3])>>>0; }
+function wbe32(u,i,v){ u[i]=(v>>>24)&255; u[i+1]=(v>>>16)&255; u[i+2]=(v>>>8)&255; u[i+3]=v&255; }
+function concat(parts){
+  var len = 0, i, out, off = 0;
+  for(i=0;i<parts.length;i++) len += parts[i].length;
+  out = new Uint8Array(len);
+  for(i=0;i<parts.length;i++){ out.set(parts[i], off); off += parts[i].length; }
+  return out;
+}
+
+/* ---------- JPEG ---------- */
+function isJpeg(u){ return u.length>3 && u[0]===0xFF && u[1]===0xD8; }
+function jpegSegments(u){
+  var segs = [], i = 2, m, L;
+  while(i+4 <= u.length){
+    if(u[i]!==0xFF){ i++; continue; }
+    m = u[i+1];
+    if(m===0xFF){ i++; continue; }
+    if(m===0xD8 || m===0x01 || (m>=0xD0 && m<=0xD7)){ i+=2; continue; }
+    if(m===0xDA) break; // start of scan — stop
+    L = be16(u, i+2);
+    if(L < 2 || i+2+L > u.length) break;
+    segs.push({marker:m, start:i, len:L});
+    i += 2 + L;
+  }
+  return segs;
+}
+function findJfif(u, segs){
+  for(var k=0;k<segs.length;k++){ var s=segs[k];
+    if(s.marker===0xE0 && s.len>=14 && u[s.start+4]===0x4A && u[s.start+5]===0x46 && u[s.start+6]===0x49 && u[s.start+7]===0x46 && u[s.start+8]===0) return s;
+  } return null;
+}
+function findExif(u, segs){
+  for(var k=0;k<segs.length;k++){ var s=segs[k];
+    if(s.marker===0xE1 && s.len>=10 && u[s.start+4]===0x45 && u[s.start+5]===0x78 && u[s.start+6]===0x69 && u[s.start+7]===0x66 && u[s.start+8]===0 && u[s.start+9]===0) return s;
+  } return null;
+}
+/* walk EXIF IFD0, return {xres,yres,unit} entry positions + reader */
+function exifRes(u, seg){
+  var base = seg.start + 10;                       // TIFF header
+  var end  = seg.start + 2 + seg.len;
+  if(base+8 > end) return null;
+  var le = (u[base]===0x49 && u[base+1]===0x49);
+  if(!le && !(u[base]===0x4D && u[base+1]===0x4D)) return null;
+  function r16(i){ return le ? (u[i]|(u[i+1]<<8)) : ((u[i]<<8)|u[i+1]); }
+  function r32(i){ return le ? ((u[i]|(u[i+1]<<8)|(u[i+2]<<16)|(u[i+3]<<24))>>>0) : be32(u,i); }
+  function w32(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; u[i+2]=(v>>>16)&255; u[i+3]=(v>>>24)&255; } else wbe32(u,i,v); }
+  function w16(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; } else { u[i]=(v>>>8)&255; u[i+1]=v&255; } }
+  if(r16(base+2)!==42) return null;
+  var ifd = base + r32(base+4);
+  if(ifd+2 > end) return null;
+  var n = r16(ifd), res = {le:le, r16:r16, r32:r32, w32:w32, w16:w16, base:base, end:end};
+  for(var k=0;k<n;k++){
+    var e = ifd + 2 + k*12;
+    if(e+12 > end) break;
+    var tag = r16(e), type = r16(e+2);
+    if(tag===0x011A && type===5) res.x = e;
+    if(tag===0x011B && type===5) res.y = e;
+    if(tag===0x0128 && type===3) res.unit = e;
+  }
+  return (res.x || res.y || res.unit) ? res : null;
+}
+function readJpegDpi(u){
+  var segs = jpegSegments(u);
+  var ex = findExif(u, segs);
+  if(ex){
+    var r = exifRes(u, ex);
+    if(r && r.x){
+      var off = r.base + r.r32(r.x+8);
+      if(off+8 <= r.end){
+        var num = r.r32(off), den = r.r32(off+4) || 1;
+        var unit = r.unit ? r.r16(r.unit+8) : 2;
+        var v = num/den;
+        if(unit===3) v *= 2.54;
+        if(v>0 && v<100000) return Math.round(v);
+      }
+    }
+  }
+  var jf = findJfif(u, segs);
+  if(jf){
+    var units = u[jf.start+11], X = be16(u, jf.start+12);
+    if(units===1 && X>0) return X;
+    if(units===2 && X>0) return Math.round(X*2.54);
+  }
+  return null; // not set
+}
+function makeJfif(dpi){
+  return new Uint8Array([0xFF,0xE0,0x00,0x10,0x4A,0x46,0x49,0x46,0x00,0x01,0x02,0x01,(dpi>>8)&255,dpi&255,(dpi>>8)&255,dpi&255,0x00,0x00]);
+}
+function makeExif(dpi){
+  // little-endian TIFF, IFD0 with XRes/YRes/ResUnit, rationals at offset 50/58
+  var a = new Uint8Array(76);
+  a.set([0xFF,0xE1,0x00,0x4A,0x45,0x78,0x69,0x66,0x00,0x00, 0x49,0x49,0x2A,0x00,0x08,0x00,0x00,0x00, 0x03,0x00]);
+  var e = 20;
+  a.set([0x1A,0x01,0x05,0x00,0x01,0x00,0x00,0x00,0x32,0x00,0x00,0x00], e);       // XResolution -> 50
+  a.set([0x1B,0x01,0x05,0x00,0x01,0x00,0x00,0x00,0x3A,0x00,0x00,0x00], e+12);    // YResolution -> 58
+  a.set([0x28,0x01,0x03,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00], e+24);    // ResolutionUnit = inches
+  // next IFD = 0 at 56..59 (10+8+2+36 = 56)
+  var t = 60; // rationals live at tiff-offset 50 => abs 10+50 = 60
+  a[t]=dpi&255; a[t+1]=(dpi>>8)&255; a[t+2]=(dpi>>16)&255; a[t+3]=(dpi>>24)&255; a[t+4]=1;
+  a[t+8]=a[t]; a[t+9]=a[t+1]; a[t+10]=a[t+2]; a[t+11]=a[t+3]; a[t+12]=1;
+  return a;
+}
+function writeJpegDpi(src, dpi){
+  var u = src.slice();
+  var segs = jpegSegments(u);
+  var jf = findJfif(u, segs), ex = findExif(u, segs);
+  if(jf){
+    u[jf.start+11] = 1;
+    u[jf.start+12] = (dpi>>8)&255; u[jf.start+13] = dpi&255;
+    u[jf.start+14] = (dpi>>8)&255; u[jf.start+15] = dpi&255;
+  }
+  if(ex){
+    var r = exifRes(u, ex);
+    if(r){
+      if(r.x){ var ox = r.base + r.r32(r.x+8); if(ox+8<=r.end){ r.w32(ox,dpi); r.w32(ox+4,1); } }
+      if(r.y){ var oy = r.base + r.r32(r.y+8); if(oy+8<=r.end){ r.w32(oy,dpi); r.w32(oy+4,1); } }
+      if(r.unit){ r.w16(r.unit+8, 2); }
+    }
+  }
+  var inserts = [];
+  if(!jf) inserts.push(makeJfif(dpi));
+  if(!ex) inserts.push(makeExif(dpi));
+  if(inserts.length){
+    return concat([u.slice(0,2)].concat(inserts, [u.slice(2)]));
+  }
+  return u;
+}
+
+/* ---------- PNG ---------- */
+var PNG_SIG = [0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A];
+function isPng(u){
+  if(u.length<8) return false;
+  for(var i=0;i<8;i++) if(u[i]!==PNG_SIG[i]) return false;
+  return true;
+}
+function pngChunks(u){
+  var out = [], i = 8, len, type;
+  while(i+8 <= u.length){
+    len = be32(u,i);
+    type = String.fromCharCode(u[i+4],u[i+5],u[i+6],u[i+7]);
+    out.push({type:type, start:i, len:len});
+    i += 12 + len;
+    if(type==='IEND') break;
+  }
+  return out;
+}
+function readPngDpi(u){
+  var cs = pngChunks(u);
+  for(var k=0;k<cs.length;k++){ var c=cs[k];
+    if(c.type==='pHYs' && c.len===9){
+      var ppx = be32(u, c.start+8), unit = u[c.start+16];
+      if(unit===1 && ppx>0) return Math.round(ppx*0.0254);
+    }
+  }
+  return null;
+}
+function makePhys(dpi){
+  var ppm = Math.round(dpi/0.0254);
+  var c = new Uint8Array(21); // len(4) type(4) data(9) crc(4)
+  wbe32(c,0,9);
+  c[4]=0x70; c[5]=0x48; c[6]=0x59; c[7]=0x73;
+  wbe32(c,8,ppm); wbe32(c,12,ppm); c[16]=1;
+  wbe32(c,17, crc32(c,4,17));
+  return c;
+}
+function writePngDpi(src, dpi){
+  var u = src.slice();
+  var cs = pngChunks(u);
+  for(var k=0;k<cs.length;k++){ var c=cs[k];
+    if(c.type==='pHYs' && c.len===9){
+      var ppm = Math.round(dpi/0.0254);
+      wbe32(u, c.start+8, ppm); wbe32(u, c.start+12, ppm); u[c.start+16]=1;
+      wbe32(u, c.start+17, crc32(u, c.start+4, c.start+17));
+      return u;
+    }
+  }
+  for(k=0;k<cs.length;k++){ if(cs[k].type==='IDAT'){
+    var at = cs[k].start;
+    return concat([u.slice(0,at), makePhys(dpi), u.slice(at)]);
+  }}
+  return u;
+}
+
+/* ---------- UI ---------- */
+document.querySelectorAll('.chip').forEach(function(ch){
+  ch.addEventListener('click', function(){
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    ch.classList.add('on');
+    $('customDpi').value = '';
+    targetDpi = parseInt(ch.dataset.dpi, 10);
+    renderAll();
+  });
+});
+$('customDpi').addEventListener('input', function(){
+  var v = parseInt(this.value, 10);
+  if(v>=1 && v<=10000){
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+    targetDpi = v;
+    renderAll();
+  }
+});
+var drop = $('drop'), input = $('fileInput');
+drop.addEventListener('click', function(){ input.click(); });
+drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); } });
+['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
+input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+
+function addFiles(list){
+  var arr = Array.prototype.slice.call(list).slice(0, 50);
+  arr.forEach(function(f){
+    f.arrayBuffer().then(function(buf){
+      var u = new Uint8Array(buf);
+      var kind = isJpeg(u) ? 'jpeg' : (isPng(u) ? 'png' : null);
+      if(!kind){ alert((f.name||'File') + ': only JPG and PNG are supported.'); return; }
+      var item = {
+        name: f.name || 'image',
+        bytes: u,
+        kind: kind,
+        dpi: kind==='jpeg' ? readJpegDpi(u) : readPngDpi(u),
+        url: URL.createObjectURL(new Blob([u], {type: kind==='jpeg'?'image/jpeg':'image/png'})),
+        w: 0, h: 0
+      };
+      files.push(item);
+      var img = new Image();
+      img.onload = function(){ item.w = img.naturalWidth; item.h = img.naturalHeight; renderAll(); };
+      img.src = item.url;
+      renderAll();
+    });
+  });
+}
+function outName(name, dpi){
+  var i = name.lastIndexOf('.');
+  var stem = i>0 ? name.slice(0,i) : name, ext = i>0 ? name.slice(i) : '';
+  return stem + '_' + dpi + 'dpi' + ext;
+}
+function convert(item){
+  var out = item.kind==='jpeg' ? writeJpegDpi(item.bytes, targetDpi) : writePngDpi(item.bytes, targetDpi);
+  var blob = new Blob([out], {type: item.kind==='jpeg'?'image/jpeg':'image/png'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = outName(item.name, targetDpi);
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+function printSize(item){
+  if(!item.w) return '';
+  var win = (item.w/targetDpi), hin = (item.h/targetDpi);
+  return 'Prints ' + win.toFixed(1) + '″ × ' + hin.toFixed(1) + '″ (' + (win*2.54).toFixed(1) + '×' + (hin*2.54).toFixed(1) + ' cm) @ ' + targetDpi + ' DPI';
+}
+function renderAll(){
+  var box = $('rows');
+  box.innerHTML = '';
+  files.forEach(function(item, idx){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var dpiBadge = item.dpi
+      ? '<span class="badge">' + item.dpi + ' DPI</span>'
+      : '<span class="badge warn">DPI not set</span>';
+    row.innerHTML =
+      '<img class="thumb" alt="" src="' + item.url + '">' +
+      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + '</div></div>' +
+      '<span>' + dpiBadge + ' <span class="arrow">→</span> <span class="badge">' + targetDpi + ' DPI</span></span>' +
+      '<span class="print">' + printSize(item) + '</span>' +
+      '<button class="btn primary" data-i="' + idx + '">Download</button>';
+    row.querySelector('.name').textContent = item.name;
+    row.querySelector('button').addEventListener('click', function(){ convert(item); });
+    box.appendChild(row);
+  });
+  $('toolbar').hidden = files.length === 0;
+  $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
+}
+$('dlAll').addEventListener('click', function(){
+  files.forEach(function(item, i){ setTimeout(function(){ convert(item); }, i*350); });
+});
+$('clearBtn').addEventListener('click', function(){
+  files.forEach(function(f){ URL.revokeObjectURL(f.url); });
+  files = [];
+  renderAll();
+});
+/* test hook: byte-level API surface for automated verification */
+window.__setdpi = {readJpegDpi:readJpegDpi, writeJpegDpi:writeJpegDpi, readPngDpi:readPngDpi, writePngDpi:writePngDpi, isJpeg:isJpeg, isPng:isPng};
+})();
+</script>
+</body>
+</html>

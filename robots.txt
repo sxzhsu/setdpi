@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sxzhsu.github.io/setdpi/sitemap.xml
