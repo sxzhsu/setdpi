@@ -271,6 +271,15 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p>When a submission form rejects your file for "low resolution", it is almost always this single metadata number — change the image DPI to the required value above and re-upload the very same picture.</p>
   </section>
 
+  <section class="block" id="why-it-matters">
+    <h2>Why print services reject files over one number</h2>
+    <p>The rejection email rarely explains itself, so here is what actually happens on the other side, in the three places people hit it most:</p>
+    <p><strong>At the print shop.</strong> Commercial printers run every order through preflight software before a human ever sees it. That software reads one field — the DPI metadata — to decide how large your file will print. A 3000&nbsp;&times;&nbsp;2400&nbsp;px photo tagged 72&nbsp;DPI claims it wants to print 41&nbsp;inches wide; the system compares that against your ordered 10&nbsp;&times;&nbsp;8&nbsp;in print, concludes the file is "low resolution", and bounces it. The pixels were enough all along — a 300&nbsp;DPI tag makes the same file claim exactly 10&nbsp;&times;&nbsp;8, and preflight waves it through.</p>
+    <p><strong>At the journal or conference.</strong> Publishers put "figures at 300&nbsp;DPI minimum, 600 for line art" in their author guidelines because page layout happens months later, by someone who never saw your screen. The metadata is the only instruction that survives the hand-off: it tells the typesetter how big the figure can safely sit on the page. Submissions systems increasingly enforce it automatically — the manuscript uploads, the figure check fails, and the revision clock starts over a field you can edit in two seconds.</p>
+    <p><strong>At the marketplace.</strong> Stock libraries, print-on-demand platforms and Etsy digital-download buyers all treat the DPI tag as a promise about print quality. A printable tagged 96&nbsp;DPI collects "blurry when printed" reviews not because the pixels were bad, but because buyers' home printers obeyed the tag and stretched the image. Sellers who set 300&nbsp;DPI before uploading are making the same file keep its promise.</p>
+    <p>In all three cases nothing about your actual image was wrong — the label was. That is the whole reason this tool exists: correct the label, keep every pixel byte-identical, and re-submit.</p>
+  </section>
+
   <section class="block" id="alternatives">
     <h2>Changing image DPI without Photoshop</h2>
     <p>You can change DPI in desktop software, but every route is slower than a browser tool — and some quietly resample your pixels along the way:</p>
