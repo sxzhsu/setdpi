@@ -1,0 +1,20 @@
+# SetDPI — Image DPI Changer (setdpi.com)
+
+> Free online tool that changes the DPI metadata of JPG and PNG images to 300, 600 or any custom value — losslessly, because only the density tag is rewritten and the pixels are never re-encoded. It runs 100% in the browser: files are never uploaded, there is no signup, and it works offline once loaded. Batch converts up to 50 images at a time and also reports an image's current DPI. SetDPI is a single-page site; the sections below are anchors on that page.
+
+## The tool
+
+- [SetDPI — Image DPI Changer](https://setdpi.com/): Drop in JPG/PNG files, set the DPI value, download — nothing leaves the browser
+- [Converter](https://setdpi.com/#tool): The converter itself, with the current-DPI readout
+- [Image DPI calculator](https://setdpi.com/#calculator): Convert between pixel dimensions and print size at a given DPI
+
+## Explainers on the same page
+
+- [How to convert an image to 300 DPI online](https://setdpi.com/#how): Step-by-step walkthrough
+- [What is DPI — and why it doesn't change your pixels](https://setdpi.com/#what): What the density tag actually does
+- [Print size at 300 DPI — quick reference](https://setdpi.com/#print-size): Pixel dimensions to print size table
+- [Who needs a 300 DPI image?](https://setdpi.com/#who): Print shops, publishers, marketplaces, print-on-demand
+- [Common DPI requirements at a glance](https://setdpi.com/#requirements): Typical required values by use case
+- [Why print services reject files over one number](https://setdpi.com/#why-it-matters): The rejection most people hit
+- [Changing image DPI without Photoshop](https://setdpi.com/#alternatives): Alternatives and when each makes sense
+- [FAQ](https://setdpi.com/#faq): Lossless-ness, supported formats, privacy
