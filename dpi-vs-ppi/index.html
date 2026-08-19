@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>DPI vs PPI — What's the Difference, and When It Matters</title>
+<meta name="description" content="DPI vs PPI: dots per inch vs pixels per inch. When the mix-up is harmless, when print and scan work need the distinction, and how to check or set the number on a file.">
+<link rel="canonical" href="https://setdpi.com/dpi-vs-ppi/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/dpi-vs-ppi/">
+<meta property="og:title" content="DPI vs PPI — What's the Difference, and When It Matters">
+<meta property="og:description" content="Print dots vs screen pixels, why forms treat them as one field, and when a scanner or press actually needs the distinction.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="DPI vs PPI — What's the Difference, and When It Matters">
+<meta name="twitter:description" content="Print dots vs screen pixels, why forms treat them as one field, and when a scanner or press actually needs the distinction.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between DPI and PPI?","acceptedAnswer":{"@type":"Answer","text":"DPI is dots per inch — ink or toner a printer can lay down. PPI is pixels per inch — samples in a digital image or elements on a screen. In JPEG and PNG metadata they share one resolution field, so most software treats the words as the same number."}},{"@type":"Question","name":"Are DPI and PPI interchangeable?","acceptedAnswer":{"@type":"Answer","text":"For file tags and upload forms, yes. A request for 300 PPI is satisfied by writing 300 into the same field this site calls DPI. For hardware, no: a 1440 DPI printer and a 460 PPI phone are different devices, and neither number lives in your photo."}},{"@type":"Question","name":"When do I need to care about DPI vs PPI?","acceptedAnswer":{"@type":"Answer","text":"When you are talking to a press operator (real dots) or a scanner technician (samples per inch of the original). For everyday exports, marketplaces, and “300 DPI/PPI” checklists, set the tag to 300 and confirm pixels ÷ 300 covers the print."}},{"@type":"Question","name":"Does a 300 PPI screen mean my photos are 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"No. Screen PPI is hardware. File DPI/PPI is a tag inside the image, often 72, 300, or missing. Opening a photo on a 300 PPI display does not change the file and does not make it a 300 DPI print."}},{"@type":"Question","name":"How do I convert between pixels, inches, and DPI?","acceptedAnswer":{"@type":"Answer","text":"Inches = pixels ÷ DPI. Pixels needed = inches × DPI. Centimetres = inches × 2.54. The DPI Checker will do the print-size half for a real file; the homepage changer applies a new tag without touching pixels."}},{"@type":"Question","name":"Why do Windows and macOS show different DPI for the same file?","acceptedAnswer":{"@type":"Answer","text":"They sometimes assume 72 or 96 when the tag is missing, and they may prefer EXIF over JFIF or the reverse. If the file has no density metadata, any number you see is a viewer default, not a property of the pixels."}},{"@type":"Question","name":"Should I use DPI or PPI when sending files to a printer?","acceptedAnswer":{"@type":"Answer","text":"Use whichever word they printed on the form — and send a file whose density field is that number, with enough pixels for the ordered size. For a photo lab that is almost always 300. Do not tag a file with the printer’s hardware DPI (1200, 1440, 2400)."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"DPI vs PPI — What's the Difference, and When It Matters","description":"DPI vs PPI: definitions, when the terms are interchangeable in file metadata, and when print and scan work need the distinction.","url":"https://setdpi.com/dpi-vs-ppi/","datePublished":"2026-08-19","dateModified":"2026-08-19","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #cfc7b2;border-radius:10px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbf8f0}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--ink)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px;overflow-wrap:anywhere}
+.row .warn-msg{font-size:13px;color:var(--warn);line-height:1.45;overflow-wrap:anywhere;flex:1 1 240px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,#customDpi,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+#sampleBtn{margin-top:14px}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){
+  .row .print,.row .warn-msg{flex-basis:100%}
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#defs">Definitions</a>
+      <a href="#when">When it matters</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Set DPI</a>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <a href="/convert-image-to-300-dpi/">To 300 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <span class="here" aria-current="page">DPI vs PPI</span>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Vocabulary · print · screens · scans</div>
+    <h1>DPI vs PPI — What’s the Difference, and When It Matters</h1>
+    <p class="sub">DPI is print dots. PPI is pixels. <strong>In a JPEG or PNG they are the same metadata field.</strong> Here is when that mix-up is harmless, and when a press or a scanner still needs you to keep the words straight.</p>
+    <div class="trust">
+      <span>100% private — no upload</span>
+      <span>No myths — same field in the file</span>
+      <span>Free — no signup, no watermark</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+
+  <section class="block" id="defs">
+    <h2>DPI vs PPI: the actual definitions</h2>
+    <p><strong>DPI</strong> means dots per inch. A dot, in the original printing sense, is a speck of ink, toner, or dye that a device puts on a substrate. A 1200 DPI laser printer can address 1200 of those specks in a linear inch. A 300 DPI requirement on a photo is a looser, file-level cousin of the same idea: “treat this picture as 300 samples in each inch of paper.”</p>
+    <p><strong>PPI</strong> means pixels per inch. A pixel is a sample in a digital image or a physical element on a screen. A 254 PPI laptop panel has about 254 hardware pixels in each inch of glass. A file tagged 300 PPI is claiming that its pixels should be spaced 300 to the inch when someone turns them into marks on paper (or, more rarely, when a layout program sizes the picture).</p>
+    <p>So the textbook split is: DPI describes a printer’s dots, PPI describes pixels on a screen or in a file. That split is real in hardware. It is almost fictional in the metadata of a JPEG or PNG. Those formats store one pair of resolution numbers — EXIF <code>XResolution</code> / <code>YResolution</code>, JFIF density, PNG <code>pHYs</code> — and they do not label the pair “dots” or “pixels”. Software reads the same field and writes “DPI” or “PPI” according to the decade and the audience.</p>
+  </section>
+  <section class="block" id="mix">
+    <h2>Why everyday mix-ups do not matter</h2>
+    <p>If a client, a form, or a tutorial says “export at 300 PPI” and another says “300 DPI”, they are asking for the same tag. Set the density field to 300. Windows Properties will often show it as DPI. Photoshop’s Image Size dialog calls the box Resolution and offers pixels/inch. Preview on a Mac says pixels per inch. A print-shop preflight log may say DPI. All of them poked the same integer.</p>
+    <p>Screens ignore the integer entirely. A 4000-pixel-wide photo looks the same on a 109 PPI desktop and a 460 PPI phone, up to how the OS scales the window. The phone’s “460 PPI” is hardware. The file’s “72 DPI” is a leftover default. Neither number changes the other. This is why web designers stopped caring about the tag twenty years ago and why “save for web at 72 DPI” is a ritual, not a requirement. Browsers map image pixels to CSS pixels. They do not consult JFIF.</p>
+    <p>Photographers talking to other photographers can keep saying DPI for the file and PPI for the monitor and everyone in the room will understand. The harm starts only when someone treats the two hardware meanings as interchangeable — “my phone is 400 PPI so the photo is 400 DPI” — or when a scan is documented in the wrong unit. Those are the cases below.</p>
+  </section>
+  <section class="block" id="when">
+    <h2>When you do have to keep DPI and PPI apart</h2>
+    <p><strong>Printing.</strong> The press has a real DPI (or a stochastic dot size). The file has a PPI-style tag and a pixel count. Effective resolution on paper is <em>pixels ÷ printed inches</em>, regardless of the tag. If you drop a 1500-pixel image across 10 inches of a magazine page, you printed it at 150 PPI. Tagging the file 300 DPI does not make the press invent samples. The tag helps preflight and default placement; the layout width decides the effective number. If the shop says they print at 1440 DPI, they are describing nozzle addressability, not asking you to tag the photo 1440.</p>
+    <p><strong>Scanning.</strong> Here DPI is the honest word. You are asking a sensor to take N samples per inch of the physical original. Scan a 4 × 6 in print at 300 DPI and you should get about 1200 × 1800 px. Scan it at 600 DPI and you get about 2400 × 3600 px — actually more information, because the sampler walked a finer grid. That is the opposite of “increasing DPI” on an existing file, which does not walk any grid at all. If a scanner wrote the wrong tag (a 600 DPI optical scan saved as 72), fixing the tag is correct and lossless; you are restoring the capture record, not pretending you scanned twice. If the scan was truly 200 DPI and you need 300, the honest move is to rescan, not to relabel.</p>
+    <p><strong>On-screen design that will never print.</strong> Use pixels. A 32 px icon is a 32 px icon. Writing 300 DPI into its PNG does not make it sharper on a retina display and does not make it larger in a browser. High-DPI (the hardware kind) screens just have more device pixels per CSS pixel; you serve a 2× asset or an SVG. File DPI is not part of that pipeline.</p>
+    <p><strong>Type and “DPI awareness” in operating systems.</strong> Windows DPI scaling (125%, 150%, 200%) is about how large the OS draws UI, not about JPEG metadata. Mixing those conversations is how people end up “increasing image DPI” to fix a blurry desktop screenshot of an app. The fix for a blurry screenshot is a larger capture or a vector source, not a 300 tag.</p>
+  </section>
+  <section class="block" id="math">
+    <h2>Conversion examples you can actually use</h2>
+    <p>The only arithmetic that connects the terms in file metadata:</p>
+    <ul>
+      <li>inches = pixels ÷ (DPI or PPI tag)</li>
+      <li>cm = inches × 2.54</li>
+      <li>pixels needed = inches × desired DPI</li>
+      <li>PNG <code>pHYs</code> pixels-per-metre = DPI ÷ 0.0254 (SetDPI writes this; the <a href="/dpi-checker/">checker</a> converts it back)</li>
+    </ul>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>You have</th><th>You want</th><th>Do this</th></tr></thead>
+      <tbody>
+        <tr><td>3000 × 2400 px file, tag 72</td><td>An 8 × 10 in lab print</td><td>3000/300 = 10 in, 2400/300 = 8 in. Tag 300. Enough pixels. Do not resample.</td></tr>
+        <tr><td>800 × 600 px web image, tag 96</td><td>An 8 × 10 in print at 300</td><td>Need 2400 × 3000 px. You are short. Relabelling to 300 yields a 2.7 × 2.0 in print. Get a larger original or upscale elsewhere.</td></tr>
+        <tr><td>4 × 6 in photo, scanned 600 DPI</td><td>To know the pixel size</td><td>4×600 by 6×600 = 2400 × 3600 px. The 600 here is a capture DPI, not a screen PPI.</td></tr>
+        <tr><td>A form that says “300 PPI minimum”</td><td>To upload a JPEG</td><td>Set the density field to 300. Same field as 300 DPI. Then confirm pixels ÷ 300 ≥ the print size they listed.</td></tr>
+        <tr><td>A 27-inch 4K monitor (3840 px wide)</td><td>Its hardware PPI</td><td>3840 / 27 ≈ 142 PPI. Unrelated to any photo you open on it.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Notice that in four of the five rows the useful action is either “write 300 into the tag” or “count pixels”. The fifth row is hardware and never touches a file. That is the practical size of the DPI vs PPI distinction for anyone who is not designing a printer.</p>
+  </section>
+  <section class="block" id="check">
+    <h2>Check the number on your file, then change it if the job needs it</h2>
+    <p>Because JPEG and PNG store one density pair under two casual names, the way to settle an argument is to read the file, not to debate vocabulary. The <a href="/dpi-checker/">DPI Checker</a> reads JFIF, EXIF <code>XResolution</code>, and PNG <code>pHYs</code>, shows pixel size, and converts to print inches and centimetres. If those structures are missing — true of most screenshots and many web downloads — it says so instead of inventing 72.</p>
+    <p>If the tag is wrong and the pixels already cover the print, rewrite it losslessly with the <a href="/">Image DPI Changer</a> on the homepage, or jump to <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a> when that is the required number. If a portal rejected you for “DPI too low”, <a href="/increase-image-dpi/">Increase Image DPI</a> is the same rewrite with a longer warning that raising the tag is not an enlarger.</p>
+    <p>Keep the words straight when you are talking to a press operator or a scanner tech. Let them blur when you are filling a web form. And never let a vocabulary fight talk you into resampling a file that only needed its label fixed.</p>
+  </section>
+  <section class="block" id="history">
+    <h2>A little history, because the mix-up is inherited</h2>
+    <p>Early Macintosh displays were 72 PPI so that one screen pixel matched one PostScript point (1/72 in). Early Windows displays were 96 PPI. Those two numbers escaped into every “default resolution” box in imaging software and never left. They describe 1980s monitors. They do not describe your phone, your 4K laptop, or the photo from your camera.</p>
+    <p>Printer marketing then used DPI for nozzle counts (300, 600, 1200, 2400, 4800). Camera and scanner marketing used megapixels and optical DPI. File formats, stuck in the middle, offered a single resolution field and let the applications pick a noun. Photoshop mostly said PPI. Consumer Windows said DPI. The internet said both, often in the same sentence. That is the mess this page is naming. It is not a new scientific disagreement; it is two industries sharing a unit and a leftover default of 72.</p>
+    <p>Once you see that, “what is the difference between DPI and PPI?” has a short answer and a useful one. The short answer: dots vs pixels, printers vs screens. The useful answer: in a JPEG or PNG they are the same metadata; 300 of either satisfies a 300 requirement; print size is still pixels divided by that number; hardware DPI/PPI is a different conversation. Check the file. Change the tag only. Leave the pixels alone unless you truly need more of them.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>What is the difference between DPI and PPI?</summary><div class="a">DPI is dots per inch — ink or toner a printer can lay down. PPI is pixels per inch — samples in a digital image or elements on a screen. In JPEG and PNG metadata they share one resolution field, so most software treats the words as the same number.</div></details>
+      <details><summary>Are DPI and PPI interchangeable?</summary><div class="a">For file tags and upload forms, yes. A request for 300 PPI is satisfied by writing 300 into the same field this site calls DPI. For hardware, no: a 1440 DPI printer and a 460 PPI phone are different devices, and neither number lives in your photo.</div></details>
+      <details><summary>When do I need to care about DPI vs PPI?</summary><div class="a">When you are talking to a press operator (real dots) or a scanner technician (samples per inch of the original). For everyday exports, marketplaces, and “300 DPI/PPI” checklists, set the tag to 300 and confirm pixels ÷ 300 covers the print.</div></details>
+      <details><summary>Does a 300 PPI screen mean my photos are 300 DPI?</summary><div class="a">No. Screen PPI is hardware. File DPI/PPI is a tag inside the image, often 72, 300, or missing. Opening a photo on a 300 PPI display does not change the file and does not make it a 300 DPI print.</div></details>
+      <details><summary>How do I convert between pixels, inches, and DPI?</summary><div class="a">Inches = pixels ÷ DPI. Pixels needed = inches × DPI. Centimetres = inches × 2.54. The DPI Checker will do the print-size half for a real file; the homepage changer applies a new tag without touching pixels.</div></details>
+      <details><summary>Why do Windows and macOS show different DPI for the same file?</summary><div class="a">They sometimes assume 72 or 96 when the tag is missing, and they may prefer EXIF over JFIF or the reverse. If the file has no density metadata, any number you see is a viewer default, not a property of the pixels.</div></details>
+      <details><summary>Should I use DPI or PPI when sending files to a printer?</summary><div class="a">Use whichever word they printed on the form — and send a file whose density field is that number, with enough pixels for the ordered size. For a photo lab that is almost always 300. Do not tag a file with the printer’s hardware DPI (1200, 1440, 2400).</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+
+</body>
+</html>

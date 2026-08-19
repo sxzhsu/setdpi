@@ -61,6 +61,15 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);bac
 .nav-links{display:flex;gap:18px;font-size:14px}
 .nav-links a{color:var(--muted)}
 .nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.more-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0 8px}
+.more-tools a{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
+.more-tools a:hover{border-color:var(--accent);text-decoration:none}
+.more-tools a h3{font-size:15px;margin:0 0 6px;font-family:inherit;font-weight:700}
+.more-tools a p{font-size:13.5px;color:var(--muted);margin:0;max-width:none}
 .hero{padding:52px 0 8px;text-align:center}
 .hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
 .hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
@@ -136,7 +145,7 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .calc input:focus{border-color:var(--accent);outline:none}
 .calc .x{color:var(--muted)}
 .calc .res{flex:1 1 220px;font-size:14.5px;font-weight:700;color:var(--accent)}
-@media (max-width:560px){.row .print{flex-basis:100%}.nav-links{gap:12px}}
+@media (max-width:560px){.row .print{flex-basis:100%}.nav-links{gap:12px}.cluster{font-size:12.5px}.cluster a,.cluster span{padding:4px 7px}}
 
 /* Mobile: long technical strings must not scroll the page — Google indexes mobile-first. */
 code,pre,kbd,samp{overflow-wrap:anywhere}
@@ -154,6 +163,15 @@ pre{overflow-x:auto}
       <a href="#how" title="How to convert image DPI online">How it works</a>
       <a href="#print-size" title="Print size at 300 DPI quick reference">Print size</a>
       <a href="#faq" title="Frequently asked questions about image DPI">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <span class="here" aria-current="page">Set DPI</span>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <a href="/convert-image-to-300-dpi/">To 300 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
     </nav>
   </div>
 </header>
@@ -198,6 +216,17 @@ pre{overflow-x:auto}
       </div>
     </div>
   </div>
+
+  <section class="block" id="more-tools">
+    <h2>More DPI tools &amp; guides</h2>
+    <p>The changer above rewrites density metadata losslessly. These extra pages cover checking a file first, converting specifically to 300 DPI, raising a rejected tag, and the DPI vs PPI distinction.</p>
+    <div class="more-tools">
+      <a href="/dpi-checker/"><h3>DPI Checker</h3><p>Read JPEG JFIF/EXIF and PNG pHYs density, pixel size, and print size. Read-only — the file is never rewritten.</p></a>
+      <a href="/convert-image-to-300-dpi/"><h3>Convert to 300 DPI</h3><p>The print-shop default. Same lossless rewrite, target pre-filled at 300 for journals, ID photos, and Etsy printables.</p></a>
+      <a href="/increase-image-dpi/"><h3>Increase Image DPI</h3><p>Raise a 72 or 96 tag so preflight stops rejecting the file. Increasing DPI does not add pixels.</p></a>
+      <a href="/dpi-vs-ppi/"><h3>DPI vs PPI</h3><p>When the two terms are interchangeable, and the few cases — print and scan — where the difference matters.</p></a>
+    </div>
+  </section>
 
   <section class="block" id="how">
     <h2>How to convert an image to 300 DPI online</h2>

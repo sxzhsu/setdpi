@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>DPI Checker — Check Image DPI Online, Free & Instant</title>
+<meta name="description" content="Free DPI checker: read JPG and PNG density (JFIF, EXIF, pHYs) in your browser. See DPI/PPI, pixel size, and print size. No upload, no rewrite.">
+<link rel="canonical" href="https://setdpi.com/dpi-checker/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/dpi-checker/">
+<meta property="og:title" content="DPI Checker — Check Image DPI Online, Free & Instant">
+<meta property="og:description" content="Check image DPI/PPI in your browser. JPEG JFIF/EXIF and PNG pHYs, plus pixel and print size. Files never leave the device.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="DPI Checker — Check Image DPI Online, Free & Instant">
+<meta name="twitter:description" content="Check image DPI/PPI in your browser. JPEG JFIF/EXIF and PNG pHYs, plus pixel and print size. Files never leave the device.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check the DPI of an image online?","acceptedAnswer":{"@type":"Answer","text":"Drop a JPG or PNG onto the DPI Checker above. The stored density is read in your browser from JPEG JFIF or EXIF XResolution, or from the PNG pHYs chunk, and shown with pixel size and print size. Nothing is uploaded and the file is not changed."}},{"@type":"Question","name":"Why does this DPI checker say “No DPI metadata found”?","acceptedAnswer":{"@type":"Answer","text":"Because the file has no density field. Most screenshots, browser downloads, and social-media exports never write JFIF, EXIF resolution, or pHYs. Viewers assume 72 or 96 DPI in that case. Inventing 72 here would be dishonest."}},{"@type":"Question","name":"Is DPI the same as PPI when I check an image?","acceptedAnswer":{"@type":"Answer","text":"In the file, yes. JPEG and PNG store one resolution pair. Tools label it DPI or PPI. A checker reporting 300 DPI is reporting the same field a dialog would call 300 PPI. Hardware screen PPI is a different number and is not in the file."}},{"@type":"Question","name":"What does 300 DPI mean when I check a photo?","acceptedAnswer":{"@type":"Answer","text":"It means the file claims 300 pixels per printed inch. A 3000 × 2400 px image tagged 300 DPI is labelled as a 10 × 8 in print. 72 DPI on the same pixels labels a 41.7 × 33.3 in print. The pixels do not change."}},{"@type":"Question","name":"Do screenshots have a DPI value?","acceptedAnswer":{"@type":"Answer","text":"Usually no. Operating-system screenshots and most in-browser captures omit density metadata. This checker will say so. If you need a 300 tag for a form, write one with the changer on the homepage — and remember a screenshot’s pixel count still limits print size."}},{"@type":"Question","name":"How accurate is a browser DPI checker?","acceptedAnswer":{"@type":"Answer","text":"As accurate as the bytes. This page uses the same JFIF, EXIF, and pHYs fields as desktop software. It prefers EXIF XResolution when present, then JFIF, and converts PNG pHYs from pixels-per-metre. It does not open TIFF, WebP, or HEIC."}},{"@type":"Question","name":"I checked my image — how do I change the DPI?","acceptedAnswer":{"@type":"Answer","text":"Use the Image DPI Changer on the SetDPI homepage. It rewrites JFIF/EXIF or pHYs losslessly in the browser. For the print-shop default, use Convert Image to 300 DPI. Increasing the tag does not add pixels."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"SetDPI — DPI Checker","url":"https://setdpi.com/dpi-checker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free in-browser DPI checker for JPG and PNG. Reads JFIF, EXIF XResolution, and PNG pHYs. Files never leave the device."}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #cfc7b2;border-radius:10px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbf8f0}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--ink)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px;overflow-wrap:anywhere}
+.row .warn-msg{font-size:13px;color:var(--warn);line-height:1.45;overflow-wrap:anywhere;flex:1 1 240px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,#customDpi,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+#sampleBtn{margin-top:14px}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){
+  .row .print,.row .warn-msg{flex-basis:100%}
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#how">How to check</a>
+      <a href="#missing">No DPI?</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Set DPI</a>
+      <span class="here" aria-current="page">DPI Checker</span>
+      <a href="/convert-image-to-300-dpi/">To 300 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Read-only · JPEG & PNG · nothing is uploaded</div>
+    <h1>DPI Checker — See an Image’s Print Density Instantly</h1>
+    <p class="sub">Drop a JPG or PNG to <strong>check image DPI</strong> (and PPI), pixel dimensions, and print size. This page only <strong>reads metadata</strong> — it never rewrites your file and <strong>never uploads</strong> it.</p>
+    <div class="trust">
+      <span>100% private — no upload</span>
+      <span>Read-only — pixels untouched</span>
+      <span>Free — no signup, no watermark</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+  <div class="tool" id="tool">
+    <div id="drop" tabindex="0" role="button" aria-label="Add images: drop files here or press Enter to browse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round"/></svg>
+      <div class="big">Drop images here, or click to browse</div>
+      <div class="small">JPG &amp; PNG · up to 50 files · DPI is read in your browser, never uploaded</div>
+      <button class="btn ghost" id="sampleBtn" type="button">No image handy? Try a sample photo</button>
+    </div>
+    <input type="file" id="fileInput" accept=".jpg,.jpeg,.jfif,.png,image/jpeg,image/png" multiple>
+    <div id="rows"></div>
+    <div class="toolbar" id="toolbar" hidden>
+      <span class="hint" id="count"></span>
+      <div>
+        <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="how">
+    <h2>How to check the DPI of an image online</h2>
+    <p>Drop a JPG or PNG onto the DPI Checker above, or click the box to browse. The file is read in your browser. In one pass you see the stored DPI (or PPI) value, the pixel width and height, and the print size those pixels produce at that density. Nothing is uploaded, and the file is not rewritten — this page is a reader.</p>
+    <p>Checking DPI is the step most people skip. A print shop, journal portal, or Etsy listing form then rejects the file for “low resolution,” and the photographer opens an editor looking for a resample slider. Nine times out of ten the pixels were already enough; the density tag was missing or set to 72. A checker tells you which of those two problems you actually have, before you change anything.</p>
+    <p>You can also check DPI on Windows (right-click → Properties → Details → Horizontal resolution) and on a Mac (Preview → Tools → Adjust Size). Those dialogs read the same fields this page reads. The browser version is faster when you have a handful of files, and it works on a Chromebook, a phone, or any machine that does not ship Preview.</p>
+    <p>Batch is supported: drop up to 50 files. Each row is independent. The checker never mixes one file’s tag with another’s.</p>
+  </section>
+  <section class="block" id="meaning">
+    <h2>What the number actually means</h2>
+    <p>DPI — dots per inch — is a metadata instruction, not a measure of how sharp the picture looks on your screen. Screens ignore it. They paint image pixels to device pixels and stop there. The number only starts to matter when something that prints, or software that preflights a print job, reads the file.</p>
+    <p>Three values show up constantly. <strong>72 DPI</strong> is the old Macintosh screen convention. A lot of web exporters, screenshots, and “Save for Web” pipelines still write 72, or write nothing and let the viewer assume 72. <strong>96 DPI</strong> is the old Windows screen convention — the same idea, a default for software that felt it had to put some number in the box. <strong>300 DPI</strong> is the print-industry habit for photos, magazines, journals, and most photo-lab work. At 300 DPI, each inch of paper gets 300 pixels, which is dense enough that halftone screening and normal viewing distance hide the pixel grid.</p>
+    <p>150 DPI is the usual compromise for large posters viewed from a few feet away. 600 DPI shows up in author guidelines for line art and hairline charts, where a soft photo-style 300 is not enough to keep edges crisp.</p>
+    <p>The relationship is a division, not a quality slider:</p>
+    <p><strong>print size (inches) = pixels ÷ DPI</strong></p>
+    <p>A 3000 × 2000 px photo is 10 × 6.7 in at 300 DPI, and 41.7 × 27.8 in at 72 DPI. Same pixels. The 72 DPI version is not “lower quality” as a digital file; it is labelled as a poster, and a preflight tool that expected a 10 × 8 print will call it low-resolution because 41 inches of claimed width does not fit the order. Flip the tag to 300 and the same bytes claim 10 × 6.7 in.</p>
+    <p>If this checker reports 72 on a camera JPEG that is 6000 px wide, you do not have a 72 DPI camera. You have a 6000 px image whose exporter wrote a screen default. The print size at 300 DPI is 20 in wide — plenty for a poster — once the tag matches the job.</p>
+  </section>
+  <section class="block" id="missing">
+    <h2>Why so many images have no DPI at all</h2>
+    <p>If the checker says “No DPI metadata found”, that is not a bug in the tool. Most screenshots, most images saved from a browser, most files that passed through a social network, and many phone-share exports simply never write a density field.</p>
+    <p>JPEG can store density in two places: the JFIF APP0 segment (the older, simpler header) and the EXIF <code>XResolution</code> / <code>YResolution</code> tags, with <code>ResolutionUnit</code> saying whether the numbers are inches or centimetres. PNG stores it in the <code>pHYs</code> chunk as pixels-per-metre, which this checker converts back to DPI. If none of those structures exist, or the PNG <code>pHYs</code> unit is 0 (“unknown”), there is no honest DPI to display.</p>
+    <p>Viewers then guess. Photoshop, Preview, Windows Explorer, and most browsers assume 72 or 96 DPI when the field is absent. That guess is a display convenience, not data from your file. Reporting a fake 72 here would make the checker look more helpful and be wrong. The message on the row is deliberate: the file has no density metadata; viewers will assume 72 or 96.</p>
+    <p>That is also why a screenshot of a 4K desktop is a poor print file even after you later “set 300 DPI”. The screenshot is maybe 3840 × 2160 px with no density tag. At 300 DPI it prints about 12.8 × 7.2 in. The tag can be written — use the changer on the <a href="/">homepage</a> — but the pixel count does not grow.</p>
+    <p>Camera originals usually do have EXIF resolution, often 72, 240, or 300 depending on the maker. Scanned files sometimes write the optical DPI of the scan, which is the one case where the number describes how the pixels were captured, not just how they should be printed. This checker only reads JPEG and PNG; TIFF is not supported.</p>
+  </section>
+  <section class="block" id="next">
+    <h2>After you check — change the tag without resampling</h2>
+    <p>If the number is wrong for the job (72 when the portal wants 300, empty when the print shop’s preflight demands a tag), the fix is to rewrite the density fields and leave the pixels alone. That is what the <a href="/">homepage Image DPI Changer</a> does: JFIF and EXIF for JPEG, <code>pHYs</code> plus a CRC32 for PNG. No re-encoding, no quality loss, no upload.</p>
+    <p>Do not “increase DPI” in an editor with Resample ticked unless you actually want more pixels. Resampling invents new samples and changes the file. It is the right move only when the print size you need is larger than pixels ÷ 300. Example: 1200 × 1800 px at 300 DPI is a 4 × 6 in print. If you need 8 × 12 in at 300 DPI, you need 2400 × 3600 px. Changing the tag to 300 does not manufacture those pixels. This site does not upscale.</p>
+    <p>Use the checker first. If the tag is the problem, <a href="/">set a new DPI on the homepage</a>. If you specifically need the print-shop default, use <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a>. If a form rejected a 72 tag, <a href="/increase-image-dpi/">Increase Image DPI</a> walks through what raising the number does and does not do. For the vocabulary, see <a href="/dpi-vs-ppi/">DPI vs PPI</a>.</p>
+  </section>
+  <section class="block" id="how-it-reads">
+    <h2>How this DPI Checker reads JPEG and PNG</h2>
+    <p>For JPEG, EXIF is preferred when <code>XResolution</code> is present, because that is what Windows Properties and many RIPs display. The value is a rational (numerator / denominator). If <code>ResolutionUnit</code> is centimetres, the checker multiplies by 2.54 to report DPI. If there is no usable EXIF density, it falls back to JFIF: units = 1 means dots per inch, units = 2 means dots per centimetre.</p>
+    <p>For PNG, <code>pHYs</code> stores pixels per metre on X and Y. When the unit byte is 1 (metre), DPI ≈ pixels-per-metre × 0.0254. When the unit byte is 0, the chunk is a relative aspect ratio, not a print density, so this checker treats it as “not set”.</p>
+    <p>WebP, HEIC, TIFF, and PDF are out of scope. Convert those to JPEG or PNG first if you only need a density read; that conversion step is not lossless, and it is not done here.</p>
+    <p>A phone marketed as “400 PPI” is describing the screen hardware: about 400 hardware pixels in each inch of glass. That has nothing to do with the PPI or DPI tag inside a photo you open on that phone. The photo can be 72, 300, or untagged; the screen still maps image pixels to device pixels according to the browser or the photo app. So “check image DPI” is not “check how sharp this will look on my phone”. It is “check what print density the file claims, if it claims one at all”. For the screen you already have the only number that matters: the pixel width and height, which this checker also shows.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>How do I check the DPI of an image online?</summary><div class="a">Drop a JPG or PNG onto the DPI Checker above. The stored density is read in your browser from JPEG JFIF or EXIF XResolution, or from the PNG pHYs chunk, and shown with pixel size and print size. Nothing is uploaded and the file is not changed.</div></details>
+      <details><summary>Why does this DPI checker say “No DPI metadata found”?</summary><div class="a">Because the file has no density field. Most screenshots, browser downloads, and social-media exports never write JFIF, EXIF resolution, or pHYs. Viewers assume 72 or 96 DPI in that case. Inventing 72 here would be dishonest.</div></details>
+      <details><summary>Is DPI the same as PPI when I check an image?</summary><div class="a">In the file, yes. JPEG and PNG store one resolution pair. Tools label it DPI or PPI. A checker reporting 300 DPI is reporting the same field a dialog would call 300 PPI. Hardware screen PPI is a different number and is not in the file.</div></details>
+      <details><summary>What does 300 DPI mean when I check a photo?</summary><div class="a">It means the file claims 300 pixels per printed inch. A 3000 × 2400 px image tagged 300 DPI is labelled as a 10 × 8 in print. 72 DPI on the same pixels labels a 41.7 × 33.3 in print. The pixels do not change.</div></details>
+      <details><summary>Do screenshots have a DPI value?</summary><div class="a">Usually no. Operating-system screenshots and most in-browser captures omit density metadata. This checker will say so. If you need a 300 tag for a form, write one with the changer on the homepage — and remember a screenshot’s pixel count still limits print size.</div></details>
+      <details><summary>How accurate is a browser DPI checker?</summary><div class="a">As accurate as the bytes. This page uses the same JFIF, EXIF, and pHYs fields as desktop software. It prefers EXIF XResolution when present, then JFIF, and converts PNG pHYs from pixels-per-metre. It does not open TIFF, WebP, or HEIC.</div></details>
+      <details><summary>I checked my image — how do I change the DPI?</summary><div class="a">Use the Image DPI Changer on the SetDPI homepage. It rewrites JFIF/EXIF or pHYs losslessly in the browser. For the print-shop default, use Convert Image to 300 DPI. Increasing the tag does not add pixels.</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+<script>
+(function(){
+"use strict";
+var targetDpi = null;
+
+var CRC_T = (function(){
+  var t = new Uint32Array(256), c, n, k;
+  for(n=0;n<256;n++){ c=n; for(k=0;k<8;k++) c = (c&1) ? (0xEDB88320 ^ (c>>>1)) : (c>>>1); t[n]=c; }
+  return t;
+})();
+function crc32(u8, start, end){
+  var c = 0xFFFFFFFF, i;
+  for(i=start;i<end;i++) c = CRC_T[(c ^ u8[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function be16(u,i){ return (u[i]<<8) | u[i+1]; }
+function be32(u,i){ return ((u[i]<<24)|(u[i+1]<<16)|(u[i+2]<<8)|u[i+3])>>>0; }
+function wbe32(u,i,v){ u[i]=(v>>>24)&255; u[i+1]=(v>>>16)&255; u[i+2]=(v>>>8)&255; u[i+3]=v&255; }
+function concat(parts){
+  var len = 0, i, out, off = 0;
+  for(i=0;i<parts.length;i++) len += parts[i].length;
+  out = new Uint8Array(len);
+  for(i=0;i<parts.length;i++){ out.set(parts[i], off); off += parts[i].length; }
+  return out;
+}
+function isJpeg(u){ return u.length>3 && u[0]===0xFF && u[1]===0xD8; }
+function jpegSegments(u){
+  var segs = [], i = 2, m, L;
+  while(i+4 <= u.length){
+    if(u[i]!==0xFF){ i++; continue; }
+    m = u[i+1];
+    if(m===0xFF){ i++; continue; }
+    if(m===0xD8 || m===0x01 || (m>=0xD0 && m<=0xD7)){ i+=2; continue; }
+    if(m===0xDA) break;
+    L = be16(u, i+2);
+    if(L < 2 || i+2+L > u.length) break;
+    segs.push({marker:m, start:i, len:L});
+    i += 2 + L;
+  }
+  return segs;
+}
+function findJfif(u, segs){
+  for(var k=0;k<segs.length;k++){ var s=segs[k];
+    if(s.marker===0xE0 && s.len>=14 && u[s.start+4]===0x4A && u[s.start+5]===0x46 && u[s.start+6]===0x49 && u[s.start+7]===0x46 && u[s.start+8]===0) return s;
+  } return null;
+}
+function findExif(u, segs){
+  for(var k=0;k<segs.length;k++){ var s=segs[k];
+    if(s.marker===0xE1 && s.len>=10 && u[s.start+4]===0x45 && u[s.start+5]===0x78 && u[s.start+6]===0x69 && u[s.start+7]===0x66 && u[s.start+8]===0 && u[s.start+9]===0) return s;
+  } return null;
+}
+function exifRes(u, seg){
+  var base = seg.start + 10;
+  var end  = seg.start + 2 + seg.len;
+  if(base+8 > end) return null;
+  var le = (u[base]===0x49 && u[base+1]===0x49);
+  if(!le && !(u[base]===0x4D && u[base+1]===0x4D)) return null;
+  function r16(i){ return le ? (u[i]|(u[i+1]<<8)) : ((u[i]<<8)|u[i+1]); }
+  function r32(i){ return le ? ((u[i]|(u[i+1]<<8)|(u[i+2]<<16)|(u[i+3]<<24))>>>0) : be32(u,i); }
+  function w32(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; u[i+2]=(v>>>16)&255; u[i+3]=(v>>>24)&255; } else wbe32(u,i,v); }
+  function w16(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; } else { u[i]=(v>>>8)&255; u[i+1]=v&255; } }
+  if(r16(base+2)!==42) return null;
+  var ifd = base + r32(base+4);
+  if(ifd+2 > end) return null;
+  var n = r16(ifd), res = {le:le, r16:r16, r32:r32, w32:w32, w16:w16, base:base, end:end};
+  for(var k=0;k<n;k++){
+    var e = ifd + 2 + k*12;
+    if(e+12 > end) break;
+    var tag = r16(e), type = r16(e+2);
+    if(tag===0x011A && type===5) res.x = e;
+    if(tag===0x011B && type===5) res.y = e;
+    if(tag===0x0128 && type===3) res.unit = e;
+  }
+  return (res.x || res.y || res.unit) ? res : null;
+}
+function readJpegDpi(u){
+  var segs = jpegSegments(u);
+  var ex = findExif(u, segs);
+  if(ex){
+    var r = exifRes(u, ex);
+    if(r && r.x){
+      var off = r.base + r.r32(r.x+8);
+      if(off+8 <= r.end){
+        var num = r.r32(off), den = r.r32(off+4) || 1;
+        var unit = r.unit ? r.r16(r.unit+8) : 2;
+        var v = num/den;
+        if(unit===3) v *= 2.54;
+        if(v>0 && v<100000) return Math.round(v);
+      }
+    }
+  }
+  var jf = findJfif(u, segs);
+  if(jf){
+    var units = u[jf.start+11], X = be16(u, jf.start+12);
+    if(units===1 && X>0) return X;
+    if(units===2 && X>0) return Math.round(X*2.54);
+  }
+  return null;
+}
+var PNG_SIG = [0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A];
+function isPng(u){
+  if(u.length<8) return false;
+  for(var i=0;i<8;i++) if(u[i]!==PNG_SIG[i]) return false;
+  return true;
+}
+function pngChunks(u){
+  var out = [], i = 8, len, type;
+  while(i+8 <= u.length){
+    len = be32(u,i);
+    type = String.fromCharCode(u[i+4],u[i+5],u[i+6],u[i+7]);
+    out.push({type:type, start:i, len:len});
+    i += 12 + len;
+    if(type==='IEND') break;
+  }
+  return out;
+}
+function readPngDpi(u){
+  var cs = pngChunks(u);
+  for(var k=0;k<cs.length;k++){ var c=cs[k];
+    if(c.type==='pHYs' && c.len===9){
+      var ppx = be32(u, c.start+8), unit = u[c.start+16];
+      if(unit===1 && ppx>0) return Math.round(ppx*0.0254);
+    }
+  }
+  return null;
+}
+
+var $ = function(id){ return document.getElementById(id); };
+var files = [];
+var drop = $('drop'), input = $('fileInput');
+drop.addEventListener('click', function(){ input.click(); });
+drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); } });
+['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
+input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+function addFiles(list){
+  var arr = Array.prototype.slice.call(list).slice(0, 50);
+  arr.forEach(function(f){
+    f.arrayBuffer().then(function(buf){
+      var u = new Uint8Array(buf);
+      var kind = isJpeg(u) ? 'jpeg' : (isPng(u) ? 'png' : null);
+      if(!kind){ alert((f.name||'File') + ': only JPG and PNG are supported.'); return; }
+      var item = {
+        name: f.name || 'image',
+        bytes: u,
+        kind: kind,
+        dpi: kind==='jpeg' ? readJpegDpi(u) : readPngDpi(u),
+        url: URL.createObjectURL(new Blob([u], {type: kind==='jpeg'?'image/jpeg':'image/png'})),
+        w: 0, h: 0
+      };
+      files.push(item);
+      var img = new Image();
+      img.onload = function(){ item.w = img.naturalWidth; item.h = img.naturalHeight; renderAll(); };
+      img.src = item.url;
+      renderAll();
+    });
+  });
+}
+function inchCm(wpx, hpx, dpi){
+  var win = wpx/dpi, hin = hpx/dpi;
+  return win.toFixed(1) + '″ × ' + hin.toFixed(1) + '″ (' + (win*2.54).toFixed(1) + '×' + (hin*2.54).toFixed(1) + ' cm)';
+}
+$('clearBtn').addEventListener('click', function(){
+  files.forEach(function(f){ URL.revokeObjectURL(f.url); });
+  files = [];
+  renderAll();
+});
+$('sampleBtn').addEventListener('click', function(e){
+  e.stopPropagation();
+  var cv = document.createElement('canvas'); cv.width = 1600; cv.height = 1200;
+  var x = cv.getContext('2d');
+  x.fillStyle = '#cfe3f2'; x.fillRect(0, 0, 1600, 800);
+  x.fillStyle = '#f2d38b'; x.beginPath(); x.arc(1180, 300, 140, 0, 7); x.fill();
+  x.fillStyle = '#8fae7e'; x.beginPath(); x.moveTo(0,820); x.quadraticCurveTo(400,600,800,820); x.quadraticCurveTo(1200,1040,1600,760); x.lineTo(1600,1200); x.lineTo(0,1200); x.closePath(); x.fill();
+  x.fillStyle = '#7a9b6a'; x.beginPath(); x.moveTo(0,900); x.quadraticCurveTo(500,760,1000,940); x.quadraticCurveTo(1300,1040,1600,940); x.lineTo(1600,1200); x.lineTo(0,1200); x.closePath(); x.fill();
+  cv.toBlob(function(b){
+    addFiles([new File([b], 'sample-photo.jpg', {type: 'image/jpeg'})]);
+  }, 'image/jpeg', 0.92);
+});
+
+function renderAll(){
+  var box = $('rows');
+  box.innerHTML = '';
+  files.forEach(function(item){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var dpiHtml, printHtml;
+    if(item.dpi){
+      dpiHtml = '<span class="badge">' + item.dpi + ' DPI</span>';
+      printHtml = item.w
+        ? ('Prints ' + inchCm(item.w, item.h, item.dpi) + ' @ ' + item.dpi + ' DPI')
+        : '';
+    } else {
+      dpiHtml = '<span class="badge warn">DPI not set</span>';
+      printHtml = '';
+    }
+    var warn = item.dpi ? '' : '<span class="warn-msg">No DPI metadata found — most screenshots and web images have none. Viewers assume 72 or 96 DPI in that case.' +
+      (item.w ? ' Assumed print size: ' + inchCm(item.w, item.h, 72) + ' @ 72 · ' + inchCm(item.w, item.h, 96) + ' @ 96.' : '') + '</span>';
+    row.innerHTML =
+      '<img class="thumb" alt="Preview of ' + item.name + '" src="' + item.url + '">' +
+      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + ' · ' + dpiHtml + '</div></div>' +
+      (printHtml ? '<span class="print">' + printHtml + '</span>' : warn) +
+      '<a class="btn ghost" href="/">Set a DPI tag</a>';
+    row.querySelector('.name').textContent = item.name;
+    box.appendChild(row);
+  });
+  $('toolbar').hidden = files.length === 0;
+  $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · read locally, not uploaded') : '';
+}
+window.__setdpi = {readJpegDpi:readJpegDpi, readPngDpi:readPngDpi, isJpeg:isJpeg, isPng:isPng};
+
+})();
+</script>
+</body>
+</html>
