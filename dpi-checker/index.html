@@ -74,6 +74,7 @@ a.brand:hover{color:var(--ink);text-decoration:none}
 .row .meta{flex:1 1 200px;min-width:0}
 .row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.row .raw{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;overflow-wrap:anywhere;opacity:.88;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
 .badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
 .badge.warn{background:#fef3c7;color:var(--warn)}
 .arrow{color:var(--muted);font-size:13px}
@@ -369,6 +370,75 @@ function readPngDpi(u){
   }
   return null;
 }
+function exifRational(r, entry){
+  if(!entry) return null;
+  var off = r.base + r.r32(entry+8);
+  if(off+8 > r.end) return null;
+  var num = r.r32(off), den = r.r32(off+4) || 1;
+  var v = num/den;
+  if(!(v>0 && v<100000)) return null;
+  return v;
+}
+function readJpegRaw(u){
+  var segs = jpegSegments(u);
+  var ex = findExif(u, segs);
+  if(ex){
+    var r = exifRes(u, ex);
+    if(r && r.x){
+      var xv = exifRational(r, r.x);
+      if(xv!=null){
+        var storedUnit = r.unit ? r.r16(r.unit+8) : null;
+        var unitCode = storedUnit != null ? storedUnit : 2;
+        var v = xv;
+        if(unitCode===3) v *= 2.54;
+        if(v>0 && v<100000){
+          return {
+            x: xv,
+            y: exifRational(r, r.y),
+            unit: storedUnit===2 ? 'inch' : (storedUnit===3 ? 'cm' : null),
+            source: 'EXIF'
+          };
+        }
+      }
+    }
+  }
+  var jf = findJfif(u, segs);
+  if(jf){
+    var units = u[jf.start+11], X = be16(u, jf.start+12), Y = be16(u, jf.start+14);
+    if(units===1 && X>0) return {x:X, y:Y>0?Y:null, unit:'inch', source:'JFIF'};
+    if(units===2 && X>0) return {x:X, y:Y>0?Y:null, unit:'cm', source:'JFIF'};
+  }
+  return {x:null, y:null, unit:null, source:null};
+}
+function readPngRaw(u){
+  var cs = pngChunks(u);
+  for(var k=0;k<cs.length;k++){ var c=cs[k];
+    if(c.type==='pHYs' && c.len===9){
+      var ppx = be32(u, c.start+8), ppy = be32(u, c.start+12), unit = u[c.start+16];
+      if(unit===1 && ppx>0){
+        return {
+          x: Math.round(ppx*0.0254),
+          y: ppy>0 ? Math.round(ppy*0.0254) : null,
+          unit: 'inch',
+          source: 'pHYs (converted from px/m)'
+        };
+      }
+    }
+  }
+  return {x:null, y:null, unit:null, source:null};
+}
+function fmtRawNum(v){
+  if(v==null || !isFinite(v)) return '—';
+  if(Math.abs(v - Math.round(v)) < 1e-6) return String(Math.round(v));
+  return (Math.round(v*10)/10).toFixed(1);
+}
+function rawInspectLine(raw){
+  raw = raw || {};
+  return 'XResolution: ' + fmtRawNum(raw.x) +
+    ' · YResolution: ' + fmtRawNum(raw.y) +
+    ' · ResolutionUnit: ' + (raw.unit || '—') +
+    ' · source: ' + (raw.source || '—');
+}
 
 var $ = function(id){ return document.getElementById(id); };
 var files = [];
@@ -391,6 +461,7 @@ function addFiles(list){
         bytes: u,
         kind: kind,
         dpi: kind==='jpeg' ? readJpegDpi(u) : readPngDpi(u),
+        raw: kind==='jpeg' ? readJpegRaw(u) : readPngRaw(u),
         url: URL.createObjectURL(new Blob([u], {type: kind==='jpeg'?'image/jpeg':'image/png'})),
         w: 0, h: 0
       };
@@ -444,7 +515,7 @@ function renderAll(){
       (item.w ? ' Assumed print size: ' + inchCm(item.w, item.h, 72) + ' @ 72 · ' + inchCm(item.w, item.h, 96) + ' @ 96.' : '') + '</span>';
     row.innerHTML =
       '<img class="thumb" alt="Preview of ' + item.name + '" src="' + item.url + '">' +
-      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + ' · ' + dpiHtml + '</div></div>' +
+      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + ' · ' + dpiHtml + '</div><div class="raw">' + rawInspectLine(item.raw) + '</div></div>' +
       (printHtml ? '<span class="print">' + printHtml + '</span>' : warn) +
       '<a class="btn ghost" href="/">Set a DPI tag</a>';
     row.querySelector('.name').textContent = item.name;
