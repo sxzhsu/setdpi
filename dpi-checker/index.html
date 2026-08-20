@@ -24,7 +24,7 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check the DPI of an image online?","acceptedAnswer":{"@type":"Answer","text":"Drop a JPG or PNG onto the DPI Checker above. The stored density is read in your browser from JPEG JFIF or EXIF XResolution, or from the PNG pHYs chunk, and shown with pixel size and print size. Nothing is uploaded and the file is not changed."}},{"@type":"Question","name":"Why does this DPI checker say “No DPI metadata found”?","acceptedAnswer":{"@type":"Answer","text":"Because the file has no density field. Most screenshots, browser downloads, and social-media exports never write JFIF, EXIF resolution, or pHYs. Viewers assume 72 or 96 DPI in that case. Inventing 72 here would be dishonest."}},{"@type":"Question","name":"Is DPI the same as PPI when I check an image?","acceptedAnswer":{"@type":"Answer","text":"In the file, yes. JPEG and PNG store one resolution pair. Tools label it DPI or PPI. A checker reporting 300 DPI is reporting the same field a dialog would call 300 PPI. Hardware screen PPI is a different number and is not in the file."}},{"@type":"Question","name":"What does 300 DPI mean when I check a photo?","acceptedAnswer":{"@type":"Answer","text":"It means the file claims 300 pixels per printed inch. A 3000 × 2400 px image tagged 300 DPI is labelled as a 10 × 8 in print. 72 DPI on the same pixels labels a 41.7 × 33.3 in print. The pixels do not change."}},{"@type":"Question","name":"Do screenshots have a DPI value?","acceptedAnswer":{"@type":"Answer","text":"Usually no. Operating-system screenshots and most in-browser captures omit density metadata. This checker will say so. If you need a 300 tag for a form, write one with the changer on the homepage — and remember a screenshot’s pixel count still limits print size."}},{"@type":"Question","name":"How accurate is a browser DPI checker?","acceptedAnswer":{"@type":"Answer","text":"As accurate as the bytes. This page uses the same JFIF, EXIF, and pHYs fields as desktop software. It prefers EXIF XResolution when present, then JFIF, and converts PNG pHYs from pixels-per-metre. It does not open TIFF, WebP, or HEIC."}},{"@type":"Question","name":"I checked my image — how do I change the DPI?","acceptedAnswer":{"@type":"Answer","text":"Use the Image DPI Changer on the SetDPI homepage. It rewrites JFIF/EXIF or pHYs losslessly in the browser. For the print-shop default, use Convert Image to 300 DPI. Increasing the tag does not add pixels."}}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"SetDPI — DPI Checker","url":"https://setdpi.com/dpi-checker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free in-browser DPI checker for JPG and PNG. Reads JFIF, EXIF XResolution, and PNG pHYs. Files never leave the device."}
+{"@context":"https://schema.org","@type":"WebApplication","name":"SetDPI — DPI Checker","url":"https://setdpi.com/dpi-checker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free in-browser DPI checker for JPG and PNG. Reads JFIF, EXIF XResolution, and PNG pHYs. Files never leave the device.","datePublished":"2026-08-19","dateModified":"2026-08-20"}
 </script>
 <style>
 :root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
@@ -199,6 +199,18 @@ img,svg{max-width:100%}
     <p>150 DPI is the usual compromise for large posters viewed from a few feet away. 600 DPI shows up in author guidelines for line art and hairline charts, where a soft photo-style 300 is not enough to keep edges crisp.</p>
     <p>The relationship is a division, not a quality slider:</p>
     <p><strong>print size (inches) = pixels ÷ DPI</strong></p>
+    <div class=”table-scroll”>
+    <table class=”print”>
+      <thead><tr><th>DPI</th><th>Typical use</th><th>3000 × 2000 px prints at</th></tr></thead>
+      <tbody>
+      <tr><td>72</td><td>Screen default, web export</td><td>41.7 × 27.8 in</td></tr>
+      <tr><td>96</td><td>Windows screen default</td><td>31.3 × 20.8 in</td></tr>
+      <tr><td>150</td><td>Large-format posters</td><td>20 × 13.3 in</td></tr>
+      <tr><td>300</td><td>Photo labs, journals, magazines</td><td>10 × 6.7 in</td></tr>
+      <tr><td>600</td><td>Line art, hairline charts</td><td>5 × 3.3 in</td></tr>
+      </tbody>
+    </table>
+    </div>
     <p>A 3000 × 2000 px photo is 10 × 6.7 in at 300 DPI, and 41.7 × 27.8 in at 72 DPI. Same pixels. The 72 DPI version is not “lower quality” as a digital file; it is labelled as a poster, and a preflight tool that expected a 10 × 8 print will call it low-resolution because 41 inches of claimed width does not fit the order. Flip the tag to 300 and the same bytes claim 10 × 6.7 in.</p>
     <p>If this checker reports 72 on a camera JPEG that is 6000 px wide, you do not have a 72 DPI camera. You have a 6000 px image whose exporter wrote a screen default. The print size at 300 DPI is 20 in wide — plenty for a poster — once the tag matches the job.</p>
   </section>
