@@ -289,7 +289,7 @@ pre{overflow-x:auto}
   </section>
 
   <section class="block" id="requirements">
-    <h2>Common DPI requirements at a glance</h2>
+    <h2>Common image DPI requirements at a glance</h2>
     <p>Different platforms and print services ask for different resolution settings. These are the values you will most often be asked for:</p>
     <table class="print">
       <thead><tr><th>Use case</th><th>Required DPI</th><th>Notes</th></tr></thead>
@@ -323,7 +323,7 @@ pre{overflow-x:auto}
   </section>
 
   <section class="block" id="faq">
-    <h2>Frequently asked questions</h2>
+    <h2>Image DPI changer — frequently asked questions</h2>
     <div class="faq">
       <details open><summary>How do I convert an image to 300 DPI online for free?</summary><div class="a">Drop your JPG or PNG into the converter above, select the <b>300</b> preset and click Download. The DPI metadata is rewritten directly in your browser — free, instant, no watermark, no signup.</div></details>
       <details><summary>Does changing DPI reduce image quality?</summary><div class="a">Not here. SetDPI only rewrites the DPI metadata (JFIF/EXIF for JPG, pHYs for PNG) and never re-encodes your pixels, so quality is 100% preserved. Many other tools decompress and re-save the image, which degrades quality — this one doesn't.</div></details>
@@ -646,7 +646,7 @@ function renderAll(){
       ? '<span class="badge">' + item.dpi + ' DPI</span>'
       : '<span class="badge warn">DPI not set</span>';
     row.innerHTML =
-      '<img class="thumb" alt="Preview of ' + item.name + '" src="' + item.url + '">' +
+      '<img class="thumb" width="52" height="52" alt="Preview of ' + item.name + '" src="' + item.url + '">' +
       '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + '</div></div>' +
       '<span>' + dpiBadge + ' <span class="arrow">→</span> <span class="badge">' + targetDpi + ' DPI</span></span>' +
       '<span class="print">' + printSize(item) + '</span>' +
