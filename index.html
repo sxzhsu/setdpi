@@ -111,6 +111,11 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);bac
 .toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
 .toolbar[hidden]{display:none}
 .hint{font-size:12.5px;color:var(--muted)}
+.fdoor{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding:10px 12px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--card)}
+.fdoor[hidden],.fdoor [hidden]{display:none}
+.fdoor .pro{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-size:10.5px;letter-spacing:.3px;vertical-align:middle}
+.fdnote{flex-basis:100%;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn.sm{padding:7px 12px;font-size:13px}
 section.block{padding:34px 0 6px}
 section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
 section.block p{color:#374151;margin-bottom:12px;max-width:760px}
@@ -214,6 +219,16 @@ pre{overflow-x:auto}
       <div>
         <button class="btn ghost" id="clearBtn">Clear</button>
         <button class="btn primary" id="dlAll">Download all</button>
+      </div>
+    </div>
+    <div class="fdoor" id="fdoor" hidden>
+      <span class="hint">Need more than a DPI tag?</span>
+      <button class="btn ghost fd" type="button" data-feature="print_resize">Resize for print &mdash; 4&times;6, A4, Letter<span class="pro">Pro</span></button>
+      <button class="btn ghost fd" type="button" data-feature="pdf_export">Save as print-ready PDF<span class="pro">Pro</span></button>
+      <div class="fdnote" id="fdnote" hidden>
+        <span><strong id="fdtitle"></strong> isn&rsquo;t built yet &mdash; we&rsquo;re gauging demand before we build it. Would you use it?</span>
+        <button class="btn primary sm" type="button" id="fdyes">Yes, build it</button>
+        <span class="hint" id="fdthanks" hidden>Noted &mdash; thanks. Everything above stays free.</span>
       </div>
     </div>
   </div>
@@ -656,6 +671,7 @@ function renderAll(){
     box.appendChild(row);
   });
   $('toolbar').hidden = files.length === 0;
+  $('fdoor').hidden = files.length === 0;
   $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
 }
 $('dlAll').addEventListener('click', function(){
@@ -665,6 +681,23 @@ $('clearBtn').addEventListener('click', function(){
   files.forEach(function(f){ URL.revokeObjectURL(f.url); });
   files = [];
   renderAll();
+});
+/* fake door: measure print-workflow demand before building anything. Two clicks = two
+   intent levels (curious vs. would-use); both go to GA4 as events, nothing is collected. */
+var FD_TITLES = {print_resize: 'Resize for print', pdf_export: 'Print-ready PDF'};
+var fdFeature = '';
+document.querySelectorAll('.fd').forEach(function(b){
+  b.addEventListener('click', function(){
+    fdFeature = b.getAttribute('data-feature');
+    $('fdtitle').textContent = FD_TITLES[fdFeature];
+    $('fdthanks').hidden = true; $('fdyes').hidden = false;
+    $('fdnote').hidden = false;
+    if (window.gtag) gtag('event', 'fake_door_click', {feature: fdFeature});
+  });
+});
+$('fdyes').addEventListener('click', function(){
+  $('fdyes').hidden = true; $('fdthanks').hidden = false;
+  if (window.gtag) gtag('event', 'fake_door_interest', {feature: fdFeature});
 });
 /* sample photo: 让没带图的访客（和评委）零成本体验 */
 $('sampleBtn').addEventListener('click', function(e){
