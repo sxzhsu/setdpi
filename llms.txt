@@ -10,6 +10,12 @@
 - [DPI Checker](https://setdpi.com/dpi-checker/): Read-only JPEG JFIF/EXIF and PNG pHYs density checker — pixel size and print size, no rewrite
 - [Convert Image to 300 DPI](https://setdpi.com/convert-image-to-300-dpi/): Same lossless changer with the target pre-filled at 300 for print shops, journals, ID photos, and Etsy printables
 - [Increase Image DPI](https://setdpi.com/increase-image-dpi/): Raise a 72/96/150 tag so preflight stops rejecting the file. Increasing DPI does not add pixels
+- [DPI Calculator](https://setdpi.com/dpi-calculator/): Enter pixels, inches, and DPI — the calculator finds the missing value and shows print size
+- [Change Image DPI to 150](https://setdpi.com/change-dpi-to-150/): Lossless 150 DPI preset for posters, banners, and large-format printing
+- [Change Image DPI to 200](https://setdpi.com/change-dpi-to-200/): Lossless 200 DPI preset for web-to-print and digital delivery
+- [72 DPI to 300 DPI](https://setdpi.com/72-dpi-to-300-dpi/): Convert screen-resolution images to print-ready 300 DPI
+- [Convert Image to 600 DPI](https://setdpi.com/convert-image-to-600-dpi/): Lossless 600 DPI for fine art, medical imaging, and archival
+- [Convert Image to 1200 DPI](https://setdpi.com/convert-image-to-1200-dpi/): Lossless 1200 DPI for precision labels and fine-detail printing
 
 ## Explainers
 

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>DPI Calculator — Pixels, Inches, and Print Size</title>
+<meta name="description" content="Free DPI calculator: enter any two of pixels, inches, and DPI to find the third. See print size at 72, 150, 200, 300, or 600 DPI. No signup.">
+<link rel="canonical" href="https://setdpi.com/dpi-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/dpi-calculator/">
+<meta property="og:title" content="DPI Calculator — Pixels, Inches, and Print Size">
+<meta property="og:description" content="Free DPI calculator: enter any two of pixels, inches, and DPI to find the third. See print size at 72, 150, 200, 300, or 600 DPI. No signup.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="DPI Calculator — Pixels, Inches, and Print Size">
+<meta name="twitter:description" content="Free DPI calculator: enter any two of pixels, inches, and DPI to find the third. See print size at 72, 150, 200, 300, or 600 DPI. No signup.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate DPI from pixels and inches?","acceptedAnswer":{"@type":"Answer","text":"DPI = pixels ÷ inches. A 3000-pixel-wide image that should print 10 inches wide is 300 DPI. Enter any two of pixels, inches, and DPI in the calculator; it fills the third."}},{"@type":"Question","name":"What is 8.5 x 11 in pixels at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"2550 × 3300 pixels. Pixels = inches × DPI, so 8.5 × 300 = 2550 and 11 × 300 = 3300. That is US Letter at photo-quality density."}},{"@type":"Question","name":"How many pixels do I need for a 4x6 print at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"1200 × 1800 pixels. At 150 DPI the same 4×6 print only needs 600 × 900 pixels, which is acceptable for a snapshot viewed at arm's length but not for a lab print."}},{"@type":"Question","name":"What DPI do I need for a large print?","acceptedAnswer":{"@type":"Answer","text":"150 DPI is the usual floor for posters and banners viewed from a few feet. 200 is common for newsprint. 300 is more than you need on a 24×36 inch poster unless someone will inspect it up close. Divide pixel width by print width in inches to get the DPI you actually have."}},{"@type":"Question","name":"Is 72 DPI good enough for web?","acceptedAnswer":{"@type":"Answer","text":"Yes. Screens ignore the DPI tag and paint pixels. 72 is a legacy Macintosh screen convention. A 72 DPI file and a 300 DPI file with the same pixel count look identical on a monitor. 72 only becomes a problem when a print workflow reads the tag."}},{"@type":"Question","name":"How do I convert inches to pixels?","acceptedAnswer":{"@type":"Answer","text":"Pixels = inches × DPI. An 8×10 inch print at 300 DPI needs 2400×3000 pixels. Enter the print size and DPI in the calculator; it fills the pixel fields."}},{"@type":"Question","name":"What size image do I need for an A4 print at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"A4 is 8.27 × 11.69 inches, so 2481 × 3507 pixels at 300 DPI. At 150 DPI you need 1241 × 1754 pixels."}},{"@type":"Question","name":"Does this DPI calculator change my image file?","acceptedAnswer":{"@type":"Answer","text":"No. This page only does the arithmetic between pixels, inches, and DPI. It never opens or rewrites a file. To set the density tag on a JPG or PNG, use the Image DPI Changer on the homepage or Convert Image to 300 DPI."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"DPI Calculator","url":"https://setdpi.com/dpi-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free DPI calculator: enter any two of pixels, inches, and DPI to find the third. See print size at 72, 150, 200, 300, or 600 DPI.","datePublished":"2026-09-04","dateModified":"2026-09-04","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,input:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,.calc-group input,.calc-result,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:stretch}
+.calc-group{background:#fbf8f0;border:1.5px solid var(--line);border-radius:10px;padding:16px;transition:border-color .15s,background .15s}
+.calc-group.solving{background:var(--accent-soft);border-color:#d7b8ac}
+.calc-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.calc-group-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.calc-flag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:#fff;border:1px solid #d7b8ac;border-radius:999px;padding:2px 8px;display:none}
+.calc-group.solving .calc-flag{display:inline-block}
+.calc-group label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.calc-group input[type=number]{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;font-size:18px;font-weight:700;color:var(--ink);background:#fff;margin-top:4px}
+.calc-group input[type=number]:focus{border-color:var(--accent);outline:none}
+.calc-group.solving input[type=number]{background:#fffdf9}
+.calc-result{margin-top:16px;padding:12px 14px;background:#fbf8f0;border:1px solid var(--line);border-radius:9px;font-size:14.5px;font-weight:700;color:var(--accent);line-height:1.5}
+.calc-mode{margin-top:8px;font-size:13px;color:var(--muted)}
+.live-caption{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:18px 0 0}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:720px){
+  .calc-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+  .calc-group input[type=number]{font-size:16px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#formula">Formula</a>
+      <a href="#common-dpi">Common DPI</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Image DPI Changer</a>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <span class="here" aria-current="page">DPI Calculator</span>
+      <a href="/change-dpi-to-150/">150 DPI</a>
+      <a href="/change-dpi-to-200/">200 DPI</a>
+      <a href="/72-dpi-to-300-dpi/">72 → 300</a>
+      <a href="/convert-image-to-300-dpi/">300 DPI</a>
+      <a href="/convert-image-to-600-dpi/">600 DPI</a>
+      <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Pixels · Inches · DPI</div>
+    <h1>DPI Calculator</h1>
+    <p class="sub">Enter any two values — the calculator finds the third. See exactly how big your image will print at any DPI.</p>
+    <div class="trust">
+      <span>Free</span>
+      <span>Instant</span>
+      <span>No signup</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+  <div class="tool" id="tool">
+    <p class="note"><strong>This is a calculator, not a DPI changer.</strong> It does the arithmetic between pixels, inches, and DPI. It never opens or rewrites a file. To set the density tag on a JPG or PNG, use the <a href="/">Image DPI Changer</a>.</p>
+    <div class="calc-grid" id="calcGrid">
+      <div class="calc-group" id="group-px" data-group="px">
+        <div class="calc-head">
+          <span class="calc-group-label">Pixels</span>
+          <span class="calc-flag">Calculated</span>
+        </div>
+        <label for="pxW">Width (px)
+          <input id="pxW" type="number" inputmode="decimal" min="0" step="1" value="3000" autocomplete="off" aria-label="Width in pixels">
+        </label>
+        <label for="pxH">Height (px)
+          <input id="pxH" type="number" inputmode="decimal" min="0" step="1" value="2000" autocomplete="off" aria-label="Height in pixels">
+        </label>
+      </div>
+      <div class="calc-group" id="group-dpi" data-group="dpi">
+        <div class="calc-head">
+          <span class="calc-group-label">DPI</span>
+          <span class="calc-flag">Calculated</span>
+        </div>
+        <label for="dpi">DPI
+          <input id="dpi" type="number" inputmode="decimal" min="0" step="1" value="300" autocomplete="off" aria-label="DPI">
+        </label>
+        <div class="presets" role="group" aria-label="DPI shortcuts">
+          <button class="chip" type="button" data-dpi="72" aria-pressed="false">72</button>
+          <button class="chip" type="button" data-dpi="150" aria-pressed="false">150</button>
+          <button class="chip" type="button" data-dpi="200" aria-pressed="false">200</button>
+          <button class="chip on" type="button" data-dpi="300" aria-pressed="true">300</button>
+          <button class="chip" type="button" data-dpi="600" aria-pressed="false">600</button>
+        </div>
+      </div>
+      <div class="calc-group solving" id="group-in" data-group="in">
+        <div class="calc-head">
+          <span class="calc-group-label">Print size</span>
+          <span class="calc-flag">Calculated</span>
+        </div>
+        <label for="inW">Print Width (in)
+          <input id="inW" type="number" inputmode="decimal" min="0" step="0.01" value="10" autocomplete="off" aria-label="Print width in inches">
+        </label>
+        <label for="inH">Print Height (in)
+          <input id="inH" type="number" inputmode="decimal" min="0" step="0.01" value="6.67" autocomplete="off" aria-label="Print height in inches">
+        </label>
+      </div>
+    </div>
+    <div class="calc-result" id="calcResult" aria-live="polite">3000 × 2000 px at 300 DPI → 10.00 × 6.67 in (25.4 × 16.9 cm)</div>
+    <p class="calc-mode" id="calcMode">Solving for print size — inches = pixels ÷ DPI. Change any two groups to recalculate the third.</p>
+    <p class="live-caption" id="liveCaption">Print size at common DPI</p>
+    <div class="table-scroll">
+      <table class="print" id="liveSizes">
+        <thead>
+          <tr>
+            <th>At 72 DPI</th>
+            <th>At 150 DPI</th>
+            <th>At 200 DPI</th>
+            <th>At 300 DPI</th>
+            <th>At 600 DPI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="sz72">41.67 × 27.78 in</td>
+            <td id="sz150">20.00 × 13.33 in</td>
+            <td id="sz200">15.00 × 10.00 in</td>
+            <td id="sz300">10.00 × 6.67 in</td>
+            <td id="sz600">5.00 × 3.33 in</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <section class="block" id="print-sizes">
+    <h2>Common print sizes</h2>
+    <p>Pixels needed to print these standard sizes without upscaling. 300 DPI is photo-lab quality; 150 DPI is the usual floor for large-format work viewed from a distance.</p>
+    <div class="table-scroll">
+      <table class="print">
+        <thead>
+          <tr>
+            <th>Print Size</th>
+            <th>Pixels needed at 300 DPI</th>
+            <th>Pixels needed at 150 DPI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>4×6 in</td><td>1200×1800</td><td>600×900</td></tr>
+          <tr><td>5×7 in</td><td>1500×2100</td><td>750×1050</td></tr>
+          <tr><td>8×10 in</td><td>2400×3000</td><td>1200×1500</td></tr>
+          <tr><td>8.5×11 in (Letter)</td><td>2550×3300</td><td>1275×1650</td></tr>
+          <tr><td>11×14 in</td><td>3300×4200</td><td>1650×2100</td></tr>
+          <tr><td>A4 (8.27×11.69 in)</td><td>2481×3507</td><td>1241×1754</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Plug any of those pixel counts into the calculator with a different DPI to see the print size change. A 2400×3000 px file is an 8×10 at 300 DPI and a 16×20 at 150 DPI — same pixels, twice the paper.</p>
+  </section>
+
+  <section class="block" id="formula">
+    <h2>The DPI formula</h2>
+    <p>Three numbers, one relationship. Rearrange to solve for whichever you do not have:</p>
+    <ul>
+      <li><strong>DPI = pixels ÷ inches</strong></li>
+      <li><strong>inches = pixels ÷ DPI</strong></li>
+      <li><strong>pixels = inches × DPI</strong></li>
+    </ul>
+    <p>A 3000 px-wide photo printed 10 inches wide is 300 DPI. The same pixels printed 41.67 inches wide are 72 DPI. Nothing about the picture changed except how tightly the printer is asked to pack those pixels.</p>
+    <p>Width and height use the same DPI. If a file is 3000×2000 px at 300 DPI, it prints 10×6.67 in. Centimetres are inches × 2.54.</p>
+    <p>This arithmetic is what print shops mean by “enough resolution.” A 1200×1800 px image is a legitimate 4×6 at 300 DPI and is not a legitimate 16×24 at 300 DPI, tag or no tag. The <a href="/">Image DPI Changer</a> rewrites the density tag; it cannot invent pixels. Use this calculator first if you are not sure the file covers the print.</p>
+  </section>
+
+  <section class="block" id="common-dpi">
+    <h2>Common DPI values and when to use them</h2>
+    <p>The number is a convention, not a quality slider. Pick the density the job actually needs, then confirm the pixel count covers the print at that density.</p>
+    <div class="table-scroll">
+      <table class="print">
+        <thead>
+          <tr>
+            <th>DPI</th>
+            <th>Typical use</th>
+            <th>3000 × 2000 px prints at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>72</td><td>Screen / web (legacy Mac)</td><td>41.67 × 27.78 in</td></tr>
+          <tr><td>150</td><td>Draft / large format</td><td>20.00 × 13.33 in</td></tr>
+          <tr><td>200</td><td>Newsprint</td><td>15.00 × 10.00 in</td></tr>
+          <tr><td>300</td><td>Photo quality</td><td>10.00 × 6.67 in</td></tr>
+          <tr><td>600</td><td>Fine art / medical / line art</td><td>5.00 × 3.33 in</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>72 DPI — screen</h3>
+    <p>The old Macintosh screen convention. Web exporters, screenshots, and AI image tools still write 72, or write nothing and let the viewer assume 72. Screens ignore the tag and paint pixels, so 72 is fine for anything that stays on a monitor. It becomes a problem only when a print workflow reads the file.</p>
+    <h3>150 DPI — draft / large format</h3>
+    <p>The usual floor for posters, banners, and booth graphics viewed from a few feet. A 24-inch-wide poster at 150 DPI needs 3600 px across. 300 DPI on that same poster would demand 7200 px and a much larger file for detail nobody can see from the aisle.</p>
+    <h3>200 DPI — newsprint</h3>
+    <p>Newspapers and uncoated stock often specify around 200 DPI because the paper and the press cannot hold a finer halftone. Sending 300 is harmless if the pixels are there; sending 72 on a news photo that will print 8 inches wide is not.</p>
+    <h3>300 DPI — photo quality</h3>
+    <p>The industry habit for photo labs, magazines, journals, ID portals, Amazon KDP, and Etsy printables. Dense enough that a 150-line halftone and normal viewing distance hide the pixel grid. Preflight software almost always checks this number. See <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a> to rewrite the tag once the pixel count already covers the print.</p>
+    <h3>600 DPI — fine art / medical</h3>
+    <p>Line art, hairline charts, and some medical or archival scans. Author guidelines often ask 600 for figures that are not photographs. A 600 tag on a soft photo does not add detail — it just claims a smaller print. Use 600 when the original actually has that many samples per inch, or when a portal will reject 300 on a chart.</p>
+    <p>If you need the stored tag on a real file, not the arithmetic, use the <a href="/dpi-checker/">DPI Checker</a>. For the vocabulary mix-up with PPI, see <a href="/dpi-vs-ppi/">DPI vs PPI</a>.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>How do I calculate DPI from pixels and inches?</summary><div class="a">DPI = pixels ÷ inches. A 3000-pixel-wide image that should print 10 inches wide is 300 DPI. Enter any two of pixels, inches, and DPI in the calculator; it fills the third.</div></details>
+      <details><summary>What is 8.5 x 11 in pixels at 300 DPI?</summary><div class="a">2550 × 3300 pixels. Pixels = inches × DPI, so 8.5 × 300 = 2550 and 11 × 300 = 3300. That is US Letter at photo-quality density.</div></details>
+      <details><summary>How many pixels do I need for a 4x6 print at 300 DPI?</summary><div class="a">1200 × 1800 pixels. At 150 DPI the same 4×6 print only needs 600 × 900 pixels, which is acceptable for a snapshot viewed at arm's length but not for a lab print.</div></details>
+      <details><summary>What DPI do I need for a large print?</summary><div class="a">150 DPI is the usual floor for posters and banners viewed from a few feet. 200 is common for newsprint. 300 is more than you need on a 24×36 inch poster unless someone will inspect it up close. Divide pixel width by print width in inches to get the DPI you actually have.</div></details>
+      <details><summary>Is 72 DPI good enough for web?</summary><div class="a">Yes. Screens ignore the DPI tag and paint pixels. 72 is a legacy Macintosh screen convention. A 72 DPI file and a 300 DPI file with the same pixel count look identical on a monitor. 72 only becomes a problem when a print workflow reads the tag.</div></details>
+      <details><summary>How do I convert inches to pixels?</summary><div class="a">Pixels = inches × DPI. An 8×10 inch print at 300 DPI needs 2400×3000 pixels. Enter the print size and DPI in the calculator; it fills the pixel fields.</div></details>
+      <details><summary>What size image do I need for an A4 print at 300 DPI?</summary><div class="a">A4 is 8.27 × 11.69 inches, so 2481 × 3507 pixels at 300 DPI. At 150 DPI you need 1241 × 1754 pixels.</div></details>
+      <details><summary>Does this DPI calculator change my image file?</summary><div class="a">No. This page only does the arithmetic between pixels, inches, and DPI. It never opens or rewrites a file. To set the density tag on a JPG or PNG, use the Image DPI Changer on the homepage or Convert Image to 300 DPI.</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+<script>
+(function(){
+"use strict";
+function $(id){ return document.getElementById(id); }
+function num(id){
+  var v = parseFloat($(id).value);
+  return (isFinite(v) && v > 0) ? v : null;
+}
+function roundPx(n){ return Math.round(n); }
+function roundIn(n){ return Math.round(n * 100) / 100; }
+function roundDpi(n){
+  if (Math.abs(n - Math.round(n)) < 0.05) return Math.round(n);
+  return Math.round(n * 10) / 10;
+}
+function fmtIn(n){ return roundIn(n).toFixed(2); }
+function fmtPx(n){ return String(roundPx(n)); }
+function fmtDpi(n){ return String(roundDpi(n)); }
+
+function solve(s){
+  var out = {pxW:s.pxW, pxH:s.pxH, dpi:s.dpi, inW:s.inW, inH:s.inH};
+  var t = s.target, dim = s.lastDim;
+  if (t === "in"){
+    if (s.pxW && s.dpi) out.inW = s.pxW / s.dpi;
+    if (s.pxH && s.dpi) out.inH = s.pxH / s.dpi;
+  } else if (t === "px"){
+    if (s.inW && s.dpi) out.pxW = s.inW * s.dpi;
+    if (s.inH && s.dpi) out.pxH = s.inH * s.dpi;
+  } else if (t === "dpi"){
+    var d = null;
+    if (dim === "h" && s.pxH && s.inH) d = s.pxH / s.inH;
+    else if (s.pxW && s.inW) d = s.pxW / s.inW;
+    else if (s.pxH && s.inH) d = s.pxH / s.inH;
+    if (d && d > 0){
+      out.dpi = d;
+      if (dim === "h"){
+        if (s.pxW) out.inW = s.pxW / d;
+      } else if (s.pxH){
+        out.inH = s.pxH / d;
+      }
+    }
+  }
+  return out;
+}
+
+var recency = ["in", "px", "dpi"];
+var lastDim = "w";
+var writing = false;
+var MODE = {
+  in: "Solving for print size — inches = pixels ÷ DPI. Change any two groups to recalculate the third.",
+  px: "Solving for pixels — pixels = inches × DPI. Change any two groups to recalculate the third.",
+  dpi: "Solving for DPI — DPI = pixels ÷ inches. Change any two groups to recalculate the third."
+};
+var LIVE = [72, 150, 200, 300, 600];
+
+function current(){
+  return {pxW:num("pxW"), pxH:num("pxH"), dpi:num("dpi"), inW:num("inW"), inH:num("inH"), target:recency[0], lastDim:lastDim};
+}
+function setVal(id, value, fmt){
+  if (value == null || !isFinite(value) || value <= 0) return;
+  writing = true;
+  $(id).value = fmt(value);
+  writing = false;
+}
+function syncChips(dpi){
+  var chips = document.querySelectorAll(".chip[data-dpi]");
+  for (var i=0;i<chips.length;i++){
+    var v = +chips[i].getAttribute("data-dpi");
+    var on = dpi != null && Math.abs(dpi - v) < 0.05;
+    chips[i].classList.toggle("on", on);
+    chips[i].setAttribute("aria-pressed", on ? "true" : "false");
+  }
+}
+function markSolving(target){
+  ["px","dpi","in"].forEach(function(g){
+    $("group-"+g).classList.toggle("solving", g === target);
+  });
+}
+function liveSizes(pxW, pxH){
+  LIVE.forEach(function(d){
+    var el = $("sz"+d);
+    if (!el) return;
+    if (pxW && pxH){
+      el.textContent = fmtIn(pxW/d) + " × " + fmtIn(pxH/d) + " in";
+    } else {
+      el.textContent = "—";
+    }
+  });
+}
+function resultText(s){
+  if (s.pxW && s.pxH && s.dpi && s.inW && s.inH){
+    return fmtPx(s.pxW) + " × " + fmtPx(s.pxH) + " px at " + fmtDpi(s.dpi) + " DPI → " +
+      fmtIn(s.inW) + " × " + fmtIn(s.inH) + " in (" +
+      (s.inW*2.54).toFixed(1) + " × " + (s.inH*2.54).toFixed(1) + " cm)";
+  }
+  return "Enter any two of pixels, inches, and DPI.";
+}
+function apply(out, target){
+  if (target === "in"){
+    if (out.inW) setVal("inW", out.inW, fmtIn);
+    if (out.inH) setVal("inH", out.inH, fmtIn);
+  } else if (target === "px"){
+    if (out.pxW) setVal("pxW", out.pxW, fmtPx);
+    if (out.pxH) setVal("pxH", out.pxH, fmtPx);
+  } else if (target === "dpi"){
+    if (out.dpi) setVal("dpi", out.dpi, fmtDpi);
+    if (out.inW && lastDim === "h") setVal("inW", out.inW, fmtIn);
+    if (out.inH && lastDim !== "h") setVal("inH", out.inH, fmtIn);
+  }
+}
+function recalc(){
+  var s = current();
+  var out = solve(s);
+  apply(out, s.target);
+  markSolving(s.target);
+  $("calcResult").textContent = resultText(out);
+  $("calcMode").textContent = MODE[s.target];
+  syncChips(out.dpi);
+  liveSizes(out.pxW, out.pxH);
+}
+function touchGroup(g){
+  recency = recency.filter(function(x){ return x !== g; });
+  recency.push(g);
+}
+function blockBadKey(e){
+  if (e.key === "-" || e.key === "e" || e.key === "E" || e.key === "+") e.preventDefault();
+}
+function sanitize(el){
+  var raw = el.value;
+  if (raw === "" || raw === ".") return;
+  if (raw.charAt(0) === "-"){ el.value = ""; return; }
+  var n = parseFloat(raw);
+  if (raw !== "" && (!isFinite(n) || n < 0)) el.value = "";
+}
+
+["pxW","pxH","dpi","inW","inH"].forEach(function(id){
+  var el = $(id);
+  el.addEventListener("keydown", blockBadKey);
+  el.addEventListener("input", function(){
+    if (writing) return;
+    sanitize(el);
+    if (id === "pxH" || id === "inH") lastDim = "h";
+    else if (id === "pxW" || id === "inW") lastDim = "w";
+    var g = (id === "dpi") ? "dpi" : (id.indexOf("px") === 0 ? "px" : "in");
+    touchGroup(g);
+    recalc();
+  });
+  el.addEventListener("paste", function(e){
+    var t = ((e.clipboardData || window.clipboardData).getData("text") || "").trim();
+    if (!/^\d*\.?\d*$/.test(t) || t === "") e.preventDefault();
+  });
+});
+document.querySelectorAll(".chip[data-dpi]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    writing = true;
+    $("dpi").value = btn.getAttribute("data-dpi");
+    writing = false;
+    touchGroup("dpi");
+    recalc();
+  });
+});
+
+recalc();
+window.__dpiCalc = {solve:solve, roundPx:roundPx, roundIn:roundIn, roundDpi:roundDpi, current:current};
+})();
+</script>
+</body>
+</html>

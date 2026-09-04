@@ -4,27 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="only light">
-<title>Increase Image DPI — Losslessly, In Your Browser</title>
-<meta name="description" content="Increase image DPI to 150, 300, or 600 in your browser. Lossless tag rewrite — no extra pixels, no upload. Fixes preflight rejections without resampling.">
-<link rel="canonical" href="https://setdpi.com/increase-image-dpi/">
+<title>72 DPI to 300 DPI — Convert Screen Images to Print-Ready</title>
+<meta name="description" content="Convert 72 DPI images to 300 DPI for printing. Lossless metadata rewrite in your browser — pixels unchanged, no upload, no signup. Works with screenshots, web images, and AI art.">
+<link rel="canonical" href="https://setdpi.com/72-dpi-to-300-dpi/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://setdpi.com/increase-image-dpi/">
-<meta property="og:title" content="Increase Image DPI — Losslessly, In Your Browser">
-<meta property="og:description" content="Raise a 72 or 96 DPI tag so preflight stops rejecting the file. Increasing DPI does not add pixels. 100% in the browser.">
+<meta property="og:url" content="https://setdpi.com/72-dpi-to-300-dpi/">
+<meta property="og:title" content="72 DPI to 300 DPI — Convert Screen Images to Print-Ready">
+<meta property="og:description" content="Convert 72 DPI images to 300 DPI for printing. Lossless metadata rewrite in your browser — pixels unchanged, no upload, no signup. Works with screenshots, web images, and AI art.">
 <meta property="og:image" content="https://setdpi.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://setdpi.com/og.png">
-<meta name="twitter:title" content="Increase Image DPI — Losslessly, In Your Browser">
-<meta name="twitter:description" content="Raise a 72 or 96 DPI tag so preflight stops rejecting the file. Increasing DPI does not add pixels. 100% in the browser.">
+<meta name="twitter:title" content="72 DPI to 300 DPI — Convert Screen Images to Print-Ready">
+<meta name="twitter:description" content="Convert 72 DPI images to 300 DPI for printing. Lossless metadata rewrite in your browser — pixels unchanged, no upload, no signup. Works with screenshots, web images, and AI art.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I increase the DPI of an image?","acceptedAnswer":{"@type":"Answer","text":"Drop a JPG or PNG, pick 150, 300, or 600 (or type a value), and download. SetDPI rewrites the density tag in your browser. The pixel grid is copied, not enlarged."}},{"@type":"Question","name":"Does increasing DPI add more pixels?","acceptedAnswer":{"@type":"Answer","text":"No. Increasing the DPI label never adds pixels, never sharpens, and never makes a small file safe to print large. Print size in inches shrinks as the tag goes up, because the same samples are asked to sit closer together."}},{"@type":"Question","name":"When should I increase DPI instead of upscaling?","acceptedAnswer":{"@type":"Answer","text":"When a form or preflight rejected the file for a low tag (often 72 or “not set”) and the pixel count already covers the physical print. That is a label problem. Upscale only when pixels ÷ 300 is smaller than the inches you need."}},{"@type":"Question","name":"Can I increase DPI from 72 to 300 without quality loss?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you only rewrite metadata. This tool does that: no decode, no recompress. A 72-to-300 resample in an editor is a different operation and is not lossless."}},{"@type":"Question","name":"What if my image is too small to print at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Then increasing the tag will not help the print. It will only make the claimed paper size smaller. You need more pixels — a larger original or an enlarger. SetDPI does not upscale."}},{"@type":"Question","name":"Which DPI should I increase to — 150, 300, or 600?","acceptedAnswer":{"@type":"Answer","text":"300 for photos, documents, labs, KDP, and Etsy printables. 150 only if a large-format vendor asked for it. 600 for journal line art. Type any other vendor number in the custom box."}},{"@type":"Question","name":"Will increasing DPI change the file size?","acceptedAnswer":{"@type":"Answer","text":"Not in any meaningful way. A few dozen bytes of header may be added if JFIF, EXIF, or pHYs had to be inserted. The image samples are not recompressed, so a 5 MB JPEG stays about 5 MB."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is my image 72 DPI?","acceptedAnswer":{"@type":"Answer","text":"Browsers, Photoshop's New dialog, Save for Web, screenshot tools, and AI generators (ChatGPT, Midjourney, DALL-E, Stable Diffusion, Gemini) still default to 72 DPI. That number is a leftover from the original Macintosh, whose 72 pixels per inch matched the PostScript point. Screens never consult it, so the picture looks fine on a monitor. The file still says 72, and that is what a print shop's preflight reads."}},{"@type":"Question","name":"Can I convert 72 DPI to 300 DPI without losing quality?","acceptedAnswer":{"@type":"Answer","text":"Yes — if you rewrite the density tag instead of resampling the pixels. This tool changes JFIF/EXIF (JPEG) or pHYs (PNG) in your browser. Pixel samples stay byte-identical; file size stays essentially the same. Tools that convert 72 to 300 by opening the picture and saving it again resample or recompress. That is a new, lossy image. Quality here is unchanged because the decoder never runs."}},{"@type":"Question","name":"Is 300 DPI the same as 72 pixels?","acceptedAnswer":{"@type":"Answer","text":"No. DPI is a density label, not a pixel count. A 1200 × 1800 px file is 1200 × 1800 px whether it is tagged 72 or 300. At 72 DPI those pixels claim about 16.7 × 25 in; at 300 DPI they claim 4 × 6 in. The pixels do not grow or shrink. Only the claimed print size changes."}},{"@type":"Question","name":"How to make a 72dpi image 300dpi?","acceptedAnswer":{"@type":"Answer","text":"Drop the JPG or PNG into the tool on this page. The target is already 300. Click Download. The 72 tag is rewritten to 300 in your browser — free, no signup, no watermark, no upload, no resample."}},{"@type":"Question","name":"Will my 72 DPI photo look blurry when printed at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"It depends on the pixel count, not on the old 72 tag. Print inches = pixels ÷ 300. A 1200 × 1800 px file tagged 72 is a sharp 4 × 6 in print at 300. A 400 × 600 px screenshot becomes 1.3 × 2 in at 300 — fine as a thumbnail, blurry if you stretch it to a full page. Changing 72 to 300 does not invent pixels."}},{"@type":"Question","name":"How do I know if my 72 DPI image has enough pixels for 300 DPI printing?","acceptedAnswer":{"@type":"Answer","text":"Divide each side in pixels by 300. That is the largest sharp print in inches. 1200 × 1800 px → 4 × 6 in; 2400 × 3000 px → 8 × 10 in; 2550 × 3300 px → US Letter; 3000 × 4500 px → 10 × 15 in. The tool shows this for every file you drop. If the inches are smaller than the paper you ordered, you need a larger original, not a higher tag."}},{"@type":"Question","name":"Why do print shops reject 72 DPI files?","acceptedAnswer":{"@type":"Answer","text":"Preflight software reads the density integer in a second. A file tagged 72 is flagged as screen-resolution even when it has enough pixels for the order. A 2400 × 3000 px photo tagged 72 claims a 33-inch poster; against an 8 × 10 job the RIP calls it low-res. The same pixels tagged 300 claim exactly 8 × 10. That bounce is what this page is built for."}},{"@type":"Question","name":"Can I convert 72 DPI to 300 DPI for free?","acceptedAnswer":{"@type":"Answer","text":"Yes. This tool is free — no signup, no watermark, no upload. Drop a 72 DPI JPG or PNG, keep the 300 target, and download. Density metadata is rewritten in your browser."}}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Increase Image DPI","url":"https://setdpi.com/increase-image-dpi/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Increase JPG or PNG DPI losslessly in the browser. Does not add pixels. Files never leave the device.","datePublished":"2026-08-19","dateModified":"2026-08-20","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"72 DPI to 300 DPI","url":"https://setdpi.com/72-dpi-to-300-dpi/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Convert 72 DPI JPG or PNG images to 300 DPI losslessly in the browser. Metadata only — pixels unchanged, no upload, no resample. Built for screenshots, web images, and AI art.","datePublished":"2026-09-04","dateModified":"2026-09-04","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to convert 72 DPI to 300 DPI online","step":[{"@type":"HowToStep","name":"Add your images","text":"Drop JPG or PNG files into the tool. Screenshots, web downloads, and AI art almost always show 72 DPI."},{"@type":"HowToStep","name":"Keep the 300 DPI target","text":"The 300 preset is selected by default — the print-shop standard for files that arrived as 72."},{"@type":"HowToStep","name":"Download","text":"Click Download. Density metadata is rewritten losslessly in your browser. Pixels are untouched and nothing is uploaded."}]}
 </script>
 <style>
 :root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
@@ -140,8 +143,8 @@ img,svg{max-width:100%}
   <div class="wrap nav">
     <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
     <nav class="nav-links" aria-label="On this page">
-      <a href="#honest">Be honest</a>
-      <a href="#when">When it helps</a>
+      <a href="#how">How</a>
+      <a href="#what-changes">72 vs 300</a>
       <a href="#faq">FAQ</a>
     </nav>
   </div>
@@ -152,34 +155,38 @@ img,svg{max-width:100%}
       <a href="/dpi-calculator/">DPI Calculator</a>
       <a href="/change-dpi-to-150/">150 DPI</a>
       <a href="/change-dpi-to-200/">200 DPI</a>
-      <a href="/72-dpi-to-300-dpi/">72 → 300</a>
+      <span class="here" aria-current="page">72 → 300</span>
       <a href="/convert-image-to-300-dpi/">300 DPI</a>
       <a href="/convert-image-to-600-dpi/">600 DPI</a>
       <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
-      <span class="here" aria-current="page">Increase DPI</span>
+      <a href="/increase-image-dpi/">Increase DPI</a>
       <a href="/dpi-vs-ppi/">DPI vs PPI</a>
     </nav>
   </div>
 </header>
 <main class="wrap">
   <div class="hero">
-    <div class="kicker">Raise the tag · do not expect new pixels</div>
-    <h1>Increase Image DPI — Without Pretending It Adds Detail</h1>
-    <p class="sub">Raise a JPG or PNG to <strong>150, 300, or 600 DPI</strong> so a form stops rejecting it. The rewrite is <strong>lossless</strong> and local. It does <strong>not</strong> add pixels or enlarge the picture.</p>
+    <div class="kicker">SCREEN TO PRINT</div>
+    <h1>72 DPI to 300 DPI</h1>
+    <p class="sub">Your image says 72 DPI — screens don't care, but the print shop does. Drop it here and the tag becomes <strong>300 DPI</strong> in your browser. Pixels stay the same.</p>
     <div class="trust">
       <span>100% private — no upload</span>
-      <span>Lossless tag — not an enlarger</span>
+      <span>Lossless — pixels untouched</span>
       <span>Free — no signup, no watermark</span>
+      <span>Screen → Print</span>
     </div>
     <div class="ruler" aria-hidden="true"></div>
   </div>
 
   <div class="tool" id="tool">
-    <p class="note"><strong>Increasing DPI only changes the density tag.</strong> Pixel dimensions stay the same, so print size shrinks as DPI goes up. This does not sharpen or enlarge the picture. It <em>does</em> fix “file rejected because DPI &lt; 300”.</p>
+    
     <div class="presets" role="group" aria-label="Target DPI">
       <span class="lbl">Target DPI:</span>
       
+      <button class="chip" type="button" data-dpi="72" aria-pressed="false">72</button>
+      <button class="chip" type="button" data-dpi="96" aria-pressed="false">96</button>
       <button class="chip" type="button" data-dpi="150" aria-pressed="false">150</button>
+      <button class="chip" type="button" data-dpi="200" aria-pressed="false">200</button>
       <button class="chip on" type="button" data-dpi="300" aria-pressed="true">300</button>
       <button class="chip" type="button" data-dpi="600" aria-pressed="false">600</button>
       <input id="customDpi" type="number" min="1" max="10000" placeholder="Custom" aria-label="Custom DPI value">
@@ -201,64 +208,70 @@ img,svg{max-width:100%}
     </div>
   </div>
 
-  <section class="block" id="honest">
-    <h2>Increasing image DPI does not add pixels</h2>
-    <p>This is the sentence most “increase DPI” tools bury. <strong>Raising the DPI tag does not create new pixels, does not sharpen edges, and does not make a small file safe to print large.</strong> A 800 × 600 px screenshot tagged 72 DPI and the same screenshot tagged 300 DPI contain the identical grid. At 300 DPI that grid is a 2.7 × 2.0 in print. At 72 DPI it is an 11.1 × 8.3 in print that looks soft because each pixel covers more paper.</p>
-    <p>If you need a bigger print that still looks sharp, you need more pixels — a larger original, a resample, or an AI enlarger. SetDPI does none of those things, on purpose. This page will not pretend otherwise.</p>
-    <p>So when is increasing DPI the right move? When the <em>label</em> is what failed, not the pixel count. That is a common, boring, expensive-if-you-get-it-wrong situation, and it is the one this tool is for.</p>
-  </section>
-  <section class="block" id="when">
-    <h2>When raising the tag is exactly the fix</h2>
-    <p>Print-shop preflight, journal portals, KDP, and a long tail of “upload your artwork” forms often apply one rule: if DPI &lt; 300, reject. They do not always compute pixels ÷ ordered inches. They read a field. A 6000 × 4000 px camera file tagged 72 — a 20 × 13 in print at 300 DPI, more than enough for a magazine page — still fails that rule. Increasing the DPI metadata to 300 is the entire solution. The picture does not change. The form stops arguing.</p>
-    <p>The same pattern shows up after a “Save for Web” export, after a WhatsApp or Messenger hop that stripped EXIF, and after a screenshot that never had a density field. The file is not low-resolution in any photographic sense. It is unlabelled or labelled with a screen default. Increase the tag; do not run it through a second JPEG encode.</p>
-    <p>Use the presets above for the three numbers people actually raise <em>to</em>:</p>
-    <ul>
-      <li><strong>150</strong> — large-format posters and banners viewed from a distance. Preflight that demands 300 will still fail; only use 150 when the vendor asked for it.</li>
-      <li><strong>300</strong> — the default on this page. Photos, documents, KDP, Etsy printables, most labs.</li>
-      <li><strong>600</strong> — line art, logos, and charts in journal guidelines. It makes the claimed print size even smaller. Only help if the pixels support that size, or if the portal only checks the integer.</li>
-    </ul>
-    <p>Type any other value in the custom box if a vendor wrote a peculiar number (254, 350, 400). The rewrite is the same.</p>
-  </section>
   <section class="block" id="how">
-    <h2>How to increase image DPI losslessly</h2>
-    <p>Drop a JPG or PNG. Pick 150, 300, or 600 — or type a number. Download. On JPEG, the tool writes JFIF density and EXIF <code>XResolution</code> / <code>YResolution</code> / <code>ResolutionUnit</code>. On PNG it writes or updates the <code>pHYs</code> chunk and repairs the CRC32. Pixels are copied, not decoded. Files never leave the browser.</p>
-    <p>The row shows current DPI → target DPI and the print size at the <em>target</em>. Watch that print size. If increasing 72 → 300 turns an “11 × 8 in” readout into “2.6 × 2.0 in”, you have correctly understood the trade: the tag went up, the claimed paper size went down. That is what you want when a form demanded 300 on a file that will be printed small. That is not what you want if you were hoping the picture would become a poster.</p>
-    <p>Batch works up to 50 files. “Download all” staggers the saves so the browser does not swallow them. Names get a <code>_300dpi</code> (or whatever you chose) suffix so the original stays on disk.</p>
+    <h2>How to convert 72 DPI to 300 DPI in the browser</h2>
+    <p>Drop a JPG or PNG into the tool above. If the file is a screenshot, a web download, or AI art, the current tag will almost always read <strong>72</strong>. The target is already set to <strong>300</strong> — the value print shops, photo labs, journals, and Etsy printables ask for. Click Download. The file that lands in your downloads folder has rewritten JFIF/EXIF (JPEG) or <code>pHYs</code> (PNG) density, and the same pixel bytes it started with.</p>
+    <p>That last part is the whole product. Converting 72 DPI to 300 DPI on this site does not resample, does not recompress, and does not upload. A 4.2 MB camera JPEG is still a 4.2 MB camera JPEG. Tools that “convert DPI” by opening the picture and saving it again quietly degrade JPEG quality; there is no reason to pay that cost for a metadata edit.</p>
+    <p>If 300 is not the number on the brief, use a preset or the custom box. The homepage <a href="/">Image DPI Changer</a> is the same engine with the same 300 default; this page exists so the search phrase “72 dpi to 300 dpi” lands on copy that talks about that specific job. Everyday 300 work also lives on <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a>.</p>
   </section>
-  <section class="block" id="not">
-    <h2>What this will not do — and what to do instead</h2>
-    <p><strong>It will not make a 640 px-wide web image look like a magazine cover.</strong> At 300 DPI that file is about two inches wide. Increasing DPI further makes it smaller on paper, not larger. To print that art at 8 inches, you need roughly 2400 px of width. Get a larger original from the photographer or designer. If one does not exist, you need a dedicated upscaler; this site will not grow the pixel grid.</p>
-    <p><strong>It will not change colour, crop, or convert WebP/HEIC/TIFF.</strong> Export to JPEG or PNG first, then increase the tag. The export step is someone else’s quality decision; we only touch density after that.</p>
-    <p><strong>It will not raise “effective DPI” on a press.</strong> Effective DPI is pixels ÷ physical inches of the finished piece. If the designer already placed your 1200 px logo across 8 inches of a layout, the effective resolution is 150 DPI no matter what the file tag says. Increase the tag in the logo file if the preflight wants to see 300, but also tell the layout to print the logo smaller or replace it with a larger asset. The tag cannot overrule how wide the box is on the page.</p>
-    <p>If you only needed to inspect the current value, use the <a href="/dpi-checker/">DPI Checker</a>. If 300 is the only number you care about, <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a> is the same engine with that story. The general changer is on the <a href="/">homepage</a>. For why people say PPI on the same forms, see <a href="/dpi-vs-ppi/">DPI vs PPI</a>.</p>
+  <section class="block" id="why-72">
+    <h2>Why images default to 72 DPI</h2>
+    <p>72 is not a print density. It is a leftover screen convention from the original Macintosh, whose 72 pixels per inch matched the PostScript point so that 12-point type was 12 pixels tall. Browsers, Save for Web, most screenshot tools, Photoshop’s New dialog, and every major AI image generator still write 72 — or omit the tag, which many readers treat as 72. Screens never consult it. A 1920 × 1080 screenshot looks identical on a monitor whether it is tagged 72, 96, or 300.</p>
+    <p>That is why the file you just downloaded “says 72 DPI” even though you never chose 72. Three sources dump 72 files into print jobs every day:</p>
+    <p><strong>Browsers and the web.</strong> Right-click Save Image, a screenshot of a landing page, a PNG exported from Canva or Figma for the web — the density field is 72 or blank. The picture looks sharp on a Retina display because the display is counting pixels, not inches. A print RIP does the opposite: it reads 72 and stretches those pixels across a claimed poster.</p>
+    <p><strong>Photoshop and “new document” defaults.</strong> File → New still offers 72 PPI for screen/web presets. Save for Web and many “export for screens” paths strip or rewrite density to 72 even when the working file was 300. A designer who built an 8.5 × 11 in layout at 300, then exported a flattened JPEG for the printer, often hands over a 72-tagged file with the original pixels intact.</p>
+    <p><strong>AI image tools.</strong> ChatGPT, Midjourney, DALL-E, Stable Diffusion, and Gemini all save at 72 DPI. Pixel counts are usually generous — ChatGPT 1024 × 1024 or larger, Midjourney up to 2048 × 2048 — but the tag tells a printer those pixels occupy 14+ inches. Preflight that wants 300 will bounce them. The honest fix is a tag rewrite, not a resample, unless you actually need more pixels than the model produced.</p>
+    <p>The print shop’s preflight does not know or care about that history. It sees 72 and rejects. If you are not sure what the file currently claims, check it on the <a href="/dpi-checker/">DPI Checker</a> first.</p>
   </section>
-  <section class="block" id="math">
-    <h2>A short table of what “increase” does to print size</h2>
-    <p>Same 2400 × 3000 px file, tag raised, pixels frozen:</p>
+  <section class="block" id="what-changes">
+    <h2>What actually changes when you convert 72 to 300</h2>
+    <p>Only the density tag. Pixel width and height stay exactly the same. File size stays essentially identical. Quality is identical because the decoder never runs.</p>
+    <p>What does change is the claimed print size. <strong>Print inches = pixels ÷ DPI</strong>. Going from 72 to 300 shrinks the claimed inches by a factor of 300 ÷ 72 ≈ 4.17. A 1200 × 1800 px web image tagged 72 claims 16.7 × 25 in — a poster the pixels cannot support. Tagged 300, the same pixels claim 4 × 6 in, which is a real photo-lab size. That is the entire conversion.</p>
     <div class="table-scroll">
     <table class="print">
-      <thead><tr><th>Tag</th><th>Print size</th><th>What you just did</th></tr></thead>
+      <thead><tr><th></th><th>72 DPI</th><th>300 DPI</th></tr></thead>
       <tbody>
-        <tr><td>72 DPI</td><td>33.3 × 41.7 in</td><td>Screen default; preflight often rejects</td></tr>
-        <tr><td>150 DPI</td><td>16.0 × 20.0 in</td><td>Fine for a poster viewed from a few feet</td></tr>
-        <tr><td>300 DPI</td><td>8.0 × 10.0 in</td><td>Lab / journal / marketplace default</td></tr>
-        <tr><td>600 DPI</td><td>4.0 × 5.0 in</td><td>Line-art density; smaller print, same pixels</td></tr>
+        <tr><td>Typical job</td><td>Screens, web, screenshots, AI default</td><td>Photo labs, journals, IDs, KDP, Etsy printables</td></tr>
+        <tr><td>1200 × 1800 px prints</td><td>16.7 × 25.0 in</td><td>4.0 × 6.0 in</td></tr>
+        <tr><td>2400 × 3000 px prints</td><td>33.3 × 41.7 in</td><td>8.0 × 10.0 in</td></tr>
+        <tr><td>On screen</td><td>Identical — monitors ignore the tag</td><td>Identical — monitors ignore the tag</td></tr>
+        <tr><td>What preflight sees</td><td>Screen-resolution — often rejected</td><td>Print-ready — the integer they check</td></tr>
       </tbody>
     </table>
     </div>
-    <p>Read the table left to right as a warning label. Increasing image DPI is a relabelling. Used on a file that already has enough pixels for the physical size, it is the cheapest, safest fix in print production. Used as a substitute for resolution, it is a no-op dressed up as an enhancement.</p>
+    <p>Those two operations — tag rewrite and resample — are constantly sold as the same thing. They are not.</p>
+    <p><strong>Metadata rewrite</strong> (this tool): the JPEG or PNG keeps every pixel sample. Only the density instruction changes. Print size shrinks because the same pixels are asked to sit closer together. A 4.2 MB file is still a 4.2 MB file.</p>
+    <p><strong>Resampling</strong> (Photoshop Image Size with Resample on, most “enhance” websites): the software creates a new pixel grid. Going from 72 to 300 “the resample way” on a 72 DPI 4 × 6 in image tries to manufacture about 4× the pixels on each side. That is a new picture. It can look acceptable or it can look smeared; either way it is lossy, and for JPEG it is a second generation of compression on top.</p>
+    <p>Use the rewrite when the pixels already cover the print. Use a resample or an AI enlarger only when they do not. If they do not, no DPI converter will save the job — including this one. SetDPI does not upscale. For the vocabulary gap between DPI and PPI, read <a href="/dpi-vs-ppi/">DPI vs PPI</a>. The lossless changer also lives on the <a href="/">homepage</a>.</p>
+  </section>
+  <section class="block" id="check">
+    <h2>Check before you convert</h2>
+    <p>Pixels decide the maximum print. The 72 tag does not. Before you send a screenshot or an AI download to a lab, divide each side by 300. If the inches you get are at least the inches you will print, rewrite 72 → 300 and stop. If they are not, you need a larger original.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>Pixel size</th><th>Print @ 72 DPI</th><th>Print @ 300 DPI</th><th>Typical fit at 300</th></tr></thead>
+      <tbody>
+        <tr><td>1200 × 1800</td><td>16.7 × 25.0 in</td><td>4.0 × 6.0 in</td><td>Standard lab print</td></tr>
+        <tr><td>2400 × 3000</td><td>33.3 × 41.7 in</td><td>8.0 × 10.0 in</td><td>Framed photo</td></tr>
+        <tr><td>2550 × 3300</td><td>35.4 × 45.8 in</td><td>8.5 × 11.0 in</td><td>US Letter / KDP page</td></tr>
+        <tr><td>3000 × 4500</td><td>41.7 × 62.5 in</td><td>10.0 × 15.0 in</td><td>10 × 15 in print</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Formula again, because it is the only formula that matters: <strong>print inches = pixels ÷ DPI</strong>, and the centimetre column is inches × 2.54. The tool above computes it live for whatever target you have selected. A tiny readout at 300 DPI means the file is too small for that paper — raising the tag further will only make the claimed print smaller. If you need a different density, <a href="/change-dpi-to-200/">200 DPI</a> and <a href="/convert-image-to-600-dpi/">600 DPI</a> are the same engine with those defaults.</p>
   </section>
 
   <section class="block" id="faq">
     <h2>Frequently asked questions</h2>
     <div class="faq">
-      <details open><summary>How do I increase the DPI of an image?</summary><div class="a">Drop a JPG or PNG, pick 150, 300, or 600 (or type a value), and download. SetDPI rewrites the density tag in your browser. The pixel grid is copied, not enlarged.</div></details>
-      <details><summary>Does increasing DPI add more pixels?</summary><div class="a">No. Increasing the DPI label never adds pixels, never sharpens, and never makes a small file safe to print large. Print size in inches shrinks as the tag goes up, because the same samples are asked to sit closer together.</div></details>
-      <details><summary>When should I increase DPI instead of upscaling?</summary><div class="a">When a form or preflight rejected the file for a low tag (often 72 or “not set”) and the pixel count already covers the physical print. That is a label problem. Upscale only when pixels ÷ 300 is smaller than the inches you need.</div></details>
-      <details><summary>Can I increase DPI from 72 to 300 without quality loss?</summary><div class="a">Yes, if you only rewrite metadata. This tool does that: no decode, no recompress. A 72-to-300 resample in an editor is a different operation and is not lossless.</div></details>
-      <details><summary>What if my image is too small to print at 300 DPI?</summary><div class="a">Then increasing the tag will not help the print. It will only make the claimed paper size smaller. You need more pixels — a larger original or an enlarger. SetDPI does not upscale.</div></details>
-      <details><summary>Which DPI should I increase to — 150, 300, or 600?</summary><div class="a">300 for photos, documents, labs, KDP, and Etsy printables. 150 only if a large-format vendor asked for it. 600 for journal line art. Type any other vendor number in the custom box.</div></details>
-      <details><summary>Will increasing DPI change the file size?</summary><div class="a">Not in any meaningful way. A few dozen bytes of header may be added if JFIF, EXIF, or pHYs had to be inserted. The image samples are not recompressed, so a 5 MB JPEG stays about 5 MB.</div></details>
+      <details open><summary>Why is my image 72 DPI?</summary><div class="a">Browsers, Photoshop's New dialog, Save for Web, screenshot tools, and AI generators (ChatGPT, Midjourney, DALL-E, Stable Diffusion, Gemini) still default to 72 DPI. That number is a leftover from the original Macintosh, whose 72 pixels per inch matched the PostScript point. Screens never consult it, so the picture looks fine on a monitor. The file still says 72, and that is what a print shop's preflight reads.</div></details>
+      <details><summary>Can I convert 72 DPI to 300 DPI without losing quality?</summary><div class="a">Yes — if you rewrite the density tag instead of resampling the pixels. This tool changes JFIF/EXIF (JPEG) or pHYs (PNG) in your browser. Pixel samples stay byte-identical; file size stays essentially the same. Tools that convert 72 to 300 by opening the picture and saving it again resample or recompress. That is a new, lossy image. Quality here is unchanged because the decoder never runs.</div></details>
+      <details><summary>Is 300 DPI the same as 72 pixels?</summary><div class="a">No. DPI is a density label, not a pixel count. A 1200 × 1800 px file is 1200 × 1800 px whether it is tagged 72 or 300. At 72 DPI those pixels claim about 16.7 × 25 in; at 300 DPI they claim 4 × 6 in. The pixels do not grow or shrink. Only the claimed print size changes.</div></details>
+      <details><summary>How to make a 72dpi image 300dpi?</summary><div class="a">Drop the JPG or PNG into the tool on this page. The target is already 300. Click Download. The 72 tag is rewritten to 300 in your browser — free, no signup, no watermark, no upload, no resample.</div></details>
+      <details><summary>Will my 72 DPI photo look blurry when printed at 300 DPI?</summary><div class="a">It depends on the pixel count, not on the old 72 tag. Print inches = pixels ÷ 300. A 1200 × 1800 px file tagged 72 is a sharp 4 × 6 in print at 300. A 400 × 600 px screenshot becomes 1.3 × 2 in at 300 — fine as a thumbnail, blurry if you stretch it to a full page. Changing 72 to 300 does not invent pixels.</div></details>
+      <details><summary>How do I know if my 72 DPI image has enough pixels for 300 DPI printing?</summary><div class="a">Divide each side in pixels by 300. That is the largest sharp print in inches. 1200 × 1800 px → 4 × 6 in; 2400 × 3000 px → 8 × 10 in; 2550 × 3300 px → US Letter; 3000 × 4500 px → 10 × 15 in. The tool shows this for every file you drop. If the inches are smaller than the paper you ordered, you need a larger original, not a higher tag.</div></details>
+      <details><summary>Why do print shops reject 72 DPI files?</summary><div class="a">Preflight software reads the density integer in a second. A file tagged 72 is flagged as screen-resolution even when it has enough pixels for the order. A 2400 × 3000 px photo tagged 72 claims a 33-inch poster; against an 8 × 10 job the RIP calls it low-res. The same pixels tagged 300 claim exactly 8 × 10. That bounce is what this page is built for.</div></details>
+      <details><summary>Can I convert 72 DPI to 300 DPI for free?</summary><div class="a">Yes. This tool is free — no signup, no watermark, no upload. Drop a 72 DPI JPG or PNG, keep the 300 target, and download. Density metadata is rewritten in your browser.</div></details>
     </div>
   </section>
 </main>
