@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>BMP DPI Changer — Set a Bitmap's DPI (Pixels per Metre) Losslessly</title>
+<meta name="description" content="Free bmp dpi changer: set a bitmap to 300 DPI (or any value) by rewriting two pixels-per-metre fields. Pixels, palette and file size stay identical.">
+<link rel="canonical" href="https://setdpi.com/bmp-dpi-changer/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/bmp-dpi-changer/">
+<meta property="og:title" content="BMP DPI Changer — Set a Bitmap's DPI (Pixels per Metre) Losslessly">
+<meta property="og:description" content="Free bmp dpi changer: set a bitmap to 300 DPI (or any value) by rewriting two pixels-per-metre fields. Pixels, palette and file size stay identical.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="BMP DPI Changer — Set a Bitmap's DPI (Pixels per Metre) Losslessly">
+<meta name="twitter:description" content="Free bmp dpi changer: set a bitmap to 300 DPI (or any value) by rewriting two pixels-per-metre fields. Pixels, palette and file size stay identical.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I change a BMP to 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Drop a BMP into the tool on this page. The target is already 300. Click Download. The two pixels-per-metre fields in the BITMAPINFOHEADER are rewritten in your browser — free, no signup, no upload."}},{"@type":"Question","name":"What does \"DPI not set\" mean on a BMP?","acceptedAnswer":{"@type":"Answer","text":"A BMP stores resolution as biXPelsPerMeter and biYPelsPerMeter. When they are 0 the density is unset, which is what many exporters write. The row shows \"DPI not set\". On download both fields are set to round(target ÷ 0.0254) — 11811 for 300 DPI — and the pixel array stays exactly where it was."}},{"@type":"Question","name":"Does changing BMP DPI affect pixels, palette, compression or file size?","acceptedAnswer":{"@type":"Answer","text":"No. Only the two int32 fields at offsets 38 and 42 are overwritten. The pixel array, colour palette, compression flag and every other header field stay byte-identical, so the file length is unchanged."}},{"@type":"Question","name":"Why is an OS/2 BMP refused?","acceptedAnswer":{"@type":"Answer","text":"The 12-byte BITMAPCOREHEADER (OS/2 1.x) has no pixels-per-metre field. This page skips those files with a per-file notice and never modifies them. Windows BITMAPINFOHEADER (40 bytes) and the later V4 (108) and V5 (124) headers share the same offsets and are handled."}},{"@type":"Question","name":"Can I change the DPI of a JPEG or PNG here?","acceptedAnswer":{"@type":"Answer","text":"No. This page is BMP-only and skips other files with a notice. Use the homepage Image DPI Changer for JPEG and PNG, or the dedicated JPEG and PNG DPI changer pages."}},{"@type":"Question","name":"Does 300 DPI make my BMP print sharper?","acceptedAnswer":{"@type":"Answer","text":"No. The two fields set claimed metres (and therefore claimed inches: pixels ÷ DPI); they add no pixels. A 1200 × 1800 px BMP at 300 DPI prints 4 × 6 in. Windows Paint writes 96 DPI (3780 px/m); that is a tag, not extra detail."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"BMP DPI Changer","url":"https://setdpi.com/bmp-dpi-changer/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free bmp dpi changer: set a bitmap to 300 DPI (or any value) by rewriting two pixels-per-metre fields. Pixels, palette and file size stay identical.","datePublished":"2026-09-06","dateModified":"2026-09-06","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to change the DPI of a BMP online","step":[{"@type":"HowToStep","name":"Add BMP files","text":"Drop BMP files into the tool. Each file is read in the browser; nothing is uploaded. Non-BMP files and OS/2 BMPs are skipped with a per-file notice."},{"@type":"HowToStep","name":"Choose the target DPI (300 is preselected)","text":"300 DPI is selected by default. Use a preset (72, 96, 150, 200, 300, 600, 1200) or a custom value from 1 to 10000."},{"@type":"HowToStep","name":"Download","text":"Click Download. The two pixels-per-metre fields in the BITMAPINFOHEADER are rewritten in the browser. Pixel data is untouched and nothing is uploaded. A file called name.bmp is saved as name_300dpi.bmp when the target is 300; the original extension is kept."}]}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #cfc7b2;border-radius:10px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbf8f0}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--ink)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .thumb-tiff{display:inline-flex;align-items:center;justify-content:center;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12px;font-weight:700;color:var(--muted);background:#efeae0;letter-spacing:.04em}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px;overflow-wrap:anywhere}
+.row .warn-msg{font-size:13px;color:var(--warn);line-height:1.45;overflow-wrap:anywhere;flex:1 1 240px}
+.row .print-warn{flex:1 1 100%;font-size:12.5px;color:var(--warn);background:#fef3c7;border-radius:6px;padding:6px 10px;line-height:1.45;overflow-wrap:anywhere}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 6px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.step .n{width:28px;height:28px;border-radius:7px;background:var(--ink);color:var(--card);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step h3{margin:0 0 6px;font-size:15px;font-weight:700;font-family:inherit}
+.step p{font-size:13.5px;color:var(--muted);margin:0}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,#customDpi,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+#sampleBtn{margin-top:14px}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+#skipNotice[hidden]{display:none}
+#skipNotice p{margin:0 0 4px;font-size:14px}
+#skipNotice p:last-child{margin:0}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){
+  .row .print,.row .warn-msg,.row .print-warn{flex-basis:100%}
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#how">How</a>
+      <a href="#resolution">Resolution</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Image DPI Changer</a>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <a href="/dpi-calculator/">DPI Calculator</a>
+      <a href="/change-dpi-to-150/">150 DPI</a>
+      <a href="/change-dpi-to-200/">200 DPI</a>
+      <a href="/72-dpi-to-300-dpi/">72 → 300</a>
+      <a href="/convert-image-to-300-dpi/">300 DPI</a>
+      <a href="/convert-image-to-600-dpi/">600 DPI</a>
+      <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
+      <a href="/standard-dpi-settings/">Standard DPI Settings</a>
+      <a href="/dpi-for-printing/">DPI for Printing</a>
+      <a href="/what-does-300-dpi-look-like/">What 300 DPI Looks Like</a>
+      <a href="/bulk-dpi-changer/">Bulk DPI Changer</a>
+      <a href="/png-dpi-changer/">PNG DPI Changer</a>
+      <a href="/jpeg-dpi-changer/">JPEG DPI Changer</a>
+      <a href="/tiff-dpi-changer/">TIFF DPI Changer</a>
+      <a href="/passport-photo-dpi/">Passport Photo DPI</a>
+      <span class="here" aria-current="page">BMP DPI Changer</span>
+      <a href="/image-dpi-for-website/">Image DPI for Websites</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">BMP ONLY · PIXELS-PER-METRE REWRITE</div>
+    <h1>BMP DPI Changer</h1>
+    <p class="sub">Drop a BMP — its <code>biXPelsPerMeter</code> and <code>biYPelsPerMeter</code> fields are rewritten to <strong>300 DPI</strong> (or any value) in your browser. Pixel array, palette and file length stay untouched. Nothing is uploaded.</p>
+    <div class="trust">
+      <span>100% private — no upload</span>
+      <span>Lossless — pixel array never touched</span>
+      <span>Free — no signup, no watermark</span>
+      <span>BMP only</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+  <div class="tool" id="tool">
+
+    <div class="presets" role="group" aria-label="Target DPI">
+      <span class="lbl">Target DPI:</span>
+
+      <button class="chip" type="button" data-dpi="72" aria-pressed="false">72</button>
+      <button class="chip" type="button" data-dpi="96" aria-pressed="false">96</button>
+      <button class="chip" type="button" data-dpi="150" aria-pressed="false">150</button>
+      <button class="chip" type="button" data-dpi="200" aria-pressed="false">200</button>
+      <button class="chip on" type="button" data-dpi="300" aria-pressed="true">300</button>
+      <button class="chip" type="button" data-dpi="600" aria-pressed="false">600</button>
+      <button class="chip" type="button" data-dpi="1200" aria-pressed="false">1200</button>
+      <input id="customDpi" type="number" min="1" max="10000" placeholder="Custom" aria-label="Custom DPI value">
+    </div>
+    <div id="drop" tabindex="0" role="button" aria-label="Add BMP files: drop files here or press Enter to browse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round"/></svg>
+      <div class="big">Drop BMP files here, or click to browse</div>
+      <div class="small">BMP only · up to 50 files · pixels-per-metre fields rewritten locally, never uploaded</div>
+      <button class="btn ghost" id="sampleBtn" type="button">No BMP handy? Try a sample BMP</button>
+    </div>
+    <input type="file" id="fileInput" accept=".bmp,image/bmp,image/x-ms-bmp" multiple>
+    <div class="note" id="skipNotice" hidden></div>
+    <div id="rows"></div>
+    <div class="toolbar" id="toolbar" hidden>
+      <span class="hint" id="count"></span>
+      <div>
+        <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+        <button class="btn primary" id="dlAll" type="button">Download all</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="how">
+    <h2>How to change BMP DPI in the browser</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3>Add BMP files</h3><p>Drop BMP files above, or click to browse. The file picker accepts <code>.bmp</code> / <code>image/bmp</code> / <code>image/x-ms-bmp</code>. Up to 50 files are kept from each drop. Non-BMP files are skipped with a per-file notice pointing at the homepage for JPEG and PNG. An OS/2 BMP is skipped because its header has no DPI field.</p></div>
+      <div class="step"><span class="n">2</span><h3>Choose the target DPI (300 is preselected)</h3><p>300 is selected when the page loads. Use 72, 96, 150, 200, 600 or 1200, or type a custom integer from 1 to 10000. The print-size line on each row updates to pixels ÷ DPI.</p></div>
+      <div class="step"><span class="n">3</span><h3>Download</h3><p>Click Download. The two int32 pixels-per-metre fields are rewritten in the browser. Pixels are untouched and nothing is uploaded. A file called <code>name.bmp</code> tagged 300 is saved as <code>name_300dpi.bmp</code>; the original extension is kept.</p></div>
+    </div>
+    <p>Each dropped file is read as a byte array in the page. Bytes 0–1 are checked for the ASCII signature <code>BM</code>. If they do not match, that file is skipped and a notice is appended under the drop zone, with a link to the <a href="/">homepage</a> for JPEG and PNG. A valid Windows BMP — <code>BITMAPINFOHEADER</code> or later — is listed with its current DPI reading (or a “DPI not set” badge), a thumbnail the browser can decode from the original bytes, and pixel dimensions read from the DIB header. Files never leave the browser.</p>
+    <p>Download (and Download all) works on the original bytes: <code>biXPelsPerMeter</code> and <code>biYPelsPerMeter</code> are overwritten in place, so the file length does not change. The saved name is the original stem, an underscore, the target DPI, the letters <code>dpi</code>, and the original extension. Clearing the list also hides the skip notice and removes its rows.</p>
+  </section>
+
+  <section class="block" id="resolution">
+    <h2>How a BMP stores resolution</h2>
+    <p>A BMP begins with a 14-byte <code>BITMAPFILEHEADER</code>: the ASCII signature <code>BM</code>, a 32-bit file size, four reserved bytes, and a 32-bit offset to the pixel array. Immediately after that, at offset 14, sits the DIB header. Its first field is <code>biSize</code>, a uint32 little-endian length that tells a reader which header layout follows.</p>
+    <p>Resolution lives in two signed 32-bit little-endian fields of <code>BITMAPINFOHEADER</code>: <code>biXPelsPerMeter</code> at offset 14+24 = 38, and <code>biYPelsPerMeter</code> at offset 42. They store pixels per metre, not pixels per inch. This page converts with the same 0.0254 metres-per-inch factor PNG uses for <code>pHYs</code>: reading multiplies by 0.0254 and rounds; writing divides by 0.0254 and rounds. 300 DPI is stored as 11811 px/m; 96 DPI is stored as 3780 px/m, which is the value Windows Paint writes; 0 means the density is unset.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>DPI written</th><th>Pixels per metre stored</th><th>Exact value read back (ppm × 0.0254)</th><th>Shown here</th></tr></thead>
+      <tbody>
+        <tr><td>72</td><td>2835</td><td>72.0090</td><td>72</td></tr>
+        <tr><td>96</td><td>3780</td><td>96.0120</td><td>96</td></tr>
+        <tr><td>150</td><td>5906</td><td>150.0124</td><td>150</td></tr>
+        <tr><td>200</td><td>7874</td><td>199.9996</td><td>200</td></tr>
+        <tr><td>300</td><td>11811</td><td>299.9994</td><td>300</td></tr>
+        <tr><td>600</td><td>23622</td><td>599.9988</td><td>600</td></tr>
+        <tr><td>1200</td><td>47244</td><td>1199.9976</td><td>1200</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>A file whose both fields are 0 is shown as “DPI not set”. The badge uses <code>biXPelsPerMeter</code>; both fields are written to the same integer on download so the stored density is square. None of the seven presets divides evenly by 0.0254, so every value read back is within 0.013 DPI of the number you chose; this page rounds to the nearest whole number and shows 300 for 11811.</p>
+  </section>
+
+  <section class="block" id="headers">
+    <h2>OS/2 and V4/V5 headers</h2>
+    <p>Not every BMP uses the 40-byte <code>BITMAPINFOHEADER</code>. The oldest layout, <code>BITMAPCOREHEADER</code> / OS/2 1.x, has <code>biSize === 12</code>. That header holds only width, height, planes and bit count as 16-bit fields — there is no pixels-per-metre slot at all. This page refuses those files: the row is never listed, a per-file notice reads “This BMP uses the old OS/2 header, which has no DPI field”, and the bytes are never modified.</p>
+    <p><code>BITMAPV4HEADER</code> sets <code>biSize</code> to 108 and <code>BITMAPV5HEADER</code> sets it to 124. Both extend <code>BITMAPINFOHEADER</code> without moving the early fields, so <code>biXPelsPerMeter</code> and <code>biYPelsPerMeter</code> still sit at offsets 38 and 42. This page handles any header whose <code>biSize</code> is 40 or more, including 108 and 124, by reading and writing those two offsets and leaving the extra colour-space and profile bytes alone.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>biSize</th><th>Header</th><th>DPI fields</th><th>This page</th></tr></thead>
+      <tbody>
+        <tr><td>12</td><td>BITMAPCOREHEADER (OS/2 1.x)</td><td>None</td><td>Refused, never modified</td></tr>
+        <tr><td>40</td><td>BITMAPINFOHEADER</td><td>int32 at offsets 38 and 42</td><td>Read and written</td></tr>
+        <tr><td>108</td><td>BITMAPV4HEADER</td><td>Same offsets</td><td>Read and written</td></tr>
+        <tr><td>124</td><td>BITMAPV5HEADER</td><td>Same offsets</td><td>Read and written</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>A truncated file that claims <code>BM</code> but does not contain the four bytes of <code>biSize</code>, or that claims a 40-byte-or-larger header but ends before offset 46, cannot be read and is skipped rather than listed.</p>
+  </section>
+
+  <section class="block" id="changes">
+    <h2>What changes and what doesn't</h2>
+    <p>Only two fields change. <code>writeBmpDpi</code> copies the file, writes <code>round(dpi ÷ 0.0254)</code> into the int32 at offset 38 and the int32 at offset 42, and returns the copy. Nothing else is visited: the pixel array (whether uncompressed, RLE, or bitfields), the colour palette, the compression flag, <code>biSize</code>, width, height, bit count, and the 14-byte file header stay byte-identical. Because eight bytes are overwritten in place, the file length is unchanged.</p>
+    <p>The preview thumbnail is decoded by the browser for display only; the download is built from the original byte array. A 2×2 24-bit BMP with a 40-byte header is 70 bytes before and 70 bytes after a 300 DPI write; only the eight density bytes differ. The pixel array starts after the headers and is copied as a range, never decoded.</p>
+    <p>The sample BMP button builds a 160 × 120 pixel, 24-bit uncompressed BMP with both fields set to 0, so the row shows “DPI not set” and downloading it takes the in-place path: length stays the same, and a reader that understands the fields then sees 300 (or whatever target is selected).</p>
+  </section>
+
+  <section class="block" id="matters">
+    <h2>Where BMP DPI still matters</h2>
+    <p>BMP is an old container, but the two pixels-per-metre fields are still read in a few places that treat the tag as physical size.</p>
+    <p>Windows print dialogs and the Photos app size a BMP from those fields: a scan tagged 300 is offered at its claimed print inches, while the same pixels tagged 0 or 96 may be treated as a screen-sized image. Scanner archives often land as BMP with the scan setting already written — or with 0, if the exporter skipped the fields. Embroidery and plotter software commonly reads <code>biXPelsPerMeter</code> to scale a stitch or cut path to millimetres. Legacy print workflows that still accept BMP for line art or a one-bit mask will bounce a file tagged 72 as low resolution even when it holds plenty of pixels.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>Job</th><th>Typical density ask</th></tr></thead>
+      <tbody>
+        <tr><td>Windows print dialogs and Photos app sizing</td><td>Often 300 DPI; 0 or 96 is treated as screen-sized</td></tr>
+        <tr><td>Scanner archives saved as BMP</td><td>Commonly 300–600 DPI, or 0 if unset</td></tr>
+        <tr><td>Embroidery and plotter software</td><td>Reads pixels-per-metre to scale to millimetres</td></tr>
+        <tr><td>Legacy print workflows (line art, one-bit masks)</td><td>Typically 300–600 DPI</td></tr>
+        <tr><td>Windows Paint exports</td><td>96 DPI (3780 px/m)</td></tr>
+        <tr><td>Screens</td><td>72–96 DPI, and typically ignored</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Rewriting 300 (or the number on the brief) is what this page does; it adds no pixels. Print inches = pixels ÷ DPI. A 2400 × 3000 px BMP tagged 300 claims 8 × 10 in; tagged 96 it claims 25.0 × 31.3 in. The row shows that print size for the current target in inches and centimetres, and warns when both sides fall under 4 in that a higher tag will not create a larger sharp print.</p>
+    <p>Use 300 when a Windows print checklist or a plotter driver typically wants to see it. Use 96 when you mean the value Paint writes. Use 72 only for a screen density. The presets and the custom box cover those values; the downloaded fields are the integer you selected, stored as pixels per metre.</p>
+  </section>
+
+  <section class="block" id="vs-png">
+    <h2>BMP vs PNG</h2>
+    <p>PNG stores density in a <code>pHYs</code> chunk as pixels per metre with a unit byte; 300 DPI is 11811 px/m there too, which is why some PNG readers show 299.99. A BMP stores the same unit in two header int32s and has no separate unit flag: 0 means unset, any positive value is pixels per metre. Neither format stores inches natively.</p>
+    <p>This page reads and writes BMP only. The file input accepts <code>.bmp</code>, <code>image/bmp</code>, <code>image/x-ms-bmp</code>. A PNG, JPEG or TIFF is skipped with a per-file notice pointing to the <a href="/">homepage</a>, which handles JPEG and PNG. For a PNG-only rewrite of <code>pHYs</code>, use the <a href="/png-dpi-changer/">PNG DPI changer</a>.</p>
+    <p>Because BMP density is two fixed offsets, there is nothing to insert and nothing to reconcile: the reader looks at offset 38, and the writer overwrites offsets 38 and 42. PNG may have to insert a 21-byte chunk when <code>pHYs</code> is missing; a BMP whose fields are 0 is rewritten in place and does not grow.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>BMP DPI changer — frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>How do I change a BMP to 300 DPI?</summary><div class="a">Drop a BMP into the tool on this page. The target is already 300. Click Download. The two pixels-per-metre fields in the BITMAPINFOHEADER are rewritten in your browser — free, no signup, no upload.</div></details>
+      <details><summary>What does "DPI not set" mean on a BMP?</summary><div class="a">A BMP stores resolution as biXPelsPerMeter and biYPelsPerMeter. When they are 0 the density is unset, which is what many exporters write. The row shows "DPI not set". On download both fields are set to round(target ÷ 0.0254) — 11811 for 300 DPI — and the pixel array stays exactly where it was.</div></details>
+      <details><summary>Does changing BMP DPI affect pixels, palette, compression or file size?</summary><div class="a">No. Only the two int32 fields at offsets 38 and 42 are overwritten. The pixel array, colour palette, compression flag and every other header field stay byte-identical, so the file length is unchanged.</div></details>
+      <details><summary>Why is an OS/2 BMP refused?</summary><div class="a">The 12-byte BITMAPCOREHEADER (OS/2 1.x) has no pixels-per-metre field. This page skips those files with a per-file notice and never modifies them. Windows BITMAPINFOHEADER (40 bytes) and the later V4 (108) and V5 (124) headers share the same offsets and are handled.</div></details>
+      <details><summary>Can I change the DPI of a JPEG or PNG here?</summary><div class="a">No. This page is BMP-only and skips other files with a notice. Use the homepage Image DPI Changer for JPEG and PNG, or the dedicated JPEG and PNG DPI changer pages.</div></details>
+      <details><summary>Does 300 DPI make my BMP print sharper?</summary><div class="a">No. The two fields set claimed metres (and therefore claimed inches: pixels ÷ DPI); they add no pixels. A 1200 × 1800 px BMP at 300 DPI prints 4 × 6 in. Windows Paint writes 96 DPI (3780 px/m); that is a tag, not extra detail.</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+<script>
+(function(){
+"use strict";
+/* ---------- state ---------- */
+var targetDpi = 300;
+var files = [];
+var $ = function(id){ return document.getElementById(id); };
+/* ---- bmp-core-start ---- */
+function rd32(u,i){ return (u[i] | (u[i+1]<<8) | (u[i+2]<<16) | (u[i+3]<<24))>>>0; }
+function rd32s(u,i){ return (u[i] | (u[i+1]<<8) | (u[i+2]<<16) | (u[i+3]<<24))|0; }
+function wr32(u,i,v){ u[i]=v&255; u[i+1]=(v>>>8)&255; u[i+2]=(v>>>16)&255; u[i+3]=(v>>>24)&255; }
+function wr16(u,i,v){ u[i]=v&255; u[i+1]=(v>>>8)&255; }
+function isBmp(u8){
+  return !!(u8 && u8.length>=2 && u8[0]===0x42 && u8[1]===0x4D);
+}
+function bmpDibSize(u8){
+  if(!isBmp(u8) || u8.length<18) return 0;
+  return rd32(u8, 14);
+}
+function bmpDims(u8){
+  if(!isBmp(u8) || u8.length<26) return null;
+  if(bmpDibSize(u8)<40) return null;
+  var w = rd32s(u8, 18), h = rd32s(u8, 22);
+  if(!w) return null;
+  return {w: w, h: Math.abs(h)||0};
+}
+function readBmpDpi(u8){
+  if(!isBmp(u8) || u8.length<18) return null;
+  var biSize = rd32(u8, 14);
+  if(biSize===12) return null;
+  if(biSize<40 || u8.length<46) return null;
+  var ppm = rd32s(u8, 38);
+  if(ppm===0) return "not set";
+  return Math.round(ppm * 0.0254);
+}
+function writeBmpDpi(u8, dpi){
+  var out = u8.slice();
+  if(out.length<46) return out;
+  var biSize = rd32(out, 14);
+  if(biSize<40) return out;
+  var ppm = Math.round(dpi / 0.0254);
+  wr32(out, 38, ppm);
+  wr32(out, 42, ppm);
+  return out;
+}
+function makeSampleBmp(){
+  var w = 160, h = 120, x, y, p;
+  var row = (w * 3 + 3) & ~3;
+  var pixels = row * h;
+  var off = 54;
+  var u = new Uint8Array(off + pixels);
+  u[0]=0x42; u[1]=0x4D;
+  wr32(u, 2, u.length);
+  wr32(u, 10, off);
+  wr32(u, 14, 40);
+  wr32(u, 18, w);
+  wr32(u, 22, h);
+  wr16(u, 26, 1);
+  wr16(u, 28, 24);
+  wr32(u, 34, pixels);
+  for(y=0;y<h;y++){
+    for(x=0;x<w;x++){
+      p = off + y*row + x*3;
+      u[p] = (x*255/(w-1))|0;
+      u[p+1] = (y*255/(h-1))|0;
+      u[p+2] = 180;
+    }
+  }
+  return u;
+}
+/* ---- bmp-core-end ---- */
+/* ---------- UI ---------- */
+var drop = $('drop'), input = $('fileInput');
+drop.addEventListener('click', function(){ input.click(); });
+drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); } });
+['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
+input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+function link(href, text){ var a = document.createElement('a'); a.href = href; a.textContent = text; return a; }
+function skipNotice(name, kind){
+  var box = $('skipNotice');
+  box.hidden = false;
+  var p = document.createElement('p');
+  var strong = document.createElement('strong');
+  strong.textContent = name;
+  p.appendChild(strong);
+  if(kind==='os2'){
+    p.appendChild(document.createTextNode(': This BMP uses the old OS/2 header, which has no DPI field'));
+  } else if(kind==='short'){
+    p.appendChild(document.createTextNode(': This BMP is truncated or its header is too short to hold a DPI field.'));
+  } else {
+    p.appendChild(document.createTextNode(': Not a BMP — use the '));
+    p.appendChild(link('/', 'homepage'));
+    p.appendChild(document.createTextNode(' for JPEG/PNG.'));
+  }
+  box.appendChild(p);
+}
+function addFiles(list){
+  var arr = Array.prototype.slice.call(list).slice(0, 50);
+  arr.forEach(function(f){
+    f.arrayBuffer().then(function(buf){
+      var u = new Uint8Array(buf);
+      if(!isBmp(u)){ skipNotice(f.name, 'notbmp'); return; }
+      var biSize = bmpDibSize(u);
+      if(biSize===12){ skipNotice(f.name, 'os2'); return; }
+      if(biSize<40 || u.length<46){ skipNotice(f.name, 'short'); return; }
+      var dims = bmpDims(u);
+      var item = {
+        name: f.name || 'image.bmp',
+        bytes: u,
+        kind: 'bmp',
+        dpi: readBmpDpi(u),
+        url: URL.createObjectURL(new Blob([u],{type:'image/bmp'})),
+        w: dims ? dims.w : 0,
+        h: dims ? dims.h : 0,
+        thumbFail: false
+      };
+      files.push(item);
+      var img = new Image();
+      img.onload = function(){
+        if(img.naturalWidth){ item.w = img.naturalWidth; item.h = img.naturalHeight; }
+        renderAll();
+      };
+      img.onerror = function(){ item.thumbFail = true; renderAll(); };
+      img.src = item.url;
+      renderAll();
+    });
+  });
+}
+function effectivePrintLine(wpx, hpx, dpi){
+  var win = wpx/dpi, hin = hpx/dpi;
+  return 'At ' + dpi + ' DPI, ' + wpx + '×' + hpx + 'px prints ' +
+    win.toFixed(1) + '"×' + hin.toFixed(1) + '" (' +
+    (win*2.54).toFixed(1) + '×' + (hin*2.54).toFixed(1) + ' cm).';
+}
+function isSmallPrint(wpx, hpx, dpi){
+  return (wpx/dpi < 4) && (hpx/dpi < 4);
+}
+$('clearBtn').addEventListener('click', function(){
+  files.forEach(function(f){ if(f.url) URL.revokeObjectURL(f.url); });
+  files = [];
+  var n = $('skipNotice');
+  n.hidden = true;
+  while(n.firstChild) n.removeChild(n.firstChild);
+  renderAll();
+});
+$('sampleBtn').addEventListener('click', function(e){
+  e.stopPropagation();
+  var b = makeSampleBmp();
+  addFiles([new File([b], 'sample-image.bmp', {type:'image/bmp'})]);
+});
+
+document.querySelectorAll('.chip').forEach(function(ch){
+  ch.addEventListener('click', function(){
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
+    ch.classList.add('on');
+    ch.setAttribute('aria-pressed','true');
+    $('customDpi').value = '';
+    targetDpi = parseInt(ch.dataset.dpi, 10);
+    renderAll();
+  });
+});
+$('customDpi').addEventListener('input', function(){
+  var v = parseInt(this.value, 10);
+  if(v>=1 && v<=10000){
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
+    targetDpi = v;
+    renderAll();
+  }
+});
+function outName(name, dpi){
+  var i = name.lastIndexOf('.');
+  var stem = i>0 ? name.slice(0,i) : name, ext = i>0 ? name.slice(i) : '';
+  return stem + '_' + dpi + 'dpi' + ext;
+}
+function convert(item){
+  var out = writeBmpDpi(item.bytes, targetDpi);
+  var blob = new Blob([out], {type: 'image/bmp'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = outName(item.name, targetDpi);
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+function printSize(item){
+  if(!item.w) return '';
+  return effectivePrintLine(item.w, item.h, targetDpi);
+}
+function renderAll(){
+  var box = $('rows');
+  box.innerHTML = '';
+  files.forEach(function(item, idx){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var dpiBadge = (typeof item.dpi === 'number')
+      ? '<span class="badge">' + item.dpi + ' DPI</span>'
+      : '<span class="badge warn">DPI not set</span>';
+    var warnHtml = (item.w && isSmallPrint(item.w, item.h, targetDpi))
+      ? '<span class="print-warn">Raising the DPI tag doesn\'t add pixels — for a larger sharp print you need a higher-resolution image.</span>'
+      : '';
+    var dims = (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + 'BMP';
+    var thumbHtml = item.thumbFail
+      ? '<span class="thumb thumb-tiff" aria-hidden="true">BMP</span>'
+      : '<img class="thumb" alt="">';
+    row.innerHTML =
+      thumbHtml +
+      '<div class="meta"><div class="name"></div><div class="dims"></div></div>' +
+      '<span>' + dpiBadge + ' <span class="arrow">→</span> <span class="badge">' + targetDpi + ' DPI</span></span>' +
+      '<span class="print">' + printSize(item) + '</span>' +
+      '<button class="btn primary" type="button" data-i="' + idx + '">Download</button>' +
+      warnHtml;
+    row.querySelector('.name').textContent = item.name;
+    row.querySelector('.dims').textContent = dims;
+    var imgEl = row.querySelector('img.thumb');
+    if(imgEl){
+      imgEl.alt = 'Preview of ' + item.name;
+      imgEl.src = item.url;
+    }
+    row.querySelector('button').addEventListener('click', function(){ convert(item); });
+    box.appendChild(row);
+  });
+  $('toolbar').hidden = files.length === 0;
+  $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
+}
+$('dlAll').addEventListener('click', function(){
+  files.forEach(function(item, i){ setTimeout(function(){ convert(item); }, i*350); });
+});
+window.__setdpi = {isBmp:isBmp, readBmpDpi:readBmpDpi, writeBmpDpi:writeBmpDpi, bmpDibSize:bmpDibSize, bmpDims:bmpDims, makeSampleBmp:makeSampleBmp, outName:outName};
+
+})();
+</script>
+</body>
+</html>

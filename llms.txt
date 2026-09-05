@@ -20,6 +20,9 @@
 - [PNG DPI Changer](https://setdpi.com/png-dpi-changer/): Rewrites only the PNG pHYs density chunk to set DPI — pixels, transparency and palette stay untouched
 - [JPEG DPI Changer](https://setdpi.com/jpeg-dpi-changer/): Rewrites JFIF APP0 density and EXIF XResolution/YResolution to set DPI — the compressed image data is never re-encoded
 - [TIFF DPI Changer](https://setdpi.com/tiff-dpi-changer/): Rewrites the TIFF XResolution, YResolution and ResolutionUnit tags to set DPI — pixel data, compression and extra pages stay untouched
+- [Passport Photo DPI](https://setdpi.com/passport-photo-dpi/): Set a passport or visa photo to 300 or 600 DPI, with pixel sizes for common photo formats
+- [BMP DPI Changer](https://setdpi.com/bmp-dpi-changer/): Set a bitmap's pixels-per-metre DPI fields without touching pixels
+- [Image DPI for Websites](https://setdpi.com/image-dpi-for-website/): Why browsers ignore the DPI tag and what actually controls sharpness on a web page
 
 ## Explainers
 
