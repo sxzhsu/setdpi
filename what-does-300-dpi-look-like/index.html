@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>What Does 300 DPI Look Like? (And Why Your Screen Can't Show You)</title>
+<meta name="description" content="What does 300 DPI look like on paper vs on screen? Same pixels look identical on a monitor; 300 DPI only shows up in print.">
+<link rel="canonical" href="https://setdpi.com/what-does-300-dpi-look-like/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/what-does-300-dpi-look-like/">
+<meta property="og:title" content="What Does 300 DPI Look Like? (And Why Your Screen Can't Show You)">
+<meta property="og:description" content="On screen, 300 DPI and 72 DPI with the same pixels look identical. On paper, 300 is photo quality — a dot every 0.085 mm.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="What Does 300 DPI Look Like? (And Why Your Screen Can't Show You)">
+<meta name="twitter:description" content="On screen, 300 DPI and 72 DPI with the same pixels look identical. On paper, 300 is photo quality — a dot every 0.085 mm.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does 300 DPI look like?","acceptedAnswer":{"@type":"Answer","text":"On paper, 300 dots per inch is photo quality: a dot every 0.085 mm, below what the eye resolves at a normal reading distance of about 25–30 cm. On a screen, a 300 DPI file looks identical to a 72 DPI file with the same pixels. DPI only shows up when those pixels are laid out in inches."}},{"@type":"Question","name":"Why can't my screen show 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Monitors display pixels, not the density tag. Browsers and photo apps map image pixels to screen pixels and ignore JFIF, EXIF, and PNG pHYs. You cannot preview print sharpness by staring at the file on a laptop. Print size in inches is pixels ÷ DPI; that arithmetic happens on paper."}},{"@type":"Question","name":"Do 72 DPI and 300 DPI look different on screen?","acceptedAnswer":{"@type":"Answer","text":"Not if the pixel dimensions are the same. A 1800×1200 px image tagged 72 and the same image tagged 300 occupy the same CSS pixels. Printed, the 72 DPI version claims about 25×16.7 inches and looks pixelated; the 300 DPI version claims 6×4 inches and looks sharp."}},{"@type":"Question","name":"How big does a 1800×1200 px file print at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"6 × 4 inches — a standard 4×6 photo. At 150 DPI the same file prints 12 × 8 inches (acceptable for a small poster). At 72 DPI it prints about 25 × 16.7 inches and will look blurry at arm’s length."}},{"@type":"Question","name":"How do I check what DPI my image is tagged?","acceptedAnswer":{"@type":"Answer","text":"Use the DPI Checker. It reads JPEG JFIF/EXIF and PNG pHYs density, shows pixel size, and converts to print inches. If the tag is missing — true of many screenshots and web downloads — it says so instead of inventing 72."}},{"@type":"Question","name":"How do I make an image 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Rewrite the density tag to 300. Convert Image to 300 DPI and 72 DPI to 300 DPI do that losslessly in the browser. Pixels stay the same; claimed print size becomes pixels ÷ 300. If you do not have enough pixels for the print you want, changing the tag will not invent them."}}]}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #cfc7b2;border-radius:10px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbf8f0}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--ink)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px;overflow-wrap:anywhere}
+.row .warn-msg{font-size:13px;color:var(--warn);line-height:1.45;overflow-wrap:anywhere;flex:1 1 240px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,#customDpi,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+#sampleBtn{margin-top:14px}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){
+  .row .print,.row .warn-msg{flex-basis:100%}
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#paper">On paper</a>
+      <a href="#sizes">Print sizes</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Image DPI Changer</a>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <a href="/dpi-calculator/">DPI Calculator</a>
+      <a href="/change-dpi-to-150/">150 DPI</a>
+      <a href="/change-dpi-to-200/">200 DPI</a>
+      <a href="/72-dpi-to-300-dpi/">72 → 300</a>
+      <a href="/convert-image-to-300-dpi/">300 DPI</a>
+      <a href="/convert-image-to-600-dpi/">600 DPI</a>
+      <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
+      <a href="/standard-dpi-settings/">Standard DPI Settings</a>
+      <a href="/dpi-for-printing/">DPI for Printing</a>
+      <span class="here" aria-current="page">What 300 DPI Looks Like</span>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Print sharpness · screens lie</div>
+    <h1>What Does 300 DPI Look Like? (And Why Your Screen Can’t Show You)</h1>
+    <p class="sub">On screen, a 300 DPI file and a 72 DPI file with the same pixels look <strong>identical</strong>. DPI only manifests on paper — 300 dots per inch, a dot every 0.085 mm, photo quality at reading distance.</p>
+    <div class="trust">
+      <span>100% private — no upload</span>
+      <span>Screens ignore the tag</span>
+      <span>Free — no signup, no watermark</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+  <section class="block" id="screen">
+    <h2>Your screen cannot show you 300 DPI</h2>
+    <p>What does 300 DPI look like? On a monitor: the same as 72 DPI, 96 DPI, or 600 DPI, as long as the pixel width and height are the same. That is not a metaphor. Browsers, Preview, Photos, and Photoshop’s canvas all display <em>pixels</em>. They map image samples to screen samples (and to CSS pixels on the web). They do not consult JFIF density, EXIF <code>XResolution</code>, or PNG <code>pHYs</code> when they decide how large or how sharp the picture appears in a window.</p>
+    <p>So the ritual of squinting at a file “to see if it looks like 300” cannot work. Zooming in shows you the pixels you already have. Zooming out shows you fewer of them. Neither operation is a print. The density tag is an instruction for a layout program or a RIP: “these N pixels occupy this many inches.” Until something lays those pixels out in physical inches, 300 and 72 are the same picture.</p>
+    <p>This is also why a phone export tagged 72 does not look softer in Gmail than the same pixels tagged 300, and why “save for web at 72 DPI” never made a website look different. Screens ignore the tag. Printers and preflight software do not. For the vocabulary gap between dots and pixels, see <a href="/dpi-vs-ppi/">DPI vs PPI</a>.</p>
+  </section>
+
+  <section class="block" id="paper">
+    <h2>What 300 DPI means on paper</h2>
+    <p>Three hundred dots per inch means a mark every 1/300 of an inch — about <strong>0.085 mm</strong>. At a normal reading distance of 25–30 cm, that spacing sits at or below the resolving limit of a typical eye (on the order of one arcminute, which is roughly 0.07–0.09 mm at that range). The samples blend. Grain, ink spread, and paper texture finish the job. That blend is what people mean by “photo quality.”</p>
+    <p>Print the same pixels at 72 DPI and the picture becomes about <strong>4.2× larger</strong> on each side (300 ÷ 72). Each sample now occupies a much bigger patch of paper. You see the grid. Edges stairstep. A face that looked fine at 6 × 4 in becomes a blurry 25-inch poster. Nothing in the file changed except the instruction for how far apart to put the samples.</p>
+    <p>At 150 DPI you are halfway: a dot every 0.17 mm. Held in the hand, a 150 DPI photo looks a little soft next to a 300 DPI print of the same scene. Hung as an 18 × 24 on a wall, 150 is the usual spec, because nobody stands 25 cm from a poster. Viewing distance is the hidden half of “what 300 looks like.” The number is a density. The experience is density plus how far away you are. A longer guide by product is <a href="/dpi-for-printing/">DPI for printing</a>; the ladder of standard values is <a href="/standard-dpi-settings/">standard DPI settings</a>.</p>
+  </section>
+
+  <section class="block" id="sizes">
+    <h2>Same file, three print sizes</h2>
+    <p>Take a 1800 × 1200 px image — a common small-camera or cropped phone frame. Change only the DPI tag. The pixels stay put. The claimed paper size does not.</p>
+    <div class="table-scroll" style="overflow-x:auto">
+    <table class="print">
+      <thead><tr><th>Tag</th><th>Print size</th><th>What it looks like</th></tr></thead>
+      <tbody>
+        <tr><td>72 DPI</td><td>25.0 × 16.7 in</td><td>Blurry at arm’s length — the samples are too far apart. A pixelated poster, not a photograph.</td></tr>
+        <tr><td>150 DPI</td><td>12.0 × 8.0 in</td><td>Acceptable for a small poster or a print viewed from a step back. Soft if you hold it like a snapshot.</td></tr>
+        <tr><td>300 DPI</td><td>6.0 × 4.0 in</td><td>Sharp. A standard 4 × 6 photo. This is the “photo quality” the 300 habit is named for.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Same file. Three physical sizes. One of them looks like 300 DPI because it <em>is</em> 300 samples in each inch of paper. The 72 DPI print of those same 1800 × 1200 pixels is not “a 300 DPI image displayed large”; it is a 72 DPI image, and it looks like one.</p>
+    <p>Scale the idea up. A 2400 × 3000 px file — enough for an 8 × 10 at 300 — prints 16 × 20 at 150 (poster-fine from a few feet) and 33 × 42 at 72 (a wall of squares). The tag is the only thing that moved. If you need the 8 × 10 to look like 300, you need those 2400 × 3000 pixels <em>and</em> a 300 tag, or a layout that places the image at 8 × 10 so the effective resolution is 300 even if the tag was wrong. Effective resolution is always pixels ÷ printed inches. The tag is the claim; the layout is the truth.</p>
+  </section>
+
+  <section class="block" id="check">
+    <h2>How to check what DPI your image is tagged</h2>
+    <p>Do not trust the number Windows or macOS invents when metadata is missing — they often assume 72 or 96. Read the file. The <a href="/dpi-checker/">DPI Checker</a> opens JPEG JFIF/EXIF and PNG <code>pHYs</code> in your browser, shows pixel width and height, and converts to print inches and centimetres at the tagged density. If those structures are absent, it says so instead of pretending the photo is 72 DPI.</p>
+    <p>Once you know the tag, you still have to do the arithmetic: inches = pixels ÷ DPI. A 1200 × 1800 px image tagged 300 is a 4 × 6. The same pixels tagged 72 claim 16.7 × 25 in. Only one of those prints will look like 300 DPI, and it is the small one.</p>
+  </section>
+
+  <section class="block" id="make">
+    <h2>Make it 300</h2>
+    <p>If the pixels already cover the print you want, rewrite the density tag to 300 and stop. <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a> does that losslessly in the browser — no upload, no resample, no second JPEG encode. Coming from a screen default? <a href="/72-dpi-to-300-dpi/">72 DPI to 300 DPI</a> is the same engine aimed at that jump.</p>
+    <p>Changing 72 to 300 does not make the on-screen picture look different. That is the point of this page. It makes the <em>claimed print</em> 4.2× smaller and, if the pixels were there all along, it makes the paper look like 300 DPI instead of like a stretched 72. If the pixels were not there, you now have a very small, correctly tagged print. Get a larger original, or pick a size the file can actually support.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>What does 300 DPI look like?</summary><div class="a">On paper, 300 dots per inch is photo quality: a dot every 0.085 mm, below what the eye resolves at a normal reading distance of about 25–30 cm. On a screen, a 300 DPI file looks identical to a 72 DPI file with the same pixels. DPI only shows up when those pixels are laid out in inches.</div></details>
+      <details><summary>Why can't my screen show 300 DPI?</summary><div class="a">Monitors display pixels, not the density tag. Browsers and photo apps map image pixels to screen pixels and ignore JFIF, EXIF, and PNG pHYs. You cannot preview print sharpness by staring at the file on a laptop. Print size in inches is pixels ÷ DPI; that arithmetic happens on paper.</div></details>
+      <details><summary>Do 72 DPI and 300 DPI look different on screen?</summary><div class="a">Not if the pixel dimensions are the same. A 1800×1200 px image tagged 72 and the same image tagged 300 occupy the same CSS pixels. Printed, the 72 DPI version claims about 25×16.7 inches and looks pixelated; the 300 DPI version claims 6×4 inches and looks sharp.</div></details>
+      <details><summary>How big does a 1800×1200 px file print at 300 DPI?</summary><div class="a">6 × 4 inches — a standard 4×6 photo. At 150 DPI the same file prints 12 × 8 inches (acceptable for a small poster). At 72 DPI it prints about 25 × 16.7 inches and will look blurry at arm’s length.</div></details>
+      <details><summary>How do I check what DPI my image is tagged?</summary><div class="a">Use the DPI Checker. It reads JPEG JFIF/EXIF and PNG pHYs density, shows pixel size, and converts to print inches. If the tag is missing — true of many screenshots and web downloads — it says so instead of inventing 72.</div></details>
+      <details><summary>How do I make an image 300 DPI?</summary><div class="a">Rewrite the density tag to 300. Convert Image to 300 DPI and 72 DPI to 300 DPI do that losslessly in the browser. Pixels stay the same; claimed print size becomes pixels ÷ 300. If you do not have enough pixels for the print you want, changing the tag will not invent them.</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+
+</body>
+</html>

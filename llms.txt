@@ -28,3 +28,6 @@
 - [Changing image DPI without Photoshop](https://setdpi.com/#alternatives): Alternatives and when each makes sense
 - [FAQ](https://setdpi.com/#faq): Lossless-ness, supported formats, privacy
 - [DPI vs PPI](https://setdpi.com/dpi-vs-ppi/): Print dots vs screen pixels, when the mix-up is harmless, and when print/scan work needs the distinction
+- [Standard DPI Settings](https://setdpi.com/standard-dpi-settings/): Reference for 72, 96, 150, 200, 300, 600, and 1200 — what each value is for and how to set it
+- [DPI for Printing](https://setdpi.com/dpi-for-printing/): Decision guide by print product, plus pixels needed at 300 DPI for common sizes
+- [What 300 DPI Looks Like](https://setdpi.com/what-does-300-dpi-look-like/): Why a 300 DPI file and a 72 DPI file look identical on screen, and what 300 means on paper
