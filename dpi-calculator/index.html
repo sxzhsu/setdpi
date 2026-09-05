@@ -156,6 +156,9 @@ img,svg{max-width:100%}
       <a href="/dpi-for-printing/">DPI for Printing</a>
       <a href="/what-does-300-dpi-look-like/">What 300 DPI Looks Like</a>
       <a href="/bulk-dpi-changer/">Bulk DPI Changer</a>
+      <a href="/png-dpi-changer/">PNG DPI Changer</a>
+      <a href="/jpeg-dpi-changer/">JPEG DPI Changer</a>
+      <a href="/tiff-dpi-changer/">TIFF DPI Changer</a>
     </nav>
   </div>
 </header>
@@ -313,6 +316,17 @@ img,svg{max-width:100%}
     <h3>600 DPI — fine art / medical</h3>
     <p>Line art, hairline charts, and some medical or archival scans. Author guidelines often ask 600 for figures that are not photographs. A 600 tag on a soft photo does not add detail — it just claims a smaller print. Use 600 when the original actually has that many samples per inch, or when a portal will reject 300 on a chart.</p>
     <p>If you need the stored tag on a real file, not the arithmetic, use the <a href="/dpi-checker/">DPI Checker</a>. For the vocabulary mix-up with PPI, see <a href="/dpi-vs-ppi/">DPI vs PPI</a>.</p>
+  </section>
+
+  <section class="block" id="print-size-calculator">
+    <h2>Print size calculator</h2>
+    <p>Print size is pixels divided by DPI. That quotient is inches. Multiply inches by 2.54 to get centimetres. Width and height use the same DPI, so each axis is converted on its own.</p>
+    <ul>
+      <li><strong>inches = pixels ÷ DPI</strong></li>
+      <li><strong>cm = inches × 2.54</strong></li>
+    </ul>
+    <p>Worked example: a 3000 × 2000 px file at 300 DPI prints 10 × 6.67 in (3000 ÷ 300 = 10, 2000 ÷ 300 = 6.67), which is 25.4 × 16.9 cm. A second example: 1800 × 1200 px at 150 DPI prints 12 × 8 in (1800 ÷ 150 = 12, 1200 ÷ 150 = 8), which is 30.48 × 20.32 cm.</p>
+    <p>The calculator at the top of this page fills the print-width and print-height inch fields when you enter pixels and DPI, and shows the matching centimetre size on the result line.</p>
   </section>
 
   <section class="block" id="faq">

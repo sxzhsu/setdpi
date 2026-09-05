@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>TIFF DPI Changer — Set TIFF to 300 DPI (XResolution Tags) Losslessly</title>
+<meta name="description" content="Free TIFF DPI changer: set a TIFF to 300 DPI (or any value) by rewriting its resolution tags in the browser. Pixels untouched, no re-encoding.">
+<link rel="canonical" href="https://setdpi.com/tiff-dpi-changer/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/tiff-dpi-changer/">
+<meta property="og:title" content="TIFF DPI Changer — Set TIFF to 300 DPI (XResolution Tags) Losslessly">
+<meta property="og:description" content="Free TIFF DPI changer: set a TIFF to 300 DPI (or any value) by rewriting its resolution tags in the browser. Pixels untouched, no re-encoding.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="TIFF DPI Changer — Set TIFF to 300 DPI (XResolution Tags) Losslessly">
+<meta name="twitter:description" content="Free TIFF DPI changer: set a TIFF to 300 DPI (or any value) by rewriting its resolution tags in the browser. Pixels untouched, no re-encoding.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I change a TIFF to 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Drop a TIFF into the tool on this page. The target is already 300. Click Download. The XResolution, YResolution and ResolutionUnit tags in the first IFD are rewritten in your browser — free, no signup, no upload."}},{"@type":"Question","name":"What if my TIFF has no resolution tags?","acceptedAnswer":{"@type":"Answer","text":"The row shows \"DPI not set\". On download the first IFD is rebuilt at the end of the file: XResolution and YResolution are added as 300/1 (or the value you chose), ResolutionUnit is set to inch, the header is pointed at the new IFD, and the pixel data stays exactly where it was."}},{"@type":"Question","name":"Does changing TIFF DPI affect pixels, compression, layers or file size?","acceptedAnswer":{"@type":"Answer","text":"No pixel, strip or tile bytes are read or modified, so compression, bit depth, alpha channels and any further IFDs come out as they went in. When all three resolution tags already exist and are well formed the file length is unchanged; when the first IFD has to be rebuilt, the file grows by the new IFD, any appended 8-byte rationals and at most one padding byte."}},{"@type":"Question","name":"Does this work on a multi-page TIFF?","acceptedAnswer":{"@type":"Answer","text":"Partly. Only the first page (IFD0) gets its resolution tags rewritten. The pointer to the next page is preserved, so the other pages stay reachable and byte-identical, and the row tells you how many pages were counted."}},{"@type":"Question","name":"Why is BigTIFF not supported?","acceptedAnswer":{"@type":"Answer","text":"BigTIFF uses magic number 43 with 64-bit offsets and 20-byte IFD entries. This page parses the classic 32-bit TIFF structure only, so a BigTIFF is skipped with a per-file notice and never modified."}},{"@type":"Question","name":"My scanner TIFF already says 300 or 600 DPI — do I need this?","acceptedAnswer":{"@type":"Answer","text":"Often not. Scanner software normally writes the scan setting into XResolution and YResolution, so the badge on the row may already read 300 or 600 — reading the badge is then all you need. Download only when the tags say something else, such as 72, 96 or \"DPI not set\"."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"TIFF DPI Changer","url":"https://setdpi.com/tiff-dpi-changer/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free TIFF DPI changer: set a TIFF to 300 DPI (or any value) by rewriting its resolution tags in the browser. Pixels untouched, no re-encoding.","datePublished":"2026-09-05","dateModified":"2026-09-05","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to change the DPI of a TIFF online","step":[{"@type":"HowToStep","name":"Add TIFF files","text":"Drop TIFF files into the tool. Each file is read in the browser; nothing is uploaded. Non-TIFF and BigTIFF files are skipped with a per-file notice."},{"@type":"HowToStep","name":"Choose the target DPI (300 is preselected)","text":"300 DPI is selected by default. Use a preset (72, 96, 150, 200, 300, 600, 1200) or a custom value from 1 to 10000."},{"@type":"HowToStep","name":"Download","text":"Click Download. The XResolution, YResolution and ResolutionUnit tags in the first IFD are rewritten in the browser. Pixel data is untouched and nothing is uploaded. A file called name.tif is saved as name_300dpi.tif when the target is 300; the original extension is kept."}]}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #cfc7b2;border-radius:10px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbf8f0}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--ink)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .thumb-tiff{display:inline-flex;align-items:center;justify-content:center;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12px;font-weight:700;color:var(--muted);background:#efeae0;letter-spacing:.04em}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px;overflow-wrap:anywhere}
+.row .warn-msg{font-size:13px;color:var(--warn);line-height:1.45;overflow-wrap:anywhere;flex:1 1 240px}
+.row .print-warn{flex:1 1 100%;font-size:12.5px;color:var(--warn);background:#fef3c7;border-radius:6px;padding:6px 10px;line-height:1.45;overflow-wrap:anywhere}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 6px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.step .n{width:28px;height:28px;border-radius:7px;background:var(--ink);color:var(--card);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step h3{margin:0 0 6px;font-size:15px;font-weight:700;font-family:inherit}
+.step p{font-size:13.5px;color:var(--muted);margin:0}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,#customDpi,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+#sampleBtn{margin-top:14px}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+#skipNotice[hidden]{display:none}
+#skipNotice p{margin:0 0 4px;font-size:14px}
+#skipNotice p:last-child{margin:0}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){
+  .row .print,.row .warn-msg,.row .print-warn{flex-basis:100%}
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#how">How</a>
+      <a href="#tags">Resolution tags</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Image DPI Changer</a>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <a href="/dpi-calculator/">DPI Calculator</a>
+      <a href="/change-dpi-to-150/">150 DPI</a>
+      <a href="/change-dpi-to-200/">200 DPI</a>
+      <a href="/72-dpi-to-300-dpi/">72 → 300</a>
+      <a href="/convert-image-to-300-dpi/">300 DPI</a>
+      <a href="/convert-image-to-600-dpi/">600 DPI</a>
+      <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
+      <a href="/standard-dpi-settings/">Standard DPI Settings</a>
+      <a href="/dpi-for-printing/">DPI for Printing</a>
+      <a href="/what-does-300-dpi-look-like/">What 300 DPI Looks Like</a>
+      <a href="/bulk-dpi-changer/">Bulk DPI Changer</a>
+      <a href="/png-dpi-changer/">PNG DPI Changer</a>
+      <a href="/jpeg-dpi-changer/">JPEG DPI Changer</a>
+      <span class="here" aria-current="page">TIFF DPI Changer</span>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">TIFF ONLY · XRESOLUTION / YRESOLUTION TAG REWRITE</div>
+    <h1>TIFF DPI Changer</h1>
+    <p class="sub">Drop a TIFF — its <code>XResolution</code>, <code>YResolution</code> and <code>ResolutionUnit</code> tags are rewritten to <strong>300 DPI</strong> (or any value) in your browser. Pixel data, compression and extra pages stay untouched. Nothing is uploaded.</p>
+    <div class="trust">
+      <span>100% private — no upload</span>
+      <span>Lossless — pixel data never touched</span>
+      <span>Free — no signup, no watermark</span>
+      <span>TIFF only</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+  <div class="tool" id="tool">
+
+    <div class="presets" role="group" aria-label="Target DPI">
+      <span class="lbl">Target DPI:</span>
+
+      <button class="chip" type="button" data-dpi="72" aria-pressed="false">72</button>
+      <button class="chip" type="button" data-dpi="96" aria-pressed="false">96</button>
+      <button class="chip" type="button" data-dpi="150" aria-pressed="false">150</button>
+      <button class="chip" type="button" data-dpi="200" aria-pressed="false">200</button>
+      <button class="chip on" type="button" data-dpi="300" aria-pressed="true">300</button>
+      <button class="chip" type="button" data-dpi="600" aria-pressed="false">600</button>
+      <button class="chip" type="button" data-dpi="1200" aria-pressed="false">1200</button>
+      <input id="customDpi" type="number" min="1" max="10000" placeholder="Custom" aria-label="Custom DPI value">
+    </div>
+    <div id="drop" tabindex="0" role="button" aria-label="Add TIFF files: drop files here or press Enter to browse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round"/></svg>
+      <div class="big">Drop TIFF files here, or click to browse</div>
+      <div class="small">TIFF only · up to 50 files · resolution tags rewritten locally, never uploaded</div>
+      <button class="btn ghost" id="sampleBtn" type="button">No TIFF handy? Try a sample TIFF</button>
+    </div>
+    <input type="file" id="fileInput" accept=".tif,.tiff,image/tiff" multiple>
+    <div class="note" id="skipNotice" hidden></div>
+    <div id="rows"></div>
+    <div class="toolbar" id="toolbar" hidden>
+      <span class="hint" id="count"></span>
+      <div>
+        <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+        <button class="btn primary" id="dlAll" type="button">Download all</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="how">
+    <h2>How to change TIFF DPI in the browser</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3>Add TIFF files</h3><p>Drop TIFF files above, or click to browse. The file picker accepts <code>.tif</code> / <code>.tiff</code> / <code>image/tiff</code>. Up to 50 files are kept from each drop. Non-TIFF and BigTIFF files are skipped with a per-file notice — no alert.</p></div>
+      <div class="step"><span class="n">2</span><h3>Choose the target DPI (300 is preselected)</h3><p>300 is selected when the page loads. Use 72, 96, 150, 200, 600 or 1200, or type a custom integer from 1 to 10000. The print-size line on each row updates to pixels ÷ DPI.</p></div>
+      <div class="step"><span class="n">3</span><h3>Download</h3><p>Click Download. The resolution tags in the first IFD are rewritten in the browser. Pixel data is untouched and nothing is uploaded. A file called <code>name.tif</code> tagged 300 is saved as <code>name_300dpi.tif</code>; the original extension is kept.</p></div>
+    </div>
+    <p>Each dropped file is read as a byte array in the page. The first four bytes are checked: <code>II</code> followed by 42 (little-endian) or <code>MM</code> followed by 42 (big-endian) is a classic TIFF. A file that starts <code>II</code> or <code>MM</code> followed by 43 is a BigTIFF and is skipped with a notice saying so; anything else is skipped with a notice pointing to the <a href="/jpeg-dpi-changer/">JPEG DPI changer</a>, the <a href="/png-dpi-changer/">PNG DPI changer</a> and the <a href="/">homepage</a>. A classic TIFF whose first IFD lies inside the file is listed with its current resolution reading (or a “DPI not set” badge), its pixel size read from the <code>ImageWidth</code> and <code>ImageLength</code> tags, and — when walking the IFD chain finds more than one page — a page count.</p>
+    <p>Most browsers cannot decode TIFF, so this page does not attempt a preview: the row shows a neutral <code>TIFF</code> placeholder instead of a thumbnail, and this page never decodes the image at all. Download (and Download all) works on the original bytes. The saved name is the original stem, an underscore, the target DPI, the letters <code>dpi</code>, and the original extension. Clearing the list also hides the skip notice and removes its rows.</p>
+  </section>
+
+  <section class="block" id="tags">
+    <h2>How a TIFF stores resolution: XResolution, YResolution, ResolutionUnit</h2>
+    <p>A TIFF starts with an 8-byte header: two bytes of byte order (<code>II</code> for little-endian, <code>MM</code> for big-endian), the 16-bit magic number 42, and a 32-bit offset to the first image file directory (IFD). An IFD is a 16-bit entry count, that many 12-byte entries, and a 32-bit offset to the next IFD (0 when there is none). Each entry holds a 16-bit tag, a 16-bit type, a 32-bit count, and a 4-byte field that carries the value itself when it fits in 4 bytes and otherwise an offset to where the value is stored.</p>
+    <p>Resolution lives in three tags. <code>XResolution</code> (282) and <code>YResolution</code> (283) are RATIONAL: two unsigned 32-bit integers, numerator then denominator, 8 bytes in total, so the entry field is an offset to those 8 bytes. <code>ResolutionUnit</code> (296) is a SHORT stored inline in the first two bytes of the field: 1 means no absolute unit, 2 means inch, 3 means centimetre. When the tag is absent, the TIFF 6.0 specification makes the default 2, inch. A file tagged 300 DPI therefore carries 300/1 in both rationals and a unit of 2 (or no unit tag at all).</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>Tag</th><th>Name</th><th>Type</th><th>Where the value lives</th><th>What this page writes</th></tr></thead>
+      <tbody>
+        <tr><td>282</td><td>XResolution</td><td>RATIONAL (5), count 1</td><td>8 bytes at the offset in the entry field</td><td>target / 1</td></tr>
+        <tr><td>283</td><td>YResolution</td><td>RATIONAL (5), count 1</td><td>8 bytes at the offset in the entry field</td><td>target / 1</td></tr>
+        <tr><td>296</td><td>ResolutionUnit</td><td>SHORT (3), count 1</td><td>Inline, first 2 bytes of the entry field</td><td>2 (inch)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Reading follows those rules: the numerator is divided by the denominator, multiplied by 2.54 when the unit is centimetre, and rounded to the nearest whole number for the badge. Only <code>XResolution</code> is read for the badge; <code>YResolution</code> is written on download but not read. A unit of 1, a zero numerator or denominator, a missing <code>XResolution</code>, or a rational whose offset lies outside the file is shown as “DPI not set”. Both byte orders are read and written in the file's own order; nothing is converted between <code>II</code> and <code>MM</code>.</p>
+  </section>
+
+  <section class="block" id="rewrite">
+    <h2>What is rewritten in place and what is appended</h2>
+    <p>There are two paths, chosen by what the first IFD already contains.</p>
+    <p><strong>In place.</strong> When <code>XResolution</code>, <code>YResolution</code> and <code>ResolutionUnit</code> are all present and well formed — the two rationals with count 1 and an offset inside the file, the unit a count-1 SHORT — the page overwrites the 8 bytes of each rational with target/1 and the unit field with 2, in the file's own byte order. Sixteen rational bytes and the unit's 4-byte field change; nothing moves; the file length is unchanged and the header is untouched.</p>
+    <p><strong>Rebuild.</strong> When any of the three is missing or malformed, the page rebuilds the first IFD by appending, never by shifting. It copies the file, pads it to an even length if needed, appends an 8-byte target/1 rational for each missing <code>XResolution</code> or <code>YResolution</code> (each at a word-aligned offset; a missing <code>ResolutionUnit</code> needs no appended bytes because a SHORT fits inside its new entry), then writes a new IFD at the end: the original entries copied verbatim (well-formed resolution entries kept and overwritten in place as above, malformed ones dropped), the new entries added, the whole list sorted by tag as the specification requires, and the original next-IFD pointer copied across. Finally the 32-bit first-IFD offset in the header is pointed at the new IFD. The old IFD stays in the file as dead bytes that no reader visits.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>Condition</th><th>What changes</th><th>File length</th></tr></thead>
+      <tbody>
+        <tr><td>All three tags present and well formed</td><td>16 rational bytes and the 4-byte unit field</td><td>Unchanged</td></tr>
+        <tr><td>One or more missing or malformed</td><td>Header offset (4 bytes); an 8-byte rational appended for each missing XResolution / YResolution; new IFD appended</td><td>Grows by at most 1 padding byte, 8 bytes per added rational, and 6 + 12 × entries for the new IFD</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>On both paths the strip or tile data is never read, decoded, moved or modified. Entries that carry offsets — <code>StripOffsets</code>, <code>TileOffsets</code>, colour maps, ICC profiles, EXIF sub-IFDs — still point at the same bytes, because nothing before the original end of the file moves. The sample TIFF button builds a 160 × 120 pixel, 8-bit greyscale, uncompressed TIFF with no resolution tags in the page, so it always takes the rebuild path: its row shows “DPI not set”, and the downloaded copy carries the target value.</p>
+  </section>
+
+  <section class="block" id="pages">
+    <h2>Multi-page TIFF and BigTIFF: the limits</h2>
+    <p><strong>Multi-page TIFF.</strong> Only the first IFD is rewritten. Its next-IFD pointer is preserved on both paths, so later pages remain reachable and byte-identical: a scanned document saved as one page per IFD keeps every page, and only page one's density changes. The row counts pages by following the chain — stopping at 0, at a repeated or out-of-range offset, or after 1024 directories — and shows the count when it is above one, together with a note that only the first page's tags are rewritten.</p>
+    <p><strong>BigTIFF.</strong> Files whose magic number is 43 use 64-bit offsets and 20-byte entries. This page parses classic 32-bit structures only, so a BigTIFF is skipped with a per-file notice that says so and is never modified.</p>
+    <p><strong>Compression and tiling.</strong> Because pixel data is never decoded, the compression tag is never consulted: uncompressed, LZW, ZIP (Deflate), PackBits, CCITT and JPEG-compressed TIFFs, in stripped or tiled layouts, all go through the same tag rewrite with their data copied unchanged.</p>
+    <p><strong>Broken files.</strong> A file with a classic header whose first IFD offset lies outside the file, or whose entry table would run past the end, cannot be read and is skipped with a notice rather than listed.</p>
+  </section>
+
+  <section class="block" id="scanner">
+    <h2>Scanner TIFFs are often 300 or 600 DPI already</h2>
+    <p>Scanner software normally writes the scan setting into <code>XResolution</code> and <code>YResolution</code>, so a TIFF scanned at 300 or 600 DPI usually arrives with those tags already set. Dropping such a file here and reading the badge is a valid use of the page on its own: the badge is read from the tags, nothing is downloaded until you click, and nothing is uploaded at any point.</p>
+    <p>Download when the badge disagrees with what the job needs: a scan saved at a screen value such as 72 or 96, an export whose unit is 1 (no absolute unit, shown as “DPI not set”), or a file that has no resolution entries at all. A file whose <code>ResolutionUnit</code> is 3 (centimetre) is shown in inches on read — the stored pixels-per-centimetre value multiplied by 2.54 and rounded — and written back as inch with the target value, so a file storing 11811/100 per centimetre reads as 300 DPI here.</p>
+    <p>The badge shows the value the tags hold; it does not measure the scan. If a 600 DPI scan was later resampled to fewer pixels, the tag may still read 600. Print inches = pixels ÷ DPI: the row's print-size line and the small-print warning use the <code>ImageWidth</code> and <code>ImageLength</code> tags for that arithmetic, and stay blank when those tags are absent.</p>
+  </section>
+
+  <section class="block" id="need">
+    <h2>Print shops, archives and where a 300 DPI TIFF is required</h2>
+    <p>TIFF is the lossless container that print and archive pipelines commonly ask for: press-ready artwork, archival master scans, and journal figures where JPEG artefacts are unwelcome. Those pipelines typically read the same <code>XResolution</code> and <code>YResolution</code> tags this page rewrites (the badge here reads <code>XResolution</code>), and a file tagged 72 may be bounced as low resolution even when it holds plenty of pixels. Rewriting the tags to 300 (or the number on the brief) is what this page does; it adds no pixels.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>Job</th><th>Typical density ask</th></tr></thead>
+      <tbody>
+        <tr><td>Press-ready artwork and packaging</td><td>Typically 300 DPI</td></tr>
+        <tr><td>Archival master scans of documents and photos</td><td>Commonly 300–600 DPI</td></tr>
+        <tr><td>Journal halftone figures</td><td>Typically 300–600 DPI</td></tr>
+        <tr><td>Journal line-art figures</td><td>Typically 600–1200 DPI</td></tr>
+        <tr><td>Large-format posters and banners</td><td>Often 150–300 DPI</td></tr>
+        <tr><td>Screens</td><td>72–96 DPI, and typically ignored</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Print inches = pixels ÷ DPI. A 2400 × 3000 px TIFF tagged 300 claims 8 × 10 in; tagged 72 it claims 33.3 × 41.7 in. The row shows that print size for the current target in inches and centimetres, and warns when both sides fall under 4 in that a higher tag will not create a larger sharp print.</p>
+    <p>Use 300 when that is the number a print checklist or figure guide typically wants to see on a TIFF. Use 600 or 1200 when a line-art guideline asks for it. Use 72 or 96 only when you mean a screen density. The presets and the custom box cover those values; the downloaded rationals are the integer you selected over 1, with unit 2.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>TIFF DPI changer — frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>How do I change a TIFF to 300 DPI?</summary><div class="a">Drop a TIFF into the tool on this page. The target is already 300. Click Download. The XResolution, YResolution and ResolutionUnit tags in the first IFD are rewritten in your browser — free, no signup, no upload.</div></details>
+      <details><summary>What if my TIFF has no resolution tags?</summary><div class="a">The row shows "DPI not set". On download the first IFD is rebuilt at the end of the file: XResolution and YResolution are added as 300/1 (or the value you chose), ResolutionUnit is set to inch, the header is pointed at the new IFD, and the pixel data stays exactly where it was.</div></details>
+      <details><summary>Does changing TIFF DPI affect pixels, compression, layers or file size?</summary><div class="a">No pixel, strip or tile bytes are read or modified, so compression, bit depth, alpha channels and any further IFDs come out as they went in. When all three resolution tags already exist and are well formed the file length is unchanged; when the first IFD has to be rebuilt, the file grows by the new IFD, any appended 8-byte rationals and at most one padding byte.</div></details>
+      <details><summary>Does this work on a multi-page TIFF?</summary><div class="a">Partly. Only the first page (IFD0) gets its resolution tags rewritten. The pointer to the next page is preserved, so the other pages stay reachable and byte-identical, and the row tells you how many pages were counted.</div></details>
+      <details><summary>Why is BigTIFF not supported?</summary><div class="a">BigTIFF uses magic number 43 with 64-bit offsets and 20-byte IFD entries. This page parses the classic 32-bit TIFF structure only, so a BigTIFF is skipped with a per-file notice and never modified.</div></details>
+      <details><summary>My scanner TIFF already says 300 or 600 DPI — do I need this?</summary><div class="a">Often not. Scanner software normally writes the scan setting into XResolution and YResolution, so the badge on the row may already read 300 or 600 — reading the badge is then all you need. Download only when the tags say something else, such as 72, 96 or "DPI not set".</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+<script>
+(function(){
+"use strict";
+/* ---------- state ---------- */
+var targetDpi = 300;
+var files = [];
+var $ = function(id){ return document.getElementById(id); };
+/* ---- tiff-core-start ---- */
+function rd16(u,i,le){ return le ? (u[i] | (u[i+1]<<8)) : ((u[i]<<8) | u[i+1]); }
+function rd32(u,i,le){
+  return le ? ((u[i] | (u[i+1]<<8) | (u[i+2]<<16) | (u[i+3]<<24))>>>0)
+            : (((u[i]<<24) | (u[i+1]<<16) | (u[i+2]<<8) | u[i+3])>>>0);
+}
+function wr16(u,i,v,le){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; } else { u[i]=(v>>>8)&255; u[i+1]=v&255; } }
+function wr32(u,i,v,le){
+  if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; u[i+2]=(v>>>16)&255; u[i+3]=(v>>>24)&255; }
+  else { u[i]=(v>>>24)&255; u[i+1]=(v>>>16)&255; u[i+2]=(v>>>8)&255; u[i+3]=v&255; }
+}
+function isTiff(u){
+  if(!u || u.length<8) return false;
+  if(u[0]===0x49 && u[1]===0x49) return u[2]===42 && u[3]===0;
+  if(u[0]===0x4D && u[1]===0x4D) return u[2]===0 && u[3]===42;
+  return false;
+}
+function isBigTiff(u){
+  if(!u || u.length<8) return false;
+  if(u[0]===0x49 && u[1]===0x49) return u[2]===43 && u[3]===0;
+  if(u[0]===0x4D && u[1]===0x4D) return u[2]===0 && u[3]===43;
+  return false;
+}
+function readIfd(u, off, le){
+  if(off<8 || off+2 > u.length) return null;
+  var n = rd16(u, off, le);
+  if(off + 2 + 12*n + 4 > u.length) return null;
+  var entries = [], k, pos;
+  for(k=0;k<n;k++){
+    pos = off + 2 + 12*k;
+    entries.push({tag: rd16(u,pos,le), type: rd16(u,pos+2,le), count: rd32(u,pos+4,le), pos: pos});
+  }
+  return {off: off, n: n, entries: entries, next: rd32(u, off + 2 + 12*n, le)};
+}
+function parseTiff(u){
+  if(!isTiff(u)) return null;
+  var le = u[0]===0x49;
+  var ifd = readIfd(u, rd32(u,4,le), le);
+  if(!ifd) return null;
+  return {le: le, ifd0: ifd.off, n: ifd.n, entries: ifd.entries, next: ifd.next};
+}
+function findTag(entries, tag){
+  for(var k=0;k<entries.length;k++) if(entries[k].tag===tag) return entries[k];
+  return null;
+}
+function inlineInt(u, e, le){
+  if(!e || e.count!==1) return null;
+  if(e.type===3) return rd16(u, e.pos+8, le);
+  if(e.type===4) return rd32(u, e.pos+8, le);
+  return null;
+}
+function rationalOffset(u, e, le){
+  if(!e || e.type!==5 || e.count!==1) return -1;
+  var o = rd32(u, e.pos+8, le);
+  return (o+8 <= u.length) ? o : -1;
+}
+function unitOk(e){ return !!e && e.type===3 && e.count===1; }
+function readTiffDpi(u){
+  var t = parseTiff(u);
+  if(!t) return null;
+  var o = rationalOffset(u, findTag(t.entries,282), t.le);
+  if(o<0) return null;
+  var num = rd32(u,o,t.le), den = rd32(u,o+4,t.le);
+  if(!num || !den) return null;
+  var ue = findTag(t.entries,296);
+  var unit = unitOk(ue) ? rd16(u, ue.pos+8, t.le) : 2;
+  if(unit===1) return null;
+  var dpi = num/den;
+  if(unit===3) dpi = dpi*2.54;
+  if(!isFinite(dpi) || dpi<=0) return null;
+  return Math.round(dpi);
+}
+function tiffDims(u){
+  var t = parseTiff(u);
+  if(!t) return null;
+  var w = inlineInt(u, findTag(t.entries,256), t.le), h = inlineInt(u, findTag(t.entries,257), t.le);
+  if(w>0 && h>0) return {w:w, h:h};
+  return null;
+}
+function tiffPageCount(u){
+  var t = parseTiff(u);
+  if(!t) return 0;
+  var seen = {}, count = 0, off = t.ifd0, ifd;
+  while(off && count<1024){
+    if(seen[off]) break;
+    seen[off] = true;
+    ifd = readIfd(u, off, t.le);
+    if(!ifd) break;
+    count++;
+    off = ifd.next;
+  }
+  return count;
+}
+function writeTiffDpi(src, dpi){
+  var u = src.slice();
+  var t = parseTiff(u);
+  if(!t) return u;
+  var le = t.le, k, e;
+  dpi = Math.round(dpi);
+  var xe = findTag(t.entries,282), ye = findTag(t.entries,283), ue = findTag(t.entries,296);
+  var xo = rationalOffset(u, xe, le), yo = rationalOffset(u, ye, le), uOk = unitOk(ue);
+  /* well-formed tags are overwritten in place, whichever path follows */
+  if(xo>=0){ wr32(u,xo,dpi,le); wr32(u,xo+4,1,le); }
+  if(yo>=0){ wr32(u,yo,dpi,le); wr32(u,yo+4,1,le); }
+  if(uOk){ wr16(u,ue.pos+8,2,le); wr16(u,ue.pos+10,0,le); }
+  if(xo>=0 && yo>=0 && uOk) return u;           /* path A: in place, length unchanged */
+  /* path B: rebuild IFD0 at the end of the file; nothing before the original end moves */
+  var keep = [];
+  for(k=0;k<t.entries.length;k++){
+    e = t.entries[k];
+    if(e.tag===282 && xo<0) continue;
+    if(e.tag===283 && yo<0) continue;
+    if(e.tag===296 && !uOk) continue;
+    keep.push({tag:e.tag, raw:u.slice(e.pos, e.pos+12)});
+  }
+  var tail = [], len = u.length;
+  if(len & 1){ tail.push(new Uint8Array(1)); len++; }
+  function appendRational(tag){
+    var b = new Uint8Array(8); wr32(b,0,dpi,le); wr32(b,4,1,le);
+    var raw = new Uint8Array(12); wr16(raw,0,tag,le); wr16(raw,2,5,le); wr32(raw,4,1,le); wr32(raw,8,len,le);
+    tail.push(b); len += 8;
+    keep.push({tag:tag, raw:raw});
+  }
+  if(xo<0) appendRational(282);
+  if(yo<0) appendRational(283);
+  if(!uOk){
+    var uraw = new Uint8Array(12); wr16(uraw,0,296,le); wr16(uraw,2,3,le); wr32(uraw,4,1,le); wr16(uraw,8,2,le);
+    keep.push({tag:296, raw:uraw});
+  }
+  keep.sort(function(a,b){ return a.tag-b.tag; });
+  var ifd = new Uint8Array(2 + 12*keep.length + 4);
+  wr16(ifd,0,keep.length,le);
+  for(k=0;k<keep.length;k++) ifd.set(keep[k].raw, 2+12*k);
+  wr32(ifd, 2+12*keep.length, t.next, le);
+  var ifdOff = len;
+  tail.push(ifd); len += ifd.length;
+  var out = new Uint8Array(len), off = u.length;
+  out.set(u, 0);
+  for(k=0;k<tail.length;k++){ out.set(tail[k], off); off += tail[k].length; }
+  wr32(out, 4, ifdOff, le);
+  return out;
+}
+function makeSampleTiff(){
+  var w = 160, h = 120, le = true, k, x, y, pos, tag, type, val;
+  var entries = [[256,3,w],[257,3,h],[258,3,8],[259,3,1],[262,3,1],[273,4,0],[277,3,1],[278,3,h],[279,4,w*h]];
+  var stripOff = 8 + 2 + 12*entries.length + 4;
+  var u = new Uint8Array(stripOff + w*h);
+  u[0]=0x49; u[1]=0x49; wr16(u,2,42,le); wr32(u,4,8,le);
+  wr16(u,8,entries.length,le);
+  for(k=0;k<entries.length;k++){
+    pos = 10 + 12*k; tag = entries[k][0]; type = entries[k][1]; val = tag===273 ? stripOff : entries[k][2];
+    wr16(u,pos,tag,le); wr16(u,pos+2,type,le); wr32(u,pos+4,1,le);
+    if(type===3) wr16(u,pos+8,val,le); else wr32(u,pos+8,val,le);
+  }
+  wr32(u, 10 + 12*entries.length, 0, le);
+  for(y=0;y<h;y++) for(x=0;x<w;x++) u[stripOff + y*w + x] = (x*255/(w-1))|0;
+  return u;
+}
+/* ---- tiff-core-end ---- */
+/* ---------- UI ---------- */
+var drop = $('drop'), input = $('fileInput');
+drop.addEventListener('click', function(){ input.click(); });
+drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); } });
+['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
+input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+function link(href, text){ var a = document.createElement('a'); a.href = href; a.textContent = text; return a; }
+function skipNotice(name, kind){
+  var box = $('skipNotice');
+  box.hidden = false;
+  var p = document.createElement('p');
+  var strong = document.createElement('strong');
+  strong.textContent = name;
+  p.appendChild(strong);
+  if(kind==='bigtiff'){
+    p.appendChild(document.createTextNode(': BigTIFF is not supported — this page reads and writes classic TIFF (magic number 42) only.'));
+  } else if(kind==='broken'){
+    p.appendChild(document.createTextNode(': This TIFF’s first IFD lies outside the file or is truncated, so it could not be read.'));
+  } else {
+    p.appendChild(document.createTextNode(': Not a TIFF — use the '));
+    p.appendChild(link('/jpeg-dpi-changer/', 'JPEG DPI changer'));
+    p.appendChild(document.createTextNode(', the '));
+    p.appendChild(link('/png-dpi-changer/', 'PNG DPI changer'));
+    p.appendChild(document.createTextNode(' or the '));
+    p.appendChild(link('/', 'homepage'));
+    p.appendChild(document.createTextNode('.'));
+  }
+  box.appendChild(p);
+}
+function addFiles(list){
+  var arr = Array.prototype.slice.call(list).slice(0, 50);
+  arr.forEach(function(f){
+    f.arrayBuffer().then(function(buf){
+      var u = new Uint8Array(buf);
+      if(isBigTiff(u)){ skipNotice(f.name, 'bigtiff'); return; }
+      if(!isTiff(u)){ skipNotice(f.name, 'nottiff'); return; }
+      if(!parseTiff(u)){ skipNotice(f.name, 'broken'); return; }
+      var dims = tiffDims(u);
+      files.push({
+        name: f.name || 'image.tif',
+        bytes: u,
+        kind: 'tiff',
+        dpi: readTiffDpi(u),
+        pages: tiffPageCount(u),
+        w: dims ? dims.w : 0, h: dims ? dims.h : 0
+      });
+      renderAll();
+    });
+  });
+}
+function effectivePrintLine(wpx, hpx, dpi){
+  var win = wpx/dpi, hin = hpx/dpi;
+  return 'At ' + dpi + ' DPI, ' + wpx + '×' + hpx + 'px prints ' +
+    win.toFixed(1) + '"×' + hin.toFixed(1) + '" (' +
+    (win*2.54).toFixed(1) + '×' + (hin*2.54).toFixed(1) + ' cm).';
+}
+function isSmallPrint(wpx, hpx, dpi){
+  return (wpx/dpi < 4) && (hpx/dpi < 4);
+}
+$('clearBtn').addEventListener('click', function(){
+  files = [];
+  var n = $('skipNotice');
+  n.hidden = true;
+  while(n.firstChild) n.removeChild(n.firstChild);
+  renderAll();
+});
+$('sampleBtn').addEventListener('click', function(e){
+  e.stopPropagation();
+  var b = makeSampleTiff();
+  addFiles([new File([b], 'sample-image.tif', {type:'image/tiff'})]);
+});
+
+document.querySelectorAll('.chip').forEach(function(ch){
+  ch.addEventListener('click', function(){
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
+    ch.classList.add('on');
+    ch.setAttribute('aria-pressed','true');
+    $('customDpi').value = '';
+    targetDpi = parseInt(ch.dataset.dpi, 10);
+    renderAll();
+  });
+});
+$('customDpi').addEventListener('input', function(){
+  var v = parseInt(this.value, 10);
+  if(v>=1 && v<=10000){
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
+    targetDpi = v;
+    renderAll();
+  }
+});
+function outName(name, dpi){
+  var i = name.lastIndexOf('.');
+  var stem = i>0 ? name.slice(0,i) : name, ext = i>0 ? name.slice(i) : '';
+  return stem + '_' + dpi + 'dpi' + ext;
+}
+function convert(item){
+  var out = writeTiffDpi(item.bytes, targetDpi);
+  var blob = new Blob([out], {type: 'image/tiff'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = outName(item.name, targetDpi);
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+function printSize(item){
+  if(!item.w) return '';
+  return effectivePrintLine(item.w, item.h, targetDpi);
+}
+function renderAll(){
+  var box = $('rows');
+  box.innerHTML = '';
+  files.forEach(function(item, idx){
+    var row = document.createElement('div');
+    row.className = 'row';
+    var dpiBadge = item.dpi
+      ? '<span class="badge">' + item.dpi + ' DPI</span>'
+      : '<span class="badge warn">DPI not set</span>';
+    var warnHtml = (item.w && isSmallPrint(item.w, item.h, targetDpi))
+      ? '<span class="print-warn">Raising the DPI tag doesn\'t add pixels — for a larger sharp print you need a higher-resolution image.</span>'
+      : '';
+    var pagesHtml = item.pages > 1
+      ? '<span class="print-warn">Multi-page TIFF: only the first page\'s resolution tags are rewritten; other pages are left byte-for-byte as they were.</span>'
+      : '';
+    var dims = (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + 'TIFF' + (item.pages > 1 ? ' · ' + item.pages + ' pages' : '');
+    row.innerHTML =
+      '<span class="thumb thumb-tiff" aria-hidden="true">TIFF</span>' +
+      '<div class="meta"><div class="name"></div><div class="dims"></div></div>' +
+      '<span>' + dpiBadge + ' <span class="arrow">→</span> <span class="badge">' + targetDpi + ' DPI</span></span>' +
+      '<span class="print">' + printSize(item) + '</span>' +
+      '<button class="btn primary" type="button" data-i="' + idx + '">Download</button>' +
+      warnHtml + pagesHtml;
+    row.querySelector('.name').textContent = item.name;
+    row.querySelector('.dims').textContent = dims;
+    row.querySelector('button').addEventListener('click', function(){ convert(item); });
+    box.appendChild(row);
+  });
+  $('toolbar').hidden = files.length === 0;
+  $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
+}
+$('dlAll').addEventListener('click', function(){
+  files.forEach(function(item, i){ setTimeout(function(){ convert(item); }, i*350); });
+});
+window.__setdpi = {isTiff:isTiff, isBigTiff:isBigTiff, parseTiff:parseTiff, readTiffDpi:readTiffDpi, writeTiffDpi:writeTiffDpi, tiffDims:tiffDims, tiffPageCount:tiffPageCount, makeSampleTiff:makeSampleTiff};
+
+})();
+</script>
+</body>
+</html>

@@ -4,27 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="only light">
-<title>Increase Image DPI — Losslessly, In Your Browser</title>
-<meta name="description" content="Increase image DPI to 150, 300, or 600 in your browser. Lossless tag rewrite — no extra pixels, no upload. Fixes preflight rejections without resampling.">
-<link rel="canonical" href="https://setdpi.com/increase-image-dpi/">
+<title>PNG DPI Changer — Set PNG to 300 DPI (pHYs Chunk) Without Re-encoding</title>
+<meta name="description" content="Free PNG DPI changer: set a PNG to 300 DPI (or any value) by rewriting its pHYs chunk in your browser. Pixels, transparency and palette untouched.">
+<link rel="canonical" href="https://setdpi.com/png-dpi-changer/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://setdpi.com/increase-image-dpi/">
-<meta property="og:title" content="Increase Image DPI — Losslessly, In Your Browser">
-<meta property="og:description" content="Raise a 72 or 96 DPI tag so preflight stops rejecting the file. Increasing DPI does not add pixels. 100% in the browser.">
+<meta property="og:url" content="https://setdpi.com/png-dpi-changer/">
+<meta property="og:title" content="PNG DPI Changer — Set PNG to 300 DPI (pHYs Chunk) Without Re-encoding">
+<meta property="og:description" content="Free PNG DPI changer: set a PNG to 300 DPI (or any value) by rewriting its pHYs chunk in your browser. Pixels, transparency and palette untouched.">
 <meta property="og:image" content="https://setdpi.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://setdpi.com/og.png">
-<meta name="twitter:title" content="Increase Image DPI — Losslessly, In Your Browser">
-<meta name="twitter:description" content="Raise a 72 or 96 DPI tag so preflight stops rejecting the file. Increasing DPI does not add pixels. 100% in the browser.">
+<meta name="twitter:title" content="PNG DPI Changer — Set PNG to 300 DPI (pHYs Chunk) Without Re-encoding">
+<meta name="twitter:description" content="Free PNG DPI changer: set a PNG to 300 DPI (or any value) by rewriting its pHYs chunk in your browser. Pixels, transparency and palette untouched.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I increase the DPI of an image?","acceptedAnswer":{"@type":"Answer","text":"Drop a JPG or PNG, pick 150, 300, or 600 (or type a value), and download. SetDPI rewrites the density tag in your browser. The pixel grid is copied, not enlarged."}},{"@type":"Question","name":"Does increasing DPI add more pixels?","acceptedAnswer":{"@type":"Answer","text":"No. Increasing the DPI label never adds pixels, never sharpens, and never makes a small file safe to print large. Print size in inches shrinks as the tag goes up, because the same samples are asked to sit closer together."}},{"@type":"Question","name":"When should I increase DPI instead of upscaling?","acceptedAnswer":{"@type":"Answer","text":"When a form or preflight rejected the file for a low tag (often 72 or “not set”) and the pixel count already covers the physical print. That is a label problem. Upscale only when pixels ÷ 300 is smaller than the inches you need."}},{"@type":"Question","name":"Can I increase DPI from 72 to 300 without quality loss?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you only rewrite metadata. This tool does that: no decode, no recompress. A 72-to-300 resample in an editor is a different operation and is not lossless."}},{"@type":"Question","name":"What if my image is too small to print at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Then increasing the tag will not help the print. It will only make the claimed paper size smaller. You need more pixels — a larger original or an enlarger. SetDPI does not upscale."}},{"@type":"Question","name":"Which DPI should I increase to — 150, 300, or 600?","acceptedAnswer":{"@type":"Answer","text":"300 for photos, documents, labs, KDP, and Etsy printables. 150 only if a large-format vendor asked for it. 600 for journal line art. Type any other vendor number in the custom box."}},{"@type":"Question","name":"Will increasing DPI change the file size?","acceptedAnswer":{"@type":"Answer","text":"Not in any meaningful way. A few dozen bytes of header may be added if JFIF, EXIF, or pHYs had to be inserted. The image samples are not recompressed, so a 5 MB JPEG stays about 5 MB."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I change a PNG to 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"Drop a PNG into the tool on this page. The target is already 300. Click Download. The pHYs chunk is rewritten in your browser — free, no signup, no upload."}},{"@type":"Question","name":"Why does my PNG show 299.99 DPI instead of 300?","acceptedAnswer":{"@type":"Answer","text":"PNG stores density in pixels per metre, not inches. 300 DPI is stored as round(300 ÷ 0.0254) = 11811 px/m. Reading that back, 11811 × 0.0254 = 299.9994, which some readers display as 299.99. This page rounds when displaying, so 11811 appears as 300. A reader that shows 299.99 is reading the same correct value."}},{"@type":"Question","name":"What if my PNG has no DPI at all?","acceptedAnswer":{"@type":"Answer","text":"The row shows \"DPI not set\". If the file has no pHYs chunk, one is inserted immediately before the first IDAT on download with the value you chose; a pHYs whose unit byte is 0 is rewritten in place instead."}},{"@type":"Question","name":"Does changing PNG DPI affect transparency, quality or file size?","acceptedAnswer":{"@type":"Answer","text":"No. IDAT is copied byte for byte, so transparency, palette, bit depth and pixels are unchanged. The file grows by 21 bytes only when a pHYs chunk is added; otherwise the size is identical."}},{"@type":"Question","name":"Can I change the DPI of a JPG here?","acceptedAnswer":{"@type":"Answer","text":"No. This page is PNG-only and skips other files with a notice. Use the JPEG DPI changer for JPG files; the homepage Image DPI Changer handles both formats."}},{"@type":"Question","name":"Does 300 DPI make my PNG print sharper?","acceptedAnswer":{"@type":"Answer","text":"No. The tag sets claimed inches (pixels ÷ DPI); it adds no pixels. A 1200 × 1800 px PNG at 300 DPI prints 4 × 6 in."}}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Increase Image DPI","url":"https://setdpi.com/increase-image-dpi/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Increase JPG or PNG DPI losslessly in the browser. Does not add pixels. Files never leave the device.","datePublished":"2026-08-19","dateModified":"2026-08-20","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"PNG DPI Changer","url":"https://setdpi.com/png-dpi-changer/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free PNG DPI changer: set a PNG to 300 DPI (or any value) by rewriting its pHYs chunk in your browser. Pixels, transparency and palette untouched.","datePublished":"2026-09-05","dateModified":"2026-09-05","author":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"},"publisher":{"@type":"Organization","name":"SetDPI","url":"https://setdpi.com/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to change the DPI of a PNG online","step":[{"@type":"HowToStep","name":"Add PNG files","text":"Drop PNG files into the tool. Each file is read in the browser; nothing is uploaded. Non-PNG files are skipped with a per-file notice."},{"@type":"HowToStep","name":"Choose the target DPI (300 is preselected)","text":"300 DPI is selected by default. Use a preset (72, 96, 150, 200, 300, 600, 1200) or a custom value from 1 to 10000."},{"@type":"HowToStep","name":"Download","text":"Click Download. The pHYs chunk is rewritten in the browser. Pixels are untouched and nothing is uploaded. The file is named name_300dpi.png when the target is 300."}]}
 </script>
 <style>
 :root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
@@ -94,6 +97,11 @@ section.block h3{font-size:18px;margin:20px 0 8px}
 section.block p{color:#374151;margin-bottom:12px;max-width:760px}
 section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
 section.block li{margin-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 6px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.step .n{width:28px;height:28px;border-radius:7px;background:var(--ink);color:var(--card);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step h3{margin:0 0 6px;font-size:15px;font-weight:700;font-family:inherit}
+.step p{font-size:13.5px;color:var(--muted);margin:0}
 table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
 table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
 table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
@@ -117,6 +125,9 @@ table.print tr:last-child td{border-bottom:none}
 #sampleBtn{margin-top:14px}
 .note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
 .note strong{color:var(--ink)}
+#skipNotice[hidden]{display:none}
+#skipNotice p{margin:0 0 4px;font-size:14px}
+#skipNotice p:last-child{margin:0}
 footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
 footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:560px){
@@ -140,8 +151,8 @@ img,svg{max-width:100%}
   <div class="wrap nav">
     <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
     <nav class="nav-links" aria-label="On this page">
-      <a href="#honest">Be honest</a>
-      <a href="#when">When it helps</a>
+      <a href="#how">How</a>
+      <a href="#phys">pHYs chunk</a>
       <a href="#faq">FAQ</a>
     </nav>
   </div>
@@ -156,13 +167,13 @@ img,svg{max-width:100%}
       <a href="/convert-image-to-300-dpi/">300 DPI</a>
       <a href="/convert-image-to-600-dpi/">600 DPI</a>
       <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
-      <span class="here" aria-current="page">Increase DPI</span>
+      <a href="/increase-image-dpi/">Increase DPI</a>
       <a href="/dpi-vs-ppi/">DPI vs PPI</a>
       <a href="/standard-dpi-settings/">Standard DPI Settings</a>
       <a href="/dpi-for-printing/">DPI for Printing</a>
       <a href="/what-does-300-dpi-look-like/">What 300 DPI Looks Like</a>
       <a href="/bulk-dpi-changer/">Bulk DPI Changer</a>
-      <a href="/png-dpi-changer/">PNG DPI Changer</a>
+      <span class="here" aria-current="page">PNG DPI Changer</span>
       <a href="/jpeg-dpi-changer/">JPEG DPI Changer</a>
       <a href="/tiff-dpi-changer/">TIFF DPI Changer</a>
     </nav>
@@ -170,34 +181,40 @@ img,svg{max-width:100%}
 </header>
 <main class="wrap">
   <div class="hero">
-    <div class="kicker">Raise the tag · do not expect new pixels</div>
-    <h1>Increase Image DPI — Without Pretending It Adds Detail</h1>
-    <p class="sub">Raise a JPG or PNG to <strong>150, 300, or 600 DPI</strong> so a form stops rejecting it. The rewrite is <strong>lossless</strong> and local. It does <strong>not</strong> add pixels or enlarge the picture.</p>
+    <div class="kicker">PNG ONLY · pHYs CHUNK REWRITE</div>
+    <h1>PNG DPI Changer</h1>
+    <p class="sub">Drop a PNG — its <code>pHYs</code> density chunk is rewritten to <strong>300 DPI</strong> (or any value) in your browser. Pixels, transparency and palette stay untouched. Nothing is uploaded.</p>
     <div class="trust">
       <span>100% private — no upload</span>
-      <span>Lossless tag — not an enlarger</span>
+      <span>Lossless — IDAT never touched</span>
       <span>Free — no signup, no watermark</span>
+      <span>PNG only</span>
     </div>
     <div class="ruler" aria-hidden="true"></div>
   </div>
 
   <div class="tool" id="tool">
-    <p class="note"><strong>Increasing DPI only changes the density tag.</strong> Pixel dimensions stay the same, so print size shrinks as DPI goes up. This does not sharpen or enlarge the picture. It <em>does</em> fix “file rejected because DPI &lt; 300”.</p>
+    
     <div class="presets" role="group" aria-label="Target DPI">
       <span class="lbl">Target DPI:</span>
       
+      <button class="chip" type="button" data-dpi="72" aria-pressed="false">72</button>
+      <button class="chip" type="button" data-dpi="96" aria-pressed="false">96</button>
       <button class="chip" type="button" data-dpi="150" aria-pressed="false">150</button>
+      <button class="chip" type="button" data-dpi="200" aria-pressed="false">200</button>
       <button class="chip on" type="button" data-dpi="300" aria-pressed="true">300</button>
       <button class="chip" type="button" data-dpi="600" aria-pressed="false">600</button>
+      <button class="chip" type="button" data-dpi="1200" aria-pressed="false">1200</button>
       <input id="customDpi" type="number" min="1" max="10000" placeholder="Custom" aria-label="Custom DPI value">
     </div>
-    <div id="drop" tabindex="0" role="button" aria-label="Add images: drop files here or press Enter to browse">
+    <div id="drop" tabindex="0" role="button" aria-label="Add PNG files: drop files here or press Enter to browse">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round"/></svg>
-      <div class="big">Drop images here, or click to browse</div>
-      <div class="small">JPG &amp; PNG · up to 50 files · metadata rewritten locally, never uploaded</div>
-      <button class="btn ghost" id="sampleBtn" type="button">No image handy? Try a sample photo</button>
+      <div class="big">Drop PNG files here, or click to browse</div>
+      <div class="small">PNG only · up to 50 files · pHYs chunk rewritten locally, never uploaded</div>
+      <button class="btn ghost" id="sampleBtn" type="button">No PNG handy? Try a sample PNG</button>
     </div>
-    <input type="file" id="fileInput" accept=".jpg,.jpeg,.jfif,.png,image/jpeg,image/png" multiple>
+    <input type="file" id="fileInput" accept=".png,image/png" multiple>
+    <div class="note" id="skipNotice" hidden></div>
     <div id="rows"></div>
     <div class="toolbar" id="toolbar" hidden>
       <span class="hint" id="count"></span>
@@ -208,64 +225,89 @@ img,svg{max-width:100%}
     </div>
   </div>
 
-  <section class="block" id="honest">
-    <h2>Increasing image DPI does not add pixels</h2>
-    <p>This is the sentence most “increase DPI” tools bury. <strong>Raising the DPI tag does not create new pixels, does not sharpen edges, and does not make a small file safe to print large.</strong> A 800 × 600 px screenshot tagged 72 DPI and the same screenshot tagged 300 DPI contain the identical grid. At 300 DPI that grid is a 2.7 × 2.0 in print. At 72 DPI it is an 11.1 × 8.3 in print that looks soft because each pixel covers more paper.</p>
-    <p>If you need a bigger print that still looks sharp, you need more pixels — a larger original, a resample, or an AI enlarger. SetDPI does none of those things, on purpose. This page will not pretend otherwise.</p>
-    <p>So when is increasing DPI the right move? When the <em>label</em> is what failed, not the pixel count. That is a common, boring, expensive-if-you-get-it-wrong situation, and it is the one this tool is for.</p>
-  </section>
-  <section class="block" id="when">
-    <h2>When raising the tag is exactly the fix</h2>
-    <p>Print-shop preflight, journal portals, KDP, and a long tail of “upload your artwork” forms often apply one rule: if DPI &lt; 300, reject. They do not always compute pixels ÷ ordered inches. They read a field. A 6000 × 4000 px camera file tagged 72 — a 20 × 13 in print at 300 DPI, more than enough for a magazine page — still fails that rule. Increasing the DPI metadata to 300 is the entire solution. The picture does not change. The form stops arguing.</p>
-    <p>The same pattern shows up after a “Save for Web” export, after a WhatsApp or Messenger hop that stripped EXIF, and after a screenshot that never had a density field. The file is not low-resolution in any photographic sense. It is unlabelled or labelled with a screen default. Increase the tag; do not run it through a second JPEG encode.</p>
-    <p>Use the presets above for the three numbers people actually raise <em>to</em>:</p>
-    <ul>
-      <li><strong>150</strong> — large-format posters and banners viewed from a distance. Preflight that demands 300 will still fail; only use 150 when the vendor asked for it.</li>
-      <li><strong>300</strong> — the default on this page. Photos, documents, KDP, Etsy printables, most labs.</li>
-      <li><strong>600</strong> — line art, logos, and charts in journal guidelines. It makes the claimed print size even smaller. Only help if the pixels support that size, or if the portal only checks the integer.</li>
-    </ul>
-    <p>Type any other value in the custom box if a vendor wrote a peculiar number (254, 350, 400). The rewrite is the same.</p>
-  </section>
   <section class="block" id="how">
-    <h2>How to increase image DPI losslessly</h2>
-    <p>Drop a JPG or PNG. Pick 150, 300, or 600 — or type a number. Download. On JPEG, the tool writes JFIF density and EXIF <code>XResolution</code> / <code>YResolution</code> / <code>ResolutionUnit</code>. On PNG it writes or updates the <code>pHYs</code> chunk and repairs the CRC32. Pixels are copied, not decoded. Files never leave the browser.</p>
-    <p>The row shows current DPI → target DPI and the print size at the <em>target</em>. Watch that print size. If increasing 72 → 300 turns an “11 × 8 in” readout into “2.6 × 2.0 in”, you have correctly understood the trade: the tag went up, the claimed paper size went down. That is what you want when a form demanded 300 on a file that will be printed small. That is not what you want if you were hoping the picture would become a poster.</p>
-    <p>Batch works up to 50 files. “Download all” staggers the saves so the browser does not swallow them. Names get a <code>_300dpi</code> (or whatever you chose) suffix so the original stays on disk.</p>
+    <h2>How to change PNG DPI in the browser</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h3>Add PNG files</h3><p>Drop PNG files above, or click to browse. The file picker accepts <code>.png</code> / <code>image/png</code> only. Up to 50 files are kept from each drop. Non-PNG files are skipped with a per-file notice — no alert.</p></div>
+      <div class="step"><span class="n">2</span><h3>Choose the target DPI (300 is preselected)</h3><p>300 is selected when the page loads. Use 72, 96, 150, 200, 600 or 1200, or type a custom integer from 1 to 10000. The print-size line on each row updates to pixels ÷ DPI.</p></div>
+      <div class="step"><span class="n">3</span><h3>Download</h3><p>Click Download. The <code>pHYs</code> chunk is rewritten in the browser. Pixels are untouched and nothing is uploaded. A file tagged 300 is named <code>name_300dpi.png</code>.</p></div>
+    </div>
+    <p>Each dropped file is read as a byte array in the page. The eight-byte PNG signature is checked first. If it does not match, that file is skipped and a notice is appended under the drop zone, with links to the JPEG DPI changer and the homepage. A valid PNG is listed with its current <code>pHYs</code> reading (or a “DPI not set” badge), a thumbnail, and pixel dimensions once the browser has decoded the preview. Files never leave the browser.</p>
+    <p>Download (and Download all) works on the original bytes: an existing 9-byte <code>pHYs</code> is overwritten in place; otherwise a 21-byte chunk is inserted immediately before the first IDAT. The saved name is the original stem, an underscore, the target DPI, the letters <code>dpi</code>, and the original extension. Clearing the list also hides the skip notice and removes its rows.</p>
   </section>
-  <section class="block" id="not">
-    <h2>What this will not do — and what to do instead</h2>
-    <p><strong>It will not make a 640 px-wide web image look like a magazine cover.</strong> At 300 DPI that file is about two inches wide. Increasing DPI further makes it smaller on paper, not larger. To print that art at 8 inches, you need roughly 2400 px of width. Get a larger original from the photographer or designer. If one does not exist, you need a dedicated upscaler; this site will not grow the pixel grid.</p>
-    <p><strong>It will not change colour, crop, or convert WebP/HEIC/TIFF.</strong> Export to JPEG or PNG first, then increase the tag. The export step is someone else’s quality decision; we only touch density after that.</p>
-    <p><strong>It will not raise “effective DPI” on a press.</strong> Effective DPI is pixels ÷ physical inches of the finished piece. If the designer already placed your 1200 px logo across 8 inches of a layout, the effective resolution is 150 DPI no matter what the file tag says. Increase the tag in the logo file if the preflight wants to see 300, but also tell the layout to print the logo smaller or replace it with a larger asset. The tag cannot overrule how wide the box is on the page.</p>
-    <p>If you only needed to inspect the current value, use the <a href="/dpi-checker/">DPI Checker</a>. If 300 is the only number you care about, <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a> is the same engine with that story. The general changer is on the <a href="/">homepage</a>. For why people say PPI on the same forms, see <a href="/dpi-vs-ppi/">DPI vs PPI</a>.</p>
-  </section>
-  <section class="block" id="math">
-    <h2>A short table of what “increase” does to print size</h2>
-    <p>Same 2400 × 3000 px file, tag raised, pixels frozen:</p>
+
+  <section class="block" id="phys">
+    <h2>How a PNG stores DPI: the pHYs chunk</h2>
+    <p>A PNG is an 8-byte signature followed by chunks. Each chunk is a 4-byte length, a 4-byte type, that many data bytes, and a 4-byte CRC. Density, when present, lives in a chunk whose type is <code>pHYs</code> (physical pixel dimensions).</p>
+    <p>A <code>pHYs</code> chunk carries 9 data bytes — 4-byte X pixels per unit, 4-byte Y pixels per unit, 1-byte unit (1 = metre, 0 = unknown / aspect only). PNG has no inch unit, so 300 DPI is stored as 300 ÷ 0.0254 = 11811.02…, rounded to 11811 pixels per metre; reading 11811 back gives 299.9994 DPI, which is why some readers display 299.99 while this page rounds to 300.</p>
+    <p>The specification requires <code>pHYs</code> before the first IDAT. This tool writes the value in place when a <code>pHYs</code> exists (9 data bytes overwritten, file length unchanged) and otherwise inserts a 21-byte <code>pHYs</code> chunk (4 length + 4 type + 9 data + 4 CRC) immediately before the first IDAT; in both cases the chunk CRC is recomputed over the type and data bytes. A <code>pHYs</code> whose unit byte is 0 is reported as “DPI not set” and rewritten with unit 1.</p>
+    <p>X and Y are always written to the same pixels-per-metre integer, so the stored density is square. The CRC covers the four type bytes plus the nine data bytes, the standard PNG CRC range. Reading multiplies the stored integer by 0.0254 and rounds to the nearest whole number, which is why 11811 displays as 300 here.</p>
     <div class="table-scroll">
     <table class="print">
-      <thead><tr><th>Tag</th><th>Print size</th><th>What you just did</th></tr></thead>
+      <thead><tr><th>DPI written</th><th>Pixels per metre stored</th><th>Exact value read back (ppm × 0.0254)</th><th>Shown here</th></tr></thead>
       <tbody>
-        <tr><td>72 DPI</td><td>33.3 × 41.7 in</td><td>Screen default; preflight often rejects</td></tr>
-        <tr><td>150 DPI</td><td>16.0 × 20.0 in</td><td>Fine for a poster viewed from a few feet</td></tr>
-        <tr><td>300 DPI</td><td>8.0 × 10.0 in</td><td>Lab / journal / marketplace default</td></tr>
-        <tr><td>600 DPI</td><td>4.0 × 5.0 in</td><td>Line-art density; smaller print, same pixels</td></tr>
+        <tr><td>72</td><td>2835</td><td>72.0090</td><td>72</td></tr>
+        <tr><td>96</td><td>3780</td><td>96.0120</td><td>96</td></tr>
+        <tr><td>150</td><td>5906</td><td>150.0124</td><td>150</td></tr>
+        <tr><td>200</td><td>7874</td><td>199.9996</td><td>200</td></tr>
+        <tr><td>300</td><td>11811</td><td>299.9994</td><td>300</td></tr>
+        <tr><td>600</td><td>23622</td><td>599.9988</td><td>600</td></tr>
+        <tr><td>1200</td><td>47244</td><td>1199.9976</td><td>1200</td></tr>
       </tbody>
     </table>
     </div>
-    <p>Read the table left to right as a warning label. Increasing image DPI is a relabelling. Used on a file that already has enough pixels for the physical size, it is the cheapest, safest fix in print production. Used as a substitute for resolution, it is a no-op dressed up as an enhancement.</p>
+    <p>The pixels-per-metre column is the integer this page writes: the DPI divided by 0.0254, rounded. None of the seven presets divides evenly, so every value read back is within 0.013 DPI of the number you chose. A reader that truncates to two decimals prints 299.99, 599.99 or 1199.99; one that rounds to two decimals prints 300.00; this page rounds to the nearest whole number and shows 300. All of them are reading the same correct chunk.</p>
+  </section>
+
+  <section class="block" id="no-phys">
+    <h2>When a PNG has no pHYs chunk at all</h2>
+    <p><code>pHYs</code> is optional in the PNG format. Many producers omit it. Browser canvas exports, screenshots from some tools, web-optimised exports, and exports from design apps or AI image generators often either omit <code>pHYs</code> or write a screen value such as 72 or 96. This page shows “DPI not set” when no <code>pHYs</code> with unit 1 and a positive X density is found — that covers a missing chunk and a unit-0 chunk. On download a missing chunk is inserted as a 21-byte <code>pHYs</code> immediately before the first IDAT, with unit 1 and X/Y set to the target you chose; a unit-0 chunk is rewritten in place with the same values.</p>
+    <p>The sample PNG button draws on an HTML canvas and exports it as <code>image/png</code>; whether that export carries a <code>pHYs</code> chunk is up to the browser. If it does not, the row reads “DPI not set” and downloading it takes the insert path: the saved file is 21 bytes larger than the original, later chunks shift by 21 bytes, and a reader that understands <code>pHYs</code> then sees 300 (or whatever target is selected). If a file already has a 9-byte <code>pHYs</code>, download overwrites those nine data bytes and the CRC; length stays the same.</p>
+  </section>
+
+  <section class="block" id="png-vs-jpeg">
+    <h2>PNG DPI vs JPEG DPI</h2>
+    <p>JPEG stores density in the JFIF APP0 segment (a units byte and 16-bit X/Y density, so 300 is stored as exactly 300 with unit = inch) and optionally in EXIF XResolution / YResolution rationals. PNG has a single <code>pHYs</code> in pixels per metre, so 300 can only be stored as 11811 px/m — this is why a PNG may show 299.99 where a JPEG shows 300, and why a JPEG can carry two conflicting values while a PNG carries one.</p>
+    <p>This page reads and writes PNG only. The file input accepts <code>.png,image/png</code>. JPEG functions are not on this page: a JPEG (or any non-PNG) is skipped with a per-file notice pointing to the <a href="/jpeg-dpi-changer/">JPEG DPI changer</a> and the <a href="/">homepage</a>. The homepage Image DPI Changer handles both JPEG and PNG with the same lossless rewrite idea; this page exists so the phrase “png dpi changer” lands on a PNG-only tool.</p>
+    <p>Because PNG density is one chunk, there is nothing to reconcile: the reader walks the chunk list until it finds a 9-byte <code>pHYs</code> with unit 1, and the writer overwrites the first 9-byte <code>pHYs</code> it finds or inserts one. JPEG’s two stores can disagree; that problem does not exist here.</p>
+  </section>
+
+  <section class="block" id="untouched">
+    <h2>Transparency, palette, 16-bit and APNG are untouched</h2>
+    <p>The code never decodes the image. It walks the chunk list, overwrites or inserts <code>pHYs</code>, and copies every other byte unchanged — IDAT (pixel data) is never modified, nor are IHDR, PLTE, tRNS, gAMA, iCCP, sRGB, or APNG chunks (acTL / fcTL / fdAT); so alpha transparency, indexed palettes, 16-bit depth, interlacing and animation come out exactly as they went in.</p>
+    <p>The preview thumbnail is decoded by the browser for display only; the download is built from the original byte array. Insertion shifts later bytes by 21, which is fine because PNG chunks are self-delimiting: each chunk carries its own length, so a 21-byte insert before the first IDAT does not require rewriting later length fields. The in-place path does not shift anything; only the nine data bytes and the four CRC bytes of <code>pHYs</code> change.</p>
+    <p>The only new or changed bytes in the download are the <code>pHYs</code> chunk itself. File size therefore stays identical when <code>pHYs</code> already existed, and grows by exactly 21 bytes when it did not.</p>
+  </section>
+
+  <section class="block" id="need">
+    <h2>Where a 300 DPI PNG is required</h2>
+    <p>PNG is the format chosen when transparency must survive — logos, stickers, cut-outs, and DTG / print-on-demand artwork. Print pipelines that accept PNG typically check the <code>pHYs</code> value the same way they check JPEG density, so a transparent PNG tagged 72 may be bounced as low resolution even when it has plenty of pixels. Rewriting 300 (or the number on the brief) is what this page does; it adds no pixels.</p>
+    <div class="table-scroll">
+    <table class="print">
+      <thead><tr><th>Job</th><th>Typical density ask</th></tr></thead>
+      <tbody>
+        <tr><td>Print-on-demand transparent artwork</td><td>Typically 300 DPI</td></tr>
+        <tr><td>Sticker and decal shops</td><td>Typically 300 DPI</td></tr>
+        <tr><td>Etsy printables and wall art</td><td>Commonly 300 DPI</td></tr>
+        <tr><td>Journal line-art figures</td><td>Typically 300–600 DPI; many journals accept PNG for line art, though TIFF or EPS may be preferred</td></tr>
+        <tr><td>Packaging and labels</td><td>Typically 300 DPI</td></tr>
+        <tr><td>Screens</td><td>72–96 DPI, and typically ignored</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Raising the tag does not add pixels. Print inches = pixels ÷ DPI. A 1200 × 1800 px PNG tagged 300 claims 4 × 6 in; tagged 72 it claims 16.7 × 25.0 in. The row in the tool shows that print size for the current target, in inches and centimetres. If both sides fall under 4 in, a warning notes that a higher tag will not create a larger sharp print.</p>
+    <p>Use 300 when that is the number a print-on-demand checklist, a sticker shop, or a journal figure guide typically wants to see on a transparent PNG. Use 600 when a line-art guideline asks for it. Use 72 or 96 only when you mean a screen density. The presets and the custom box cover those values; the downloaded <code>pHYs</code> is the integer you selected, stored as pixels per metre with unit 1.</p>
   </section>
 
   <section class="block" id="faq">
-    <h2>Frequently asked questions</h2>
+    <h2>PNG DPI changer — frequently asked questions</h2>
     <div class="faq">
-      <details open><summary>How do I increase the DPI of an image?</summary><div class="a">Drop a JPG or PNG, pick 150, 300, or 600 (or type a value), and download. SetDPI rewrites the density tag in your browser. The pixel grid is copied, not enlarged.</div></details>
-      <details><summary>Does increasing DPI add more pixels?</summary><div class="a">No. Increasing the DPI label never adds pixels, never sharpens, and never makes a small file safe to print large. Print size in inches shrinks as the tag goes up, because the same samples are asked to sit closer together.</div></details>
-      <details><summary>When should I increase DPI instead of upscaling?</summary><div class="a">When a form or preflight rejected the file for a low tag (often 72 or “not set”) and the pixel count already covers the physical print. That is a label problem. Upscale only when pixels ÷ 300 is smaller than the inches you need.</div></details>
-      <details><summary>Can I increase DPI from 72 to 300 without quality loss?</summary><div class="a">Yes, if you only rewrite metadata. This tool does that: no decode, no recompress. A 72-to-300 resample in an editor is a different operation and is not lossless.</div></details>
-      <details><summary>What if my image is too small to print at 300 DPI?</summary><div class="a">Then increasing the tag will not help the print. It will only make the claimed paper size smaller. You need more pixels — a larger original or an enlarger. SetDPI does not upscale.</div></details>
-      <details><summary>Which DPI should I increase to — 150, 300, or 600?</summary><div class="a">300 for photos, documents, labs, KDP, and Etsy printables. 150 only if a large-format vendor asked for it. 600 for journal line art. Type any other vendor number in the custom box.</div></details>
-      <details><summary>Will increasing DPI change the file size?</summary><div class="a">Not in any meaningful way. A few dozen bytes of header may be added if JFIF, EXIF, or pHYs had to be inserted. The image samples are not recompressed, so a 5 MB JPEG stays about 5 MB.</div></details>
+      <details open><summary>How do I change a PNG to 300 DPI?</summary><div class="a">Drop a PNG into the tool on this page. The target is already 300. Click Download. The pHYs chunk is rewritten in your browser — free, no signup, no upload.</div></details>
+      <details><summary>Why does my PNG show 299.99 DPI instead of 300?</summary><div class="a">PNG stores density in pixels per metre, not inches. 300 DPI is stored as round(300 ÷ 0.0254) = 11811 px/m. Reading that back, 11811 × 0.0254 = 299.9994, which some readers display as 299.99. This page rounds when displaying, so 11811 appears as 300. A reader that shows 299.99 is reading the same correct value.</div></details>
+      <details><summary>What if my PNG has no DPI at all?</summary><div class="a">The row shows "DPI not set". If the file has no pHYs chunk, one is inserted immediately before the first IDAT on download with the value you chose; a pHYs whose unit byte is 0 is rewritten in place instead.</div></details>
+      <details><summary>Does changing PNG DPI affect transparency, quality or file size?</summary><div class="a">No. IDAT is copied byte for byte, so transparency, palette, bit depth and pixels are unchanged. The file grows by 21 bytes only when a pHYs chunk is added; otherwise the size is identical.</div></details>
+      <details><summary>Can I change the DPI of a JPG here?</summary><div class="a">No. This page is PNG-only and skips other files with a notice. Use the <a href="/jpeg-dpi-changer/">JPEG DPI changer</a> for JPG files; the <a href="/">homepage Image DPI Changer</a> handles both formats.</div></details>
+      <details><summary>Does 300 DPI make my PNG print sharper?</summary><div class="a">No. The tag sets claimed inches (pixels ÷ DPI); it adds no pixels. A 1200 × 1800 px PNG at 300 DPI prints 4 × 6 in.</div></details>
     </div>
   </section>
 </main>
@@ -279,8 +321,10 @@ img,svg{max-width:100%}
 <script>
 (function(){
 "use strict";
+/* ---------- state ---------- */
 var targetDpi = 300;
-
+var files = [];
+var $ = function(id){ return document.getElementById(id); };
 var CRC_T = (function(){
   var t = new Uint32Array(256), c, n, k;
   for(n=0;n<256;n++){ c=n; for(k=0;k<8;k++) c = (c&1) ? (0xEDB88320 ^ (c>>>1)) : (c>>>1); t[n]=c; }
@@ -300,80 +344,6 @@ function concat(parts){
   out = new Uint8Array(len);
   for(i=0;i<parts.length;i++){ out.set(parts[i], off); off += parts[i].length; }
   return out;
-}
-function isJpeg(u){ return u.length>3 && u[0]===0xFF && u[1]===0xD8; }
-function jpegSegments(u){
-  var segs = [], i = 2, m, L;
-  while(i+4 <= u.length){
-    if(u[i]!==0xFF){ i++; continue; }
-    m = u[i+1];
-    if(m===0xFF){ i++; continue; }
-    if(m===0xD8 || m===0x01 || (m>=0xD0 && m<=0xD7)){ i+=2; continue; }
-    if(m===0xDA) break;
-    L = be16(u, i+2);
-    if(L < 2 || i+2+L > u.length) break;
-    segs.push({marker:m, start:i, len:L});
-    i += 2 + L;
-  }
-  return segs;
-}
-function findJfif(u, segs){
-  for(var k=0;k<segs.length;k++){ var s=segs[k];
-    if(s.marker===0xE0 && s.len>=14 && u[s.start+4]===0x4A && u[s.start+5]===0x46 && u[s.start+6]===0x49 && u[s.start+7]===0x46 && u[s.start+8]===0) return s;
-  } return null;
-}
-function findExif(u, segs){
-  for(var k=0;k<segs.length;k++){ var s=segs[k];
-    if(s.marker===0xE1 && s.len>=10 && u[s.start+4]===0x45 && u[s.start+5]===0x78 && u[s.start+6]===0x69 && u[s.start+7]===0x66 && u[s.start+8]===0 && u[s.start+9]===0) return s;
-  } return null;
-}
-function exifRes(u, seg){
-  var base = seg.start + 10;
-  var end  = seg.start + 2 + seg.len;
-  if(base+8 > end) return null;
-  var le = (u[base]===0x49 && u[base+1]===0x49);
-  if(!le && !(u[base]===0x4D && u[base+1]===0x4D)) return null;
-  function r16(i){ return le ? (u[i]|(u[i+1]<<8)) : ((u[i]<<8)|u[i+1]); }
-  function r32(i){ return le ? ((u[i]|(u[i+1]<<8)|(u[i+2]<<16)|(u[i+3]<<24))>>>0) : be32(u,i); }
-  function w32(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; u[i+2]=(v>>>16)&255; u[i+3]=(v>>>24)&255; } else wbe32(u,i,v); }
-  function w16(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; } else { u[i]=(v>>>8)&255; u[i+1]=v&255; } }
-  if(r16(base+2)!==42) return null;
-  var ifd = base + r32(base+4);
-  if(ifd+2 > end) return null;
-  var n = r16(ifd), res = {le:le, r16:r16, r32:r32, w32:w32, w16:w16, base:base, end:end};
-  for(var k=0;k<n;k++){
-    var e = ifd + 2 + k*12;
-    if(e+12 > end) break;
-    var tag = r16(e), type = r16(e+2);
-    if(tag===0x011A && type===5) res.x = e;
-    if(tag===0x011B && type===5) res.y = e;
-    if(tag===0x0128 && type===3) res.unit = e;
-  }
-  return (res.x || res.y || res.unit) ? res : null;
-}
-function readJpegDpi(u){
-  var segs = jpegSegments(u);
-  var ex = findExif(u, segs);
-  if(ex){
-    var r = exifRes(u, ex);
-    if(r && r.x){
-      var off = r.base + r.r32(r.x+8);
-      if(off+8 <= r.end){
-        var num = r.r32(off), den = r.r32(off+4) || 1;
-        var unit = r.unit ? r.r16(r.unit+8) : 2;
-        var v = num/den;
-        if(unit===3) v *= 2.54;
-        if(v>0 && v<100000) return Math.round(v);
-      }
-    }
-  }
-  var jf = findJfif(u, segs);
-  if(jf){
-    var units = u[jf.start+11], X = be16(u, jf.start+12);
-    if(units===1 && X>0) return X;
-    if(units===2 && X>0) return Math.round(X*2.54);
-  }
-  return null;
 }
 var PNG_SIG = [0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A];
 function isPng(u){
@@ -402,47 +372,6 @@ function readPngDpi(u){
   }
   return null;
 }
-
-function makeJfif(dpi){
-  return new Uint8Array([0xFF,0xE0,0x00,0x10,0x4A,0x46,0x49,0x46,0x00,0x01,0x02,0x01,(dpi>>8)&255,dpi&255,(dpi>>8)&255,dpi&255,0x00,0x00]);
-}
-function makeExif(dpi){
-  var a = new Uint8Array(76);
-  a.set([0xFF,0xE1,0x00,0x4A,0x45,0x78,0x69,0x66,0x00,0x00, 0x49,0x49,0x2A,0x00,0x08,0x00,0x00,0x00, 0x03,0x00]);
-  var e = 20;
-  a.set([0x1A,0x01,0x05,0x00,0x01,0x00,0x00,0x00,0x32,0x00,0x00,0x00], e);
-  a.set([0x1B,0x01,0x05,0x00,0x01,0x00,0x00,0x00,0x3A,0x00,0x00,0x00], e+12);
-  a.set([0x28,0x01,0x03,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00], e+24);
-  var t = 60;
-  a[t]=dpi&255; a[t+1]=(dpi>>8)&255; a[t+2]=(dpi>>16)&255; a[t+3]=(dpi>>24)&255; a[t+4]=1;
-  a[t+8]=a[t]; a[t+9]=a[t+1]; a[t+10]=a[t+2]; a[t+11]=a[t+3]; a[t+12]=1;
-  return a;
-}
-function writeJpegDpi(src, dpi){
-  var u = src.slice();
-  var segs = jpegSegments(u);
-  var jf = findJfif(u, segs), ex = findExif(u, segs);
-  if(jf){
-    u[jf.start+11] = 1;
-    u[jf.start+12] = (dpi>>8)&255; u[jf.start+13] = dpi&255;
-    u[jf.start+14] = (dpi>>8)&255; u[jf.start+15] = dpi&255;
-  }
-  if(ex){
-    var r = exifRes(u, ex);
-    if(r){
-      if(r.x){ var ox = r.base + r.r32(r.x+8); if(ox+8<=r.end){ r.w32(ox,dpi); r.w32(ox+4,1); } }
-      if(r.y){ var oy = r.base + r.r32(r.y+8); if(oy+8<=r.end){ r.w32(oy,dpi); r.w32(oy+4,1); } }
-      if(r.unit){ r.w16(r.unit+8, 2); }
-    }
-  }
-  var inserts = [];
-  if(!jf) inserts.push(makeJfif(dpi));
-  if(!ex) inserts.push(makeExif(dpi));
-  if(inserts.length){
-    return concat([u.slice(0,2)].concat(inserts, [u.slice(2)]));
-  }
-  return u;
-}
 function makePhys(dpi){
   var ppm = Math.round(dpi/0.0254);
   var c = new Uint8Array(21);
@@ -469,9 +398,7 @@ function writePngDpi(src, dpi){
   }}
   return u;
 }
-
-var $ = function(id){ return document.getElementById(id); };
-var files = [];
+/* ---------- UI ---------- */
 var drop = $('drop'), input = $('fileInput');
 drop.addEventListener('click', function(){ input.click(); });
 drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); input.click(); } });
@@ -479,19 +406,38 @@ drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ 
 ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
 drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
 input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
+function skipNotice(name){
+  var box = $('skipNotice');
+  box.hidden = false;
+  var p = document.createElement('p');
+  var strong = document.createElement('strong');
+  strong.textContent = name;
+  p.appendChild(strong);
+  p.appendChild(document.createTextNode(': Not a PNG — use the '));
+  var jpegLink = document.createElement('a');
+  jpegLink.href = '/jpeg-dpi-changer/';
+  jpegLink.textContent = 'JPEG DPI changer';
+  p.appendChild(jpegLink);
+  p.appendChild(document.createTextNode(' or the '));
+  var homeLink = document.createElement('a');
+  homeLink.href = '/';
+  homeLink.textContent = 'homepage';
+  p.appendChild(homeLink);
+  p.appendChild(document.createTextNode('.'));
+  box.appendChild(p);
+}
 function addFiles(list){
   var arr = Array.prototype.slice.call(list).slice(0, 50);
   arr.forEach(function(f){
     f.arrayBuffer().then(function(buf){
       var u = new Uint8Array(buf);
-      var kind = isJpeg(u) ? 'jpeg' : (isPng(u) ? 'png' : null);
-      if(!kind){ alert((f.name||'File') + ': only JPG and PNG are supported.'); return; }
+      if(!isPng(u)){ skipNotice(f.name); return; }
       var item = {
         name: f.name || 'image',
         bytes: u,
-        kind: kind,
-        dpi: kind==='jpeg' ? readJpegDpi(u) : readPngDpi(u),
-        url: URL.createObjectURL(new Blob([u], {type: kind==='jpeg'?'image/jpeg':'image/png'})),
+        kind: 'png',
+        dpi: readPngDpi(u),
+        url: URL.createObjectURL(new Blob([u],{type:'image/png'})),
         w: 0, h: 0
       };
       files.push(item);
@@ -518,6 +464,9 @@ function isSmallPrint(wpx, hpx, dpi){
 $('clearBtn').addEventListener('click', function(){
   files.forEach(function(f){ URL.revokeObjectURL(f.url); });
   files = [];
+  var n = $('skipNotice');
+  n.hidden = true;
+  while(n.firstChild) n.removeChild(n.firstChild);
   renderAll();
 });
 $('sampleBtn').addEventListener('click', function(e){
@@ -528,9 +477,7 @@ $('sampleBtn').addEventListener('click', function(e){
   x.fillStyle = '#f2d38b'; x.beginPath(); x.arc(1180, 300, 140, 0, 7); x.fill();
   x.fillStyle = '#8fae7e'; x.beginPath(); x.moveTo(0,820); x.quadraticCurveTo(400,600,800,820); x.quadraticCurveTo(1200,1040,1600,760); x.lineTo(1600,1200); x.lineTo(0,1200); x.closePath(); x.fill();
   x.fillStyle = '#7a9b6a'; x.beginPath(); x.moveTo(0,900); x.quadraticCurveTo(500,760,1000,940); x.quadraticCurveTo(1300,1040,1600,940); x.lineTo(1600,1200); x.lineTo(0,1200); x.closePath(); x.fill();
-  cv.toBlob(function(b){
-    addFiles([new File([b], 'sample-photo.jpg', {type: 'image/jpeg'})]);
-  }, 'image/jpeg', 0.92);
+  cv.toBlob(function(b){ addFiles([new File([b], 'sample-image.png', {type:'image/png'})]); }, 'image/png');
 });
 
 document.querySelectorAll('.chip').forEach(function(ch){
@@ -557,8 +504,8 @@ function outName(name, dpi){
   return stem + '_' + dpi + 'dpi' + ext;
 }
 function convert(item){
-  var out = item.kind==='jpeg' ? writeJpegDpi(item.bytes, targetDpi) : writePngDpi(item.bytes, targetDpi);
-  var blob = new Blob([out], {type: item.kind==='jpeg'?'image/jpeg':'image/png'});
+  var out = writePngDpi(item.bytes, targetDpi);
+  var blob = new Blob([out], {type: 'image/png'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = outName(item.name, targetDpi);
@@ -583,7 +530,7 @@ function renderAll(){
       : '';
     row.innerHTML =
       '<img class="thumb" alt="Preview of ' + item.name + '" src="' + item.url + '">' +
-      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + '</div></div>' +
+      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + 'PNG</div></div>' +
       '<span>' + dpiBadge + ' <span class="arrow">→</span> <span class="badge">' + targetDpi + ' DPI</span></span>' +
       '<span class="print">' + printSize(item) + '</span>' +
       '<button class="btn primary" type="button" data-i="' + idx + '">Download</button>' +
@@ -598,7 +545,7 @@ function renderAll(){
 $('dlAll').addEventListener('click', function(){
   files.forEach(function(item, i){ setTimeout(function(){ convert(item); }, i*350); });
 });
-window.__setdpi = {readJpegDpi:readJpegDpi, writeJpegDpi:writeJpegDpi, readPngDpi:readPngDpi, writePngDpi:writePngDpi, isJpeg:isJpeg, isPng:isPng};
+window.__setdpi = {readPngDpi:readPngDpi, writePngDpi:writePngDpi, isPng:isPng, pngChunks:pngChunks};
 
 })();
 </script>
