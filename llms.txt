@@ -23,6 +23,8 @@
 - [Passport Photo DPI](https://setdpi.com/passport-photo-dpi/): Set a passport or visa photo to 300 or 600 DPI, with pixel sizes for common photo formats
 - [BMP DPI Changer](https://setdpi.com/bmp-dpi-changer/): Set a bitmap's pixels-per-metre DPI fields without touching pixels
 - [Image DPI for Websites](https://setdpi.com/image-dpi-for-website/): Why browsers ignore the DPI tag and what actually controls sharpness on a web page
+- [300 DPI in Pixels](https://setdpi.com/300-dpi-in-pixels/): Pixel dimensions for A-series, US paper, photo, card and poster sizes at 150/300/600 DPI
+- [What DPI to Scan Photos](https://setdpi.com/what-dpi-to-scan-photos/): 300 for reprints, 600 to enlarge or archive, 1200+ for film — with pixel and file sizes
 
 ## Explainers
 

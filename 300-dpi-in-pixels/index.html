@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>300 DPI in Pixels — A4, Letter, Photo & Poster Sizes (Table)</title>
+<meta name="description" content="300 DPI in pixels for every common size: A4 = 2480 × 3508, Letter = 2550 × 3300, 4×6 in = 1200 × 1800 — plus 150 and 600 DPI columns and the formula.">
+<link rel="canonical" href="https://setdpi.com/300-dpi-in-pixels/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/300-dpi-in-pixels/">
+<meta property="og:title" content="300 DPI in Pixels — A4, Letter, Photo & Poster Sizes (Table)">
+<meta property="og:description" content="300 DPI in pixels for every common size: A4 = 2480 × 3508, Letter = 2550 × 3300, 4×6 in = 1200 × 1800 — plus 150 and 600 DPI columns and the formula.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://setdpi.com/og.png">
+<meta name="twitter:title" content="300 DPI in Pixels — A4, Letter, Photo & Poster Sizes (Table)">
+<meta name="twitter:description" content="300 DPI in pixels for every common size: A4 = 2480 × 3508, Letter = 2550 × 3300, 4×6 in = 1200 × 1800 — plus 150 and 600 DPI columns and the formula.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many pixels is A4 at 300 DPI?","acceptedAnswer":{"@type":"Answer","text":"A4 at 300 DPI is 2480 × 3508 pixels. That is round(210 mm ÷ 25.4 × 300) by round(297 mm ÷ 25.4 × 300). At 150 DPI the same sheet is 1240 × 1754; at 600 DPI it is 4961 × 7016."}},{"@type":"Question","name":"Is 300 DPI the same as 300 PPI?","acceptedAnswer":{"@type":"Answer","text":"For a JPEG or PNG tag, yes. Those formats store one density pair, and software labels it DPI or PPI. Writing 300 satisfies a form that asked for either. Hardware is different: a 300 PPI screen is not a 300 DPI print, and neither number lives in the other."}},{"@type":"Question","name":"What if my image has fewer pixels?","acceptedAnswer":{"@type":"Answer","text":"The print will be softer than 300 DPI no matter what the tag says. Effective resolution on paper is pixels ÷ printed inches. A 1200 × 1800 file fills a 4×6 at 300, but stretched to 8×10 it is only 150 DPI. Print smaller, drop to a DPI the viewing distance can justify, or get a larger original."}},{"@type":"Question","name":"Does setting 300 DPI add pixels?","acceptedAnswer":{"@type":"Answer","text":"No. Changing the density tag does not resample the picture. An 800 × 600 file tagged 300 still has 800 × 600 pixels and prints about 2.7 × 2.0 in at 300 DPI. If you need more pixels, you need a larger original — raising the tag is not an enlarger. Increase Image DPI is the same lossless rewrite with that warning."}},{"@type":"Question","name":"How many pixels for a 4×6 print?","acceptedAnswer":{"@type":"Answer","text":"A 4×6 inch print at 300 DPI needs 1200 × 1800 pixels. At 600 DPI it needs 2400 × 3600. Formula: 4 × 300 = 1200, 6 × 300 = 1800. Swap the numbers for portrait versus landscape; the pixel budget is the same."}},{"@type":"Question","name":"What about 600 DPI?","acceptedAnswer":{"@type":"Answer","text":"600 DPI is twice the samples of 300: pixels = inches × 600. Use it for line art, small text, and some fine-art giclée — not for a typical photo-lab print. A4 at 600 is 4961 × 7016. If a shop asked for 600, confirm you have the pixels, then set the tag."}}]}
+</script>
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--ok:#2e7d4f;--warn:#b45309;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;color:var(--ink)}
+a.brand:hover{color:var(--ink);text-decoration:none}
+.brand .logo{width:26px;height:26px;border-radius:6px;background:var(--ink);color:var(--card);font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;letter-spacing:.2px}
+.nav-links{display:flex;gap:18px;font-size:14px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 0;padding:0 0 10px;font-size:13px;line-height:1.45}
+.cluster a,.cluster span{color:var(--muted);padding:4px 9px;font-weight:500;white-space:nowrap}
+.cluster a:hover{color:var(--ink);text-decoration:none}
+.cluster span.here{color:var(--ink);font-weight:700}
+.hero{padding:52px 0 8px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .sub{margin:14px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+.hero .sub strong{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+.trust span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:26px 0 8px}
+.presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.presets .lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:focus-visible,.btn:focus-visible,#drop:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+#customDpi{width:92px;border:1.5px solid var(--line);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+#customDpi:focus{border-color:var(--accent);outline:none}
+#drop{border:2px dashed #cfc7b2;border-radius:10px;padding:44px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#fbf8f0}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .big{font-size:17px;font-weight:700}
+#drop .small{font-size:13.5px;color:var(--muted);margin-top:6px}
+#drop svg{width:38px;height:38px;margin-bottom:10px;color:var(--ink)}
+#fileInput{display:none}
+#rows{margin-top:6px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+.row .thumb{width:52px;height:52px;border-radius:9px;object-fit:cover;background:#eee;border:1px solid var(--line);flex:none}
+.row .meta{flex:1 1 200px;min-width:0}
+.row .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .dims{font-size:12.5px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:#fef3c7;color:var(--warn)}
+.arrow{color:var(--muted);font-size:13px}
+.row .print{font-size:12.5px;color:var(--muted);flex:1 1 150px;overflow-wrap:anywhere}
+.row .warn-msg{font-size:13px;color:var(--warn);line-height:1.45;overflow-wrap:anywhere;flex:1 1 240px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#2c3242}
+.btn.ghost{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost:hover{filter:brightness(.97)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.toolbar[hidden]{display:none}
+.hint{font-size:12.5px;color:var(--muted)}
+section.block{padding:34px 0 6px}
+section.block h2{font-size:24px;letter-spacing:-.01em;margin-bottom:12px}
+section.block h3{font-size:18px;margin:20px 0 8px}
+section.block p{color:#374151;margin-bottom:12px;max-width:760px}
+section.block ul,section.block ol{color:#374151;margin:0 0 12px 1.2em;max-width:760px}
+section.block li{margin-bottom:6px}
+table.print{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:14px;margin:14px 0}
+table.print th,table.print td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.print th{background:#fafafa;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.print tr:last-child td{border-bottom:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+.table-scroll table.print{margin:0}
+.faq{margin-top:8px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.faq summary{padding:15px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 18px 15px;color:#374151;font-size:14.5px}
+.hero h1,section.block h2,section.block h3{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;letter-spacing:0}
+.chip,.badge,#customDpi,.row .dims{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.trust span::before{content:"";width:6px;height:6px;background:var(--accent);display:inline-block;border-radius:1px;flex:none}
+.ruler{max-width:460px;margin:26px auto 0;height:10px;border-bottom:1.5px solid #b9b19c;background:repeating-linear-gradient(90deg,#b9b19c 0 1px,transparent 1px 10px);opacity:.65}
+.tool{position:relative}
+.tool::before{content:"";position:absolute;top:-8px;left:-8px;width:18px;height:18px;border-top:1.5px solid #a89f88;border-left:1.5px solid #a89f88}
+.tool::after{content:"";position:absolute;bottom:-8px;right:-8px;width:18px;height:18px;border-bottom:1.5px solid #a89f88;border-right:1.5px solid #a89f88}
+#sampleBtn{margin-top:14px}
+.note{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 16px;font-size:14.5px;color:#374151}
+.note strong{color:var(--ink)}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:560px){
+  .row .print,.row .warn-msg{flex-basis:100%}
+  .nav-links{gap:12px}
+  .cluster{font-size:12.5px}
+  .cluster a,.cluster span{padding:4px 7px}
+  table.print{font-size:13px}
+  table.print th,table.print td{padding:8px 10px}
+}
+code,pre,kbd,samp{overflow-wrap:anywhere}
+pre{overflow-x:auto}
+img,svg{max-width:100%}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="logo">DPI</span>SetDPI</a>
+    <nav class="nav-links" aria-label="On this page">
+      <a href="#formula">Formula</a>
+      <a href="#a-series">A-series</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <nav class="cluster" aria-label="DPI tools and guides">
+      <a href="/">Image DPI Changer</a>
+      <a href="/dpi-checker/">DPI Checker</a>
+      <a href="/dpi-calculator/">DPI Calculator</a>
+      <a href="/change-dpi-to-150/">150 DPI</a>
+      <a href="/change-dpi-to-200/">200 DPI</a>
+      <a href="/72-dpi-to-300-dpi/">72 → 300</a>
+      <a href="/convert-image-to-300-dpi/">300 DPI</a>
+      <a href="/convert-image-to-600-dpi/">600 DPI</a>
+      <a href="/convert-image-to-1200-dpi/">1200 DPI</a>
+      <a href="/increase-image-dpi/">Increase DPI</a>
+      <a href="/dpi-vs-ppi/">DPI vs PPI</a>
+      <a href="/standard-dpi-settings/">Standard DPI Settings</a>
+      <a href="/dpi-for-printing/">DPI for Printing</a>
+      <a href="/what-does-300-dpi-look-like/">What 300 DPI Looks Like</a>
+      <a href="/bulk-dpi-changer/">Bulk DPI Changer</a>
+      <a href="/png-dpi-changer/">PNG DPI Changer</a>
+      <a href="/jpeg-dpi-changer/">JPEG DPI Changer</a>
+      <a href="/tiff-dpi-changer/">TIFF DPI Changer</a>
+      <a href="/passport-photo-dpi/">Passport Photo DPI</a>
+      <a href="/bmp-dpi-changer/">BMP DPI Changer</a>
+      <a href="/image-dpi-for-website/">Image DPI for Websites</a>
+      <span class="here" aria-current="page">300 DPI in Pixels</span>
+      <a href="/what-dpi-to-scan-photos/">What DPI to Scan Photos</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Print · pixels · paper sizes</div>
+    <h1>300 DPI in Pixels</h1>
+    <p class="sub"><strong>Pixels = inches × DPI.</strong> The tables below are that formula worked out for A-series, Letter, photo prints, cards, and posters — at 150, 300, and 600 where the spec actually changes.</p>
+    <div class="trust">
+      <span>A4 300 DPI = 2480 × 3508</span>
+      <span>Letter = 2550 × 3300</span>
+      <span>Free — no signup, no watermark</span>
+    </div>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+
+  <section class="block" id="formula">
+    <h2>The formula and why 300</h2>
+    <p>300 DPI in pixels is inches times 300, rounded to a whole pixel. Millimetres convert first: inches = mm ÷ 25.4. Every cell on this page is <code>round(size_in × DPI)</code> with that conversion. A4 is 210 × 297 mm, so 210 ÷ 25.4 × 300 = 2480.31 → 2480, and 297 ÷ 25.4 × 300 = 3507.87 → 3508. Letter is already in inches: 8.5 × 300 = 2550, 11 × 300 = 3300. A 4 × 6 in photo is 1200 × 1800. That is the whole conversion.</p>
+    <p>Why 300, not 250 or 360? Photo labs, magazines, business-card printers, and most upload forms settled on 300 as “photo quality” at reading distance. At about 25–30 cm, the eye stops resolving a finer grid on a continuous-tone photograph. 150 is the usual poster spec because people stand several feet back. 600 is for hairlines and small type, which cannot hide a coarse sample the way a photograph can. 72 and 96 are leftover screen defaults; they do not describe a print.</p>
+    <p>The tag and the pixel count are different jobs. <strong>Pixels = inches × DPI</strong> tells you the grid you need. Writing 300 into JFIF, EXIF <code>XResolution</code>, or PNG <code>pHYs</code> tells a preflight script you meant that grid. Do both. A 4000-pixel file tagged 72 still fails a “300 DPI” checker. An 800-pixel file tagged 300 still prints a 2.7-inch-wide photo. Orientation is yours to swap: tables list the named size in the usual portrait or landscape for that stock. Rotate the print, swap the two numbers. The formula does not change.</p>
+  </section>
+
+  <section class="block" id="a-series">
+    <h2>A-series at 300 DPI</h2>
+    <p>ISO A-series paper keeps a √2 aspect ratio, so each size is the previous one cut in half. Pixel counts follow that cut, after rounding. A4 300 DPI pixels — the other half of the search — are <strong>2480 × 3508</strong>. A3 is 3508 × 4961, almost A4 doubled on the short side. A5 is 1748 × 2480. A2 is 4961 × 7016. A1 is 7016 × 9933. A0 is 9933 × 14043, a plotter sheet.</p>
+    <div style="overflow-x:auto">
+    <table class="print">
+      <thead><tr><th>Size</th><th>Millimetres</th><th>150 DPI</th><th>300 DPI</th><th>600 DPI</th></tr></thead>
+      <tbody>
+        <tr><td>A0</td><td>841 × 1189</td><td>4967 × 7022</td><td>9933 × 14043</td><td>19866 × 28087</td></tr>
+        <tr><td>A1</td><td>594 × 841</td><td>3508 × 4967</td><td>7016 × 9933</td><td>14031 × 19866</td></tr>
+        <tr><td>A2</td><td>420 × 594</td><td>2480 × 3508</td><td>4961 × 7016</td><td>9921 × 14031</td></tr>
+        <tr><td>A3</td><td>297 × 420</td><td>1754 × 2480</td><td>3508 × 4961</td><td>7016 × 9921</td></tr>
+        <tr><td>A4</td><td>210 × 297</td><td>1240 × 1754</td><td>2480 × 3508</td><td>4961 × 7016</td></tr>
+        <tr><td>A5</td><td>148 × 210</td><td>874 × 1240</td><td>1748 × 2480</td><td>3496 × 4961</td></tr>
+        <tr><td>A6</td><td>105 × 148</td><td>620 × 874</td><td>1240 × 1748</td><td>2480 × 3496</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>150 DPI columns are there because large A-sizes are often posters. A2 at 150 is 2480 × 3508 — the same pixel budget as A4 at 300. That is the viewing-distance trade: stand back, spend fewer samples. 600 DPI columns are for line art on the same sheet. A4 at 600 is 4961 × 7016, which is A2 at 300. Each cell is rounded on its own, not by doubling a 300 column; A0 at 600 is 19866 × 28087, not 14043 × 2 on the long side. Bleed is extra: if a printer wants 3 mm around A4, add that to 210 × 297 before you multiply. The table is the trimmed sheet.</p>
+  </section>
+
+  <section class="block" id="us">
+    <h2>US paper sizes</h2>
+    <p>North American stock is already in inches, so the arithmetic is cleaner. Letter (8.5 × 11 in) at 300 DPI is <strong>2550 × 3300</strong> — the US counterpart to A4 300 DPI pixels. Legal (8.5 × 14) is 2550 × 4200. Tabloid (11 × 17), the sheet people mean when they say “ledger” in landscape, is 3300 × 5100. Half Letter (5.5 × 8.5), a booklet page or a flyer folded once, is 1650 × 2550.</p>
+    <div style="overflow-x:auto">
+    <table class="print">
+      <thead><tr><th>Size</th><th>Inches</th><th>150 DPI</th><th>300 DPI</th><th>600 DPI</th></tr></thead>
+      <tbody>
+        <tr><td>Letter</td><td>8.5 × 11</td><td>1275 × 1650</td><td>2550 × 3300</td><td>5100 × 6600</td></tr>
+        <tr><td>Legal</td><td>8.5 × 14</td><td>1275 × 2100</td><td>2550 × 4200</td><td>5100 × 8400</td></tr>
+        <tr><td>Tabloid</td><td>11 × 17</td><td>1650 × 2550</td><td>3300 × 5100</td><td>6600 × 10200</td></tr>
+        <tr><td>Half Letter</td><td>5.5 × 8.5</td><td>825 × 1275</td><td>1650 × 2550</td><td>3300 × 5100</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>150 and 600 columns scale exactly on these sizes because the inch sides are terminating decimals. Letter at 150 is 1275 × 1650; at 600 it is 5100 × 6600. A KDP interior, a school worksheet, or a US office poster that specifies Letter at 300 wants 2550 × 3300, plus whatever bleed the template added. Do not send A4 pixels to a Letter job and hope the RIP crops politely — 210 mm is 8.27 in, not 8.5.</p>
+  </section>
+
+  <section class="block" id="photos">
+    <h2>Photo prints</h2>
+    <p>Labs sell inches. 4 × 6, 5 × 7, 8 × 10, 11 × 14, 16 × 20, and 20 × 30 are the common bins. At 300 DPI those are 1200 × 1800, 1500 × 2100, 2400 × 3000, 3300 × 4200, 4800 × 6000, and 6000 × 9000. A modern phone often has 4 × 6 and 5 × 7 covered and a 72 tag. The 16 × 20 and 20 × 30 rows are where pixel count, not the tag, becomes the constraint.</p>
+    <div style="overflow-x:auto">
+    <table class="print">
+      <thead><tr><th>Size</th><th>300 DPI</th><th>600 DPI</th></tr></thead>
+      <tbody>
+        <tr><td>4 × 6 in</td><td>1200 × 1800</td><td>2400 × 3600</td></tr>
+        <tr><td>5 × 7 in</td><td>1500 × 2100</td><td>3000 × 4200</td></tr>
+        <tr><td>8 × 10 in</td><td>2400 × 3000</td><td>4800 × 6000</td></tr>
+        <tr><td>11 × 14 in</td><td>3300 × 4200</td><td>6600 × 8400</td></tr>
+        <tr><td>16 × 20 in</td><td>4800 × 6000</td><td>9600 × 12000</td></tr>
+        <tr><td>20 × 30 in</td><td>6000 × 9000</td><td>12000 × 18000</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>600 DPI doubles every number: 4 × 6 becomes 2400 × 3600. Minilabs almost never need that for a photograph. Scan a print at 600 if you want to enlarge later; do not relabel a 1200 × 1800 camera JPEG as 600 and order a 4 × 6 expecting extra detail. Crop is the silent extra. A 4:3 camera file is not a 2:3 4 × 6. You will lose pixels to the lab’s crop, so having exactly 1200 × 1800 on a 4:3 original is not enough. Count after crop.</p>
+  </section>
+
+  <section class="block" id="cards">
+    <h2>Cards and posters</h2>
+    <p>A US business card is 3.5 × 2 in, so 1050 × 600 px at 300 DPI. The 85 × 55 mm card used in much of Europe is 1004 × 650. Those are small grids. A logo drawn at 400 px will look soft; a photograph will not. A7 (74 × 105 mm) is 874 × 1240 — a folded place card or a small invitation. A 6 × 4 in postcard is 1800 × 1200, the same budget as a 4 × 6 print. The 148 × 105 mm postcard (A6 landscape) is 1748 × 1240.</p>
+    <div style="overflow-x:auto">
+    <table class="print">
+      <thead><tr><th>Size</th><th>300 DPI</th></tr></thead>
+      <tbody>
+        <tr><td>Business card 3.5 × 2 in</td><td>1050 × 600</td></tr>
+        <tr><td>Business card 85 × 55 mm</td><td>1004 × 650</td></tr>
+        <tr><td>A7 (74 × 105 mm)</td><td>874 × 1240</td></tr>
+        <tr><td>Postcard 6 × 4 in</td><td>1800 × 1200</td></tr>
+        <tr><td>Postcard 148 × 105 mm</td><td>1748 × 1240</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Posters are where 150 earns its column. 18 × 24 in at 150 is 2700 × 3600; at 300 it is 5400 × 7200. 24 × 36 in at 150 is 3600 × 5400; at 300 it is 7200 × 10800 — a file many cameras cannot supply, for a wall people view from several feet. A2 and A1 repeat the A-series numbers: 2480 × 3508 / 4961 × 7016 at 150 / 300 for A2, 3508 × 4967 / 7016 × 9933 for A1.</p>
+    <div style="overflow-x:auto">
+    <table class="print">
+      <thead><tr><th>Size</th><th>150 DPI</th><th>300 DPI</th></tr></thead>
+      <tbody>
+        <tr><td>18 × 24 in</td><td>2700 × 3600</td><td>5400 × 7200</td></tr>
+        <tr><td>24 × 36 in</td><td>3600 × 5400</td><td>7200 × 10800</td></tr>
+        <tr><td>A2 (420 × 594 mm)</td><td>2480 × 3508</td><td>4961 × 7016</td></tr>
+        <tr><td>A1 (594 × 841 mm)</td><td>3508 × 4967</td><td>7016 × 9933</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section class="block" id="tag">
+    <h2>Your file has the pixels — now set the tag</h2>
+    <p>The tables are a planning tool. They do not change a file. Once the pixel grid covers the row you need, write 300 into the density field so a lab or a portal does not reject you for a leftover 72. <a href="/convert-image-to-300-dpi/">Convert Image to 300 DPI</a> does that in the browser. Confirm the current tag and the print size with the <a href="/dpi-checker/">DPI Checker</a>. Plan a size you do not have a file for yet with the <a href="/dpi-calculator/">DPI Calculator</a>. For which integer a product actually wants — 300 in the hand, 150 on the wall — see <a href="/dpi-for-printing/">DPI for Printing</a>.</p>
+    <p>600 DPI is the other common ask. Line art, contracts with 8-point footnotes, and some giclée shops want 600 samples per inch. That is a different pixel budget — inches × 600 — and a different tag. <a href="/convert-image-to-600-dpi/">Convert Image to 600 DPI</a> rewrites the integer when the samples are already there. Inventing 600 from a short JPEG does not add detail.</p>
+  </section>
+
+  <section class="block" id="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open><summary>How many pixels is A4 at 300 DPI?</summary><div class="a">A4 at 300 DPI is 2480 × 3508 pixels. That is round(210 mm ÷ 25.4 × 300) by round(297 mm ÷ 25.4 × 300). At 150 DPI the same sheet is 1240 × 1754; at 600 DPI it is 4961 × 7016.</div></details>
+      <details><summary>Is 300 DPI the same as 300 PPI?</summary><div class="a">For a JPEG or PNG tag, yes. Those formats store one density pair, and software labels it DPI or PPI. Writing 300 satisfies a form that asked for either. Hardware is different: a 300 PPI screen is not a 300 DPI print, and neither number lives in the other.</div></details>
+      <details><summary>What if my image has fewer pixels?</summary><div class="a">The print will be softer than 300 DPI no matter what the tag says. Effective resolution on paper is pixels ÷ printed inches. A 1200 × 1800 file fills a 4×6 at 300, but stretched to 8×10 it is only 150 DPI. Print smaller, drop to a DPI the viewing distance can justify, or get a larger original.</div></details>
+      <details><summary>Does setting 300 DPI add pixels?</summary><div class="a">No. Changing the density tag does not resample the picture. An 800 × 600 file tagged 300 still has 800 × 600 pixels and prints about 2.7 × 2.0 in at 300 DPI. If you need more pixels, you need a larger original — raising the tag is not an enlarger. <a href="/increase-image-dpi/">Increase Image DPI</a> is the same lossless rewrite with that warning.</div></details>
+      <details><summary>How many pixels for a 4×6 print?</summary><div class="a">A 4×6 inch print at 300 DPI needs 1200 × 1800 pixels. At 600 DPI it needs 2400 × 3600. Formula: 4 × 300 = 1200, 6 × 300 = 1800. Swap the numbers for portrait versus landscape; the pixel budget is the same.</div></details>
+      <details><summary>What about 600 DPI?</summary><div class="a">600 DPI is twice the samples of 300: pixels = inches × 600. Use it for line art, small text, and some fine-art giclée — not for a typical photo-lab print. A4 at 600 is 4961 × 7016. If a shop asked for 600, confirm you have the pixels, then set the tag.</div></details>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
+    <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
+  </div>
+</footer>
+
+</body>
+</html>
