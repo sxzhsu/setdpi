@@ -213,6 +213,9 @@ img,svg{max-width:100%}
     </div>
   </div>
 
+  <div style="overflow-x:auto;margin:1.5rem 0 2rem" class="block">
+    <img src="diagram.svg" alt="Raising the DPI tag versus resampling: same 2400×3000 pixels print 33.3×41.7 inches at 72 DPI, 8×10 at 300 DPI and 4×5 at 600 DPI — the pixel grid never grows" width="900" loading="lazy" style="width:100%;height:auto;min-width:680px;border-radius:12px;border:1px solid #e6e0d0;background:#fffdf9" />
+  </div>
   <section class="block" id="honest">
     <h2>Increasing image DPI does not add pixels</h2>
     <p>This is the sentence most “increase DPI” tools bury. <strong>Raising the DPI tag does not create new pixels, does not sharpen edges, and does not make a small file safe to print large.</strong> A 800 × 600 px screenshot tagged 72 DPI and the same screenshot tagged 300 DPI contain the identical grid. At 300 DPI that grid is a 2.7 × 2.0 in print. At 72 DPI it is an 11.1 × 8.3 in print that looks soft because each pixel covers more paper.</p>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="380" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">When 150 DPI is the right choice</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Large-format work viewed from a few feet — one quarter the pixels of 300 on the same paper.</text>
+
+  <rect x="44" y="88" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="109" font-size="12" font-weight="bold" fill="#6e6759">JOB</text>
+  <text x="280" y="109" font-size="12" font-weight="bold" fill="#6e6759">VIEWING DISTANCE</text>
+  <text x="500" y="109" font-size="12" font-weight="bold" fill="#6e6759">WHY 150</text>
+
+  <line x1="44" y1="124" x2="856" y2="124" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="148" font-size="13" font-weight="600" fill="#1b1f28">Posters (24 × 36 in)</text>
+  <text x="280" y="148" font-size="13" fill="#6e6759">A few feet / six feet</text>
+  <text x="500" y="148" font-size="12" fill="#6e6759">3600 × 5400 px — the usual spec</text>
+
+  <line x1="44" y1="164" x2="856" y2="164" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="188" font-size="13" font-weight="600" fill="#1b1f28">Banners / retractables</text>
+  <text x="280" y="188" font-size="13" fill="#6e6759">Several feet, often in motion</text>
+  <text x="500" y="188" font-size="12" fill="#6e6759">150 is the usual floor</text>
+
+  <line x1="44" y1="204" x2="856" y2="204" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="228" font-size="13" font-weight="600" fill="#1b1f28">Trade-show graphics</text>
+  <text x="280" y="228" font-size="13" fill="#6e6759">From the aisle, not six inches</text>
+  <text x="500" y="228" font-size="12" fill="#6e6759">Exhibit houses specify 150</text>
+
+  <line x1="44" y1="244" x2="856" y2="244" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="268" font-size="13" font-weight="600" fill="#1b1f28">Billboards / wraps</text>
+  <text x="280" y="268" font-size="13" fill="#6e6759">Yards, not inches</text>
+  <text x="500" y="268" font-size="12" fill="#6e6759">Often 10–50; 150 is already denser</text>
+
+  <rect x="44" y="292" width="390" height="52" rx="8" fill="#f7f4ee"/>
+  <text x="64" y="314" font-size="12" fill="#6e6759">3600 × 5400 px at 150 DPI</text>
+  <text x="64" y="334" font-size="14" font-weight="700" fill="#a03d28">24 × 36 in poster</text>
+
+  <rect x="466" y="292" width="390" height="52" rx="8" fill="#f7f4ee"/>
+  <text x="486" y="314" font-size="12" fill="#6e6759">Same pixels tagged 300</text>
+  <text x="486" y="334" font-size="14" font-weight="700" fill="#a03d28">12 × 18 in — half the paper</text>
+
+  <text x="44" y="372" font-size="11" fill="#b0a895">setdpi.com — set 150 DPI without re-encoding</text>
+</svg>

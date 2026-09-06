@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="380" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">How a BMP stores — and rewrites — DPI</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Two pixels-per-metre int32s at offsets 38 and 42. Pixel array, palette and file length stay identical.</text>
+
+  <rect x="44" y="88" width="168" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="128" y="118" font-size="13" font-weight="600" fill="#1b1f28" text-anchor="middle">1. Drop BMP</text>
+  <text x="128" y="138" font-size="11" fill="#6e6759" text-anchor="middle">Check BM signature</text>
+
+  <polygon points="222,124 236,118 236,130" fill="#e6e0d0"/>
+
+  <rect x="244" y="88" width="176" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="332" y="118" font-size="13" font-weight="600" fill="#1b1f28" text-anchor="middle">2. Read header</text>
+  <text x="332" y="138" font-size="11" fill="#6e6759" text-anchor="middle">biSize 40 / 108 / 124</text>
+
+  <polygon points="430,124 444,118 444,130" fill="#e6e0d0"/>
+
+  <rect x="452" y="88" width="196" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="550" y="118" font-size="13" font-weight="600" fill="#1b1f28" text-anchor="middle">3. Write px/m</text>
+  <text x="550" y="138" font-size="11" fill="#6e6759" text-anchor="middle">round(DPI ÷ 0.0254)</text>
+
+  <polygon points="658,124 672,118 672,130" fill="#e6e0d0"/>
+
+  <rect x="680" y="88" width="176" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="768" y="118" font-size="13" font-weight="600" fill="#1b1f28" text-anchor="middle">4. Download</text>
+  <text x="768" y="138" font-size="11" fill="#6e6759" text-anchor="middle">Length unchanged</text>
+
+  <rect x="44" y="180" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="201" font-size="12" font-weight="bold" fill="#6e6759">DPI WRITTEN</text>
+  <text x="240" y="201" font-size="12" font-weight="bold" fill="#6e6759">PIXELS PER METRE</text>
+  <text x="480" y="201" font-size="12" font-weight="bold" fill="#6e6759">NOTES</text>
+  <text x="720" y="201" font-size="12" font-weight="bold" fill="#6e6759">SHOWN HERE</text>
+
+  <line x1="44" y1="216" x2="856" y2="216" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="240" font-size="14" font-weight="700" fill="#a03d28">0</text>
+  <text x="240" y="240" font-size="13" fill="#6e6759">unset</text>
+  <text x="480" y="240" font-size="12" fill="#6e6759">Many exporters skip the fields</text>
+  <text x="720" y="240" font-size="12" fill="#6e6759">DPI not set</text>
+
+  <line x1="44" y1="256" x2="856" y2="256" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="280" font-size="14" font-weight="700" fill="#a03d28">96</text>
+  <text x="240" y="280" font-size="13" fill="#6e6759">3780</text>
+  <text x="480" y="280" font-size="12" fill="#6e6759">Windows Paint default</text>
+  <text x="720" y="280" font-size="12" fill="#6e6759">96</text>
+
+  <line x1="44" y1="296" x2="856" y2="296" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="320" font-size="14" font-weight="700" fill="#a03d28">300</text>
+  <text x="240" y="320" font-size="13" fill="#6e6759">11811</text>
+  <text x="480" y="320" font-size="12" fill="#6e6759">Print default this page writes</text>
+  <text x="720" y="320" font-size="12" fill="#6e6759">300</text>
+
+  <text x="44" y="352" font-size="12" fill="#6e6759">OS/2 BITMAPCOREHEADER (biSize = 12) has no DPI field and is refused. V4 (108) and V5 (124) share the same offsets.</text>
+  <text x="44" y="376" font-size="11" fill="#b0a895">setdpi.com — rewrite BMP pixels-per-metre without touching the pixel array</text>
+</svg>

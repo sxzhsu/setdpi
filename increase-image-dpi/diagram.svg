@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="400" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">Raising the tag is not enlarging the picture</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Same 2400 × 3000 px file. Print inches = pixels ÷ DPI. The pixel grid never grows.</text>
+
+  <rect x="44" y="84" width="390" height="116" rx="12" fill="#f7f4ee"/>
+  <text x="64" y="114" font-size="18" font-weight="bold" fill="#a03d28">Raise the tag</text>
+  <text x="64" y="138" font-size="13" fill="#6e6759">This tool — lossless metadata rewrite</text>
+  <text x="64" y="162" font-size="13" font-weight="600" fill="#1b1f28">Pixels copied, not decoded</text>
+  <text x="64" y="184" font-size="12" fill="#6e6759">Fixes “DPI &lt; 300” rejection — file size stays ~identical</text>
+
+  <rect x="466" y="84" width="390" height="116" rx="12" fill="#f7f4ee"/>
+  <text x="486" y="114" font-size="18" font-weight="bold" fill="#a03d28">Resample / upscale</text>
+  <text x="486" y="138" font-size="13" fill="#6e6759">Editors and “enhance” sites — not this page</text>
+  <text x="486" y="162" font-size="13" font-weight="600" fill="#1b1f28">A new pixel grid is invented</text>
+  <text x="486" y="184" font-size="12" fill="#6e6759">Lossy. Only when pixels ÷ 300 is smaller than the print</text>
+
+  <rect x="44" y="216" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="237" font-size="12" font-weight="bold" fill="#6e6759">TAG</text>
+  <text x="220" y="237" font-size="12" font-weight="bold" fill="#6e6759">PRINT SIZE</text>
+  <text x="460" y="237" font-size="12" font-weight="bold" fill="#6e6759">WHAT YOU JUST DID</text>
+
+  <line x1="44" y1="252" x2="856" y2="252" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="276" font-size="13" font-weight="700" fill="#a03d28">72 DPI</text>
+  <text x="220" y="276" font-size="13" fill="#6e6759">33.3 × 41.7 in</text>
+  <text x="460" y="276" font-size="13" fill="#6e6759">Screen default; preflight often rejects</text>
+
+  <line x1="44" y1="292" x2="856" y2="292" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="316" font-size="13" font-weight="700" fill="#a03d28">300 DPI</text>
+  <text x="220" y="316" font-size="13" fill="#6e6759">8.0 × 10.0 in</text>
+  <text x="460" y="316" font-size="13" fill="#6e6759">Lab / journal / marketplace default</text>
+
+  <line x1="44" y1="332" x2="856" y2="332" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="356" font-size="13" font-weight="700" fill="#a03d28">600 DPI</text>
+  <text x="220" y="356" font-size="13" fill="#6e6759">4.0 × 5.0 in</text>
+  <text x="460" y="356" font-size="13" fill="#6e6759">Line-art density; smaller print, same pixels</text>
+
+  <text x="44" y="392" font-size="11" fill="#b0a895">setdpi.com — increase the DPI tag without adding pixels</text>
+</svg>

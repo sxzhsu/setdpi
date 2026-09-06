@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="400" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">How a JPEG stores — and rewrites — DPI</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Two independent segments. Download writes both to the same target. Scan data is never re-encoded.</text>
+
+  <rect x="44" y="84" width="178" height="76" rx="12" fill="#f7f4ee"/>
+  <text x="64" y="108" font-size="18" font-weight="bold" fill="#a03d28">1</text>
+  <text x="64" y="132" font-size="13" font-weight="600" fill="#1b1f28">Check SOI</text>
+  <text x="64" y="150" font-size="12" fill="#6e6759">Must start FF D8</text>
+
+  <polygon points="232,122 246,116 246,128" fill="#e6e0d0"/>
+
+  <rect x="254" y="84" width="178" height="76" rx="12" fill="#f7f4ee"/>
+  <text x="274" y="108" font-size="18" font-weight="bold" fill="#a03d28">2</text>
+  <text x="274" y="132" font-size="13" font-weight="600" fill="#1b1f28">Prefer EXIF</text>
+  <text x="274" y="150" font-size="12" fill="#6e6759">XResolution 0x011A</text>
+
+  <polygon points="442,122 456,116 456,128" fill="#e6e0d0"/>
+
+  <rect x="464" y="84" width="178" height="76" rx="12" fill="#f7f4ee"/>
+  <text x="484" y="108" font-size="18" font-weight="bold" fill="#a03d28">3</text>
+  <text x="484" y="132" font-size="13" font-weight="600" fill="#1b1f28">Fall back JFIF</text>
+  <text x="484" y="150" font-size="12" fill="#6e6759">APP0 Xdensity</text>
+
+  <polygon points="652,122 666,116 666,128" fill="#e6e0d0"/>
+
+  <rect x="674" y="84" width="182" height="76" rx="12" fill="#f7f4ee"/>
+  <text x="694" y="108" font-size="18" font-weight="bold" fill="#a03d28">4</text>
+  <text x="694" y="132" font-size="13" font-weight="600" fill="#1b1f28">Rewrite / insert</text>
+  <text x="694" y="150" font-size="12" fill="#6e6759">Copy DQT, DHT, SOS</text>
+
+  <rect x="44" y="180" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="201" font-size="12" font-weight="bold" fill="#6e6759">FILE HAS</text>
+  <text x="220" y="201" font-size="12" font-weight="bold" fill="#6e6759">JFIF ACTION</text>
+  <text x="500" y="201" font-size="12" font-weight="bold" fill="#6e6759">EXIF ACTION</text>
+  <text x="760" y="201" font-size="12" font-weight="bold" fill="#6e6759">SIZE</text>
+
+  <line x1="44" y1="216" x2="856" y2="216" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="240" font-size="13" font-weight="600" fill="#1b1f28">Both present</text>
+  <text x="220" y="240" font-size="12" fill="#6e6759">5 bytes in place (units 1, X/Y)</text>
+  <text x="500" y="240" font-size="12" fill="#6e6759">Tags rewritten as target/1, unit 2</text>
+  <text x="760" y="240" font-size="13" font-weight="700" fill="#a03d28">Identical</text>
+
+  <line x1="44" y1="256" x2="856" y2="256" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="280" font-size="13" font-weight="600" fill="#1b1f28">JFIF only</text>
+  <text x="220" y="280" font-size="12" fill="#6e6759">Same in-place rewrite</text>
+  <text x="500" y="280" font-size="12" fill="#6e6759">76-byte EXIF APP1 after SOI</text>
+  <text x="760" y="280" font-size="13" font-weight="700" fill="#a03d28">+76 B</text>
+
+  <line x1="44" y1="296" x2="856" y2="296" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="320" font-size="13" font-weight="600" fill="#1b1f28">EXIF only</text>
+  <text x="220" y="320" font-size="12" fill="#6e6759">18-byte JFIF APP0 after SOI</text>
+  <text x="500" y="320" font-size="12" fill="#6e6759">In-place rewrite of the three tags</text>
+  <text x="760" y="320" font-size="13" font-weight="700" fill="#a03d28">+18 B</text>
+
+  <line x1="44" y1="336" x2="856" y2="336" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="360" font-size="13" font-weight="600" fill="#1b1f28">Neither</text>
+  <text x="220" y="360" font-size="12" fill="#6e6759">18-byte JFIF after SOI</text>
+  <text x="500" y="360" font-size="12" fill="#6e6759">76-byte EXIF after the new JFIF</text>
+  <text x="760" y="360" font-size="13" font-weight="700" fill="#a03d28">+94 B</text>
+
+  <text x="44" y="392" font-size="11" fill="#b0a895">setdpi.com — rewrite JPEG density without re-encoding</text>
+</svg>

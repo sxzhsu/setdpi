@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="380" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">How a PNG stores — and rewrites — DPI</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">One pHYs chunk: 9 data bytes, pixels per metre. IDAT, alpha and palette stay identical.</text>
+
+  <rect x="44" y="88" width="178" height="80" rx="12" fill="#f7f4ee"/>
+  <text x="64" y="114" font-size="18" font-weight="bold" fill="#a03d28">1</text>
+  <text x="64" y="140" font-size="13" font-weight="600" fill="#1b1f28">Check signature</text>
+  <text x="64" y="158" font-size="12" fill="#6e6759">8-byte PNG header</text>
+
+  <polygon points="232,128 246,122 246,134" fill="#e6e0d0"/>
+
+  <rect x="254" y="88" width="178" height="80" rx="12" fill="#f7f4ee"/>
+  <text x="274" y="114" font-size="18" font-weight="bold" fill="#a03d28">2</text>
+  <text x="274" y="140" font-size="13" font-weight="600" fill="#1b1f28">Walk chunks</text>
+  <text x="274" y="158" font-size="12" fill="#6e6759">Find pHYs before IDAT</text>
+
+  <polygon points="442,128 456,122 456,134" fill="#e6e0d0"/>
+
+  <rect x="464" y="88" width="178" height="80" rx="12" fill="#f7f4ee"/>
+  <text x="484" y="114" font-size="18" font-weight="bold" fill="#a03d28">3</text>
+  <text x="484" y="140" font-size="13" font-weight="600" fill="#1b1f28">Write px/m</text>
+  <text x="484" y="158" font-size="12" fill="#6e6759">round(DPI ÷ 0.0254)</text>
+
+  <polygon points="652,128 666,122 666,134" fill="#e6e0d0"/>
+
+  <rect x="674" y="88" width="182" height="80" rx="12" fill="#f7f4ee"/>
+  <text x="694" y="114" font-size="18" font-weight="bold" fill="#a03d28">4</text>
+  <text x="694" y="140" font-size="13" font-weight="600" fill="#1b1f28">Recompute CRC</text>
+  <text x="694" y="158" font-size="12" fill="#6e6759">IDAT never touched</text>
+
+  <rect x="44" y="188" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="209" font-size="12" font-weight="bold" fill="#6e6759">DPI WRITTEN</text>
+  <text x="240" y="209" font-size="12" font-weight="bold" fill="#6e6759">PIXELS PER METRE</text>
+  <text x="500" y="209" font-size="12" font-weight="bold" fill="#6e6759">READ BACK (× 0.0254)</text>
+  <text x="740" y="209" font-size="12" font-weight="bold" fill="#6e6759">SHOWN HERE</text>
+
+  <line x1="44" y1="224" x2="856" y2="224" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="248" font-size="14" font-weight="700" fill="#a03d28">72</text>
+  <text x="240" y="248" font-size="13" fill="#6e6759">2835</text>
+  <text x="500" y="248" font-size="13" fill="#6e6759">72.0090</text>
+  <text x="740" y="248" font-size="13" fill="#6e6759">72</text>
+
+  <line x1="44" y1="264" x2="856" y2="264" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="288" font-size="14" font-weight="700" fill="#a03d28">300</text>
+  <text x="240" y="288" font-size="13" fill="#6e6759">11811</text>
+  <text x="500" y="288" font-size="13" fill="#6e6759">299.9994</text>
+  <text x="740" y="288" font-size="13" fill="#6e6759">300</text>
+
+  <line x1="44" y1="304" x2="856" y2="304" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="328" font-size="14" font-weight="700" fill="#a03d28">600</text>
+  <text x="240" y="328" font-size="13" fill="#6e6759">23622</text>
+  <text x="500" y="328" font-size="13" fill="#6e6759">599.9988</text>
+  <text x="740" y="328" font-size="13" fill="#6e6759">600</text>
+
+  <text x="44" y="360" font-size="12" fill="#6e6759">Missing pHYs: 21-byte chunk inserted before IDAT. Unit 0 is rewritten with unit 1. Length +21 only when inserted.</text>
+  <text x="44" y="376" font-size="11" fill="#b0a895">setdpi.com — rewrite PNG pHYs without touching IDAT</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="380" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">200 DPI sits between 150 and 300</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Newsprint, proofs, and archives — denser than large-format, coarser than the photo-lab habit.</text>
+
+  <rect x="44" y="88" width="250" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="169" y="118" font-size="20" font-weight="bold" fill="#a03d28" text-anchor="middle">150</text>
+  <text x="169" y="140" font-size="12" fill="#6e6759" text-anchor="middle">Posters, banners, distance</text>
+
+  <polygon points="304,124 318,118 318,130" fill="#e6e0d0"/>
+
+  <rect x="326" y="88" width="250" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="451" y="118" font-size="20" font-weight="bold" fill="#a03d28" text-anchor="middle">200</text>
+  <text x="451" y="140" font-size="12" fill="#6e6759" text-anchor="middle">Newsprint, proofs, archives</text>
+
+  <polygon points="586,124 600,118 600,130" fill="#e6e0d0"/>
+
+  <rect x="608" y="88" width="248" height="72" rx="10" fill="#f7f4ee"/>
+  <text x="732" y="118" font-size="20" font-weight="bold" fill="#a03d28" text-anchor="middle">300</text>
+  <text x="732" y="140" font-size="12" fill="#6e6759" text-anchor="middle">Photo labs, IDs, KDP, Etsy</text>
+
+  <rect x="44" y="180" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="201" font-size="12" font-weight="bold" fill="#6e6759">JOB</text>
+  <text x="360" y="201" font-size="12" font-weight="bold" fill="#6e6759">WHY 200</text>
+  <text x="640" y="201" font-size="12" font-weight="bold" fill="#6e6759">EXAMPLE SIZE</text>
+
+  <line x1="44" y1="216" x2="856" y2="216" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="240" font-size="13" font-weight="600" fill="#1b1f28">Newsprint / magazine ads</text>
+  <text x="360" y="240" font-size="12" fill="#6e6759">Coarser halftone; 300 pads the file</text>
+  <text x="640" y="240" font-size="12" fill="#6e6759">2400 × 3000 → 12 × 15 in</text>
+
+  <line x1="44" y1="256" x2="856" y2="256" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="280" font-size="13" font-weight="600" fill="#1b1f28">Email proofs</text>
+  <text x="360" y="280" font-size="12" fill="#6e6759">Brief asks a 200 DPI JPEG tag</text>
+  <text x="640" y="280" font-size="12" fill="#6e6759">Pixels and bytes stay the same</text>
+
+  <line x1="44" y1="296" x2="856" y2="296" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="320" font-size="13" font-weight="600" fill="#1b1f28">Digital archives</text>
+  <text x="360" y="320" font-size="12" fill="#6e6759">Denser than a fax, cheaper than 300</text>
+  <text x="640" y="320" font-size="12" fill="#6e6759">1654 × 2339 → A4</text>
+
+  <text x="44" y="352" font-size="12" fill="#6e6759">Same pixels, different claimed inches: 2400 × 3000 px tagged 200 prints 12 × 15 in; tagged 300 it prints 8 × 10 in.</text>
+  <text x="44" y="376" font-size="11" fill="#b0a895">setdpi.com — set 200 DPI without re-encoding</text>
+</svg>

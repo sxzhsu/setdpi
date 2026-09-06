@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="400" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">Passport photos: pixels for the portal, DPI for the print</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Most uploaders check width × height. Print shops and some forms ask for a density tag. Verify the official page (2026).</text>
+
+  <rect x="44" y="84" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="105" font-size="12" font-weight="bold" fill="#6e6759">COUNTRY / SIZE</text>
+  <text x="300" y="105" font-size="12" font-weight="bold" fill="#6e6759">PIXELS @ 300</text>
+  <text x="500" y="105" font-size="12" font-weight="bold" fill="#6e6759">PIXELS @ 600</text>
+  <text x="680" y="105" font-size="12" font-weight="bold" fill="#6e6759">PORTAL ASK</text>
+
+  <line x1="44" y1="120" x2="856" y2="120" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="144" font-size="13" font-weight="600" fill="#1b1f28">United States  2 × 2 in</text>
+  <text x="300" y="144" font-size="13" font-weight="700" fill="#a03d28">600 × 600</text>
+  <text x="500" y="144" font-size="13" fill="#6e6759">1200 × 1200</text>
+  <text x="680" y="144" font-size="12" fill="#6e6759">JPEG 600–1200 px</text>
+
+  <line x1="44" y1="160" x2="856" y2="160" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="184" font-size="13" font-weight="600" fill="#1b1f28">United Kingdom  35 × 45 mm</text>
+  <text x="300" y="184" font-size="13" font-weight="700" fill="#a03d28">413 × 531</text>
+  <text x="500" y="184" font-size="13" fill="#6e6759">827 × 1063</text>
+  <text x="680" y="184" font-size="12" fill="#6e6759">Digital ≥ 600 × 750</text>
+
+  <line x1="44" y1="200" x2="856" y2="200" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="224" font-size="13" font-weight="600" fill="#1b1f28">Schengen / EU  35 × 45 mm</text>
+  <text x="300" y="224" font-size="13" font-weight="700" fill="#a03d28">413 × 531</text>
+  <text x="500" y="224" font-size="13" fill="#6e6759">827 × 1063</text>
+  <text x="680" y="224" font-size="12" fill="#6e6759">Print shops: 300 DPI</text>
+
+  <line x1="44" y1="240" x2="856" y2="240" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="264" font-size="13" font-weight="600" fill="#1b1f28">India  35 × 35 mm</text>
+  <text x="300" y="264" font-size="13" font-weight="700" fill="#a03d28">413 × 413</text>
+  <text x="500" y="264" font-size="13" fill="#6e6759">827 × 827</text>
+  <text x="680" y="264" font-size="12" fill="#6e6759">≥ 350 px, under 200 KB</text>
+
+  <line x1="44" y1="280" x2="856" y2="280" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="304" font-size="13" font-weight="600" fill="#1b1f28">China  33 × 48 mm</text>
+  <text x="300" y="304" font-size="13" font-weight="700" fill="#a03d28">390 × 567</text>
+  <text x="500" y="304" font-size="13" fill="#6e6759">780 × 1134</text>
+  <text x="680" y="304" font-size="12" fill="#6e6759">Confirm the visa centre</text>
+
+  <rect x="44" y="328" width="390" height="40" rx="8" fill="#f7f4ee"/>
+  <text x="64" y="354" font-size="13" fill="#6e6759">Portals check pixels and file size — not the tag</text>
+
+  <rect x="450" y="328" width="406" height="40" rx="8" fill="#f7f4ee"/>
+  <text x="470" y="354" font-size="13" fill="#6e6759">Print desks bounce “DPI too low” — set 300 or 600</text>
+
+  <text x="44" y="392" font-size="11" fill="#b0a895">setdpi.com — set passport photo DPI without cropping or resampling</text>
+</svg>

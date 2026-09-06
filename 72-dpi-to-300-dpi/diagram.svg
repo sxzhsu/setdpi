@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="400" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">72 DPI vs 300 DPI — same pixels, different print size</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Only the density tag changes. Print inches = pixels ÷ DPI. Screens ignore both tags.</text>
+
+  <rect x="44" y="84" width="390" height="116" rx="12" fill="#f7f4ee"/>
+  <text x="64" y="114" font-size="22" font-weight="bold" fill="#a03d28">72 DPI</text>
+  <text x="64" y="138" font-size="13" fill="#6e6759">Screens, web, screenshots, AI default</text>
+  <text x="64" y="162" font-size="13" font-weight="600" fill="#1b1f28">1200 × 1800 px  →  16.7 × 25.0 in</text>
+  <text x="64" y="184" font-size="12" fill="#6e6759">Preflight: screen-resolution — often rejected</text>
+
+  <rect x="466" y="84" width="390" height="116" rx="12" fill="#f7f4ee"/>
+  <text x="486" y="114" font-size="22" font-weight="bold" fill="#a03d28">300 DPI</text>
+  <text x="486" y="138" font-size="13" fill="#6e6759">Photo labs, journals, IDs, KDP, Etsy</text>
+  <text x="486" y="162" font-size="13" font-weight="600" fill="#1b1f28">1200 × 1800 px  →  4.0 × 6.0 in</text>
+  <text x="486" y="184" font-size="12" fill="#6e6759">Preflight: print-ready — the integer they check</text>
+
+  <rect x="44" y="216" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="237" font-size="12" font-weight="bold" fill="#6e6759">PIXEL SIZE</text>
+  <text x="280" y="237" font-size="12" font-weight="bold" fill="#6e6759">PRINT @ 72 DPI</text>
+  <text x="500" y="237" font-size="12" font-weight="bold" fill="#6e6759">PRINT @ 300 DPI</text>
+  <text x="720" y="237" font-size="12" font-weight="bold" fill="#6e6759">FIT AT 300</text>
+
+  <line x1="44" y1="252" x2="856" y2="252" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="276" font-size="13" font-weight="600" fill="#1b1f28">1200 × 1800</text>
+  <text x="280" y="276" font-size="13" fill="#6e6759">16.7 × 25.0 in</text>
+  <text x="500" y="276" font-size="13" font-weight="700" fill="#a03d28">4.0 × 6.0 in</text>
+  <text x="720" y="276" font-size="12" fill="#6e6759">Standard lab print</text>
+
+  <line x1="44" y1="292" x2="856" y2="292" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="316" font-size="13" font-weight="600" fill="#1b1f28">2400 × 3000</text>
+  <text x="280" y="316" font-size="13" fill="#6e6759">33.3 × 41.7 in</text>
+  <text x="500" y="316" font-size="13" font-weight="700" fill="#a03d28">8.0 × 10.0 in</text>
+  <text x="720" y="316" font-size="12" fill="#6e6759">Framed photo</text>
+
+  <line x1="44" y1="332" x2="856" y2="332" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="356" font-size="13" font-weight="600" fill="#1b1f28">2550 × 3300</text>
+  <text x="280" y="356" font-size="13" fill="#6e6759">35.4 × 45.8 in</text>
+  <text x="500" y="356" font-size="13" font-weight="700" fill="#a03d28">8.5 × 11.0 in</text>
+  <text x="720" y="356" font-size="12" fill="#6e6759">US Letter / KDP</text>
+
+  <text x="44" y="392" font-size="11" fill="#b0a895">setdpi.com — convert 72 to 300 without re-encoding</text>
+</svg>
