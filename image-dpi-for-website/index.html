@@ -182,6 +182,9 @@ img,svg{max-width:100%}
     <div class="ruler" aria-hidden="true"></div>
   </div>
 
+  <div style="overflow-x:auto;margin:1.5rem 0 2rem" class="block">
+    <img src="diagram.svg" alt="Web DPI comparison: a 1200×800 image at 72 DPI and 300 DPI looks identical on screen because browsers ignore the DPI tag" width="900" loading="lazy" style="width:100%;height:auto;min-width:680px;border-radius:12px;border:1px solid #e6e0d0;background:#fffdf9" />
+  </div>
   <section class="block" id="browsers">
     <h2>Browsers do not read the DPI tag</h2>
     <p>Image DPI for website pages is a print habit that never entered the rendering pipeline. When a browser paints a JPEG or PNG, it does not open JFIF density, EXIF <code>XResolution</code>, or the PNG <code>pHYs</code> chunk to decide how large or how sharp the picture is. It maps image pixels to CSS pixels. A 1200-pixel-wide photo in a 600-pixel-wide column is drawn 600 CSS pixels wide. Device pixel ratio then multiplies that box: 1× on an old laptop, 2× or 3× on a phone, so the GPU has device pixels to fill the glass.</p>

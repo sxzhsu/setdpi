@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="300" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">The three-way formula</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Enter any two; the calculator solves for the third.</text>
+  <rect x="44" y="100" width="220" height="100" rx="12" fill="#f5e9e3" stroke="#a03d28" stroke-width="1.5"/>
+  <text x="154" y="140" font-size="28" font-weight="bold" fill="#a03d28" text-anchor="middle">Pixels</text>
+  <text x="154" y="168" font-size="13" fill="#6e6759" text-anchor="middle">width or height</text>
+  <text x="300" y="155" font-size="22" fill="#6e6759">=</text>
+  <rect x="340" y="100" width="220" height="100" rx="12" fill="#f5e9e3" stroke="#a03d28" stroke-width="1.5"/>
+  <text x="450" y="140" font-size="28" font-weight="bold" fill="#a03d28" text-anchor="middle">Inches</text>
+  <text x="450" y="168" font-size="13" fill="#6e6759" text-anchor="middle">print dimension</text>
+  <text x="596" y="155" font-size="22" fill="#6e6759">×</text>
+  <rect x="636" y="100" width="220" height="100" rx="12" fill="#f5e9e3" stroke="#a03d28" stroke-width="1.5"/>
+  <text x="746" y="140" font-size="28" font-weight="bold" fill="#a03d28" text-anchor="middle">DPI</text>
+  <text x="746" y="168" font-size="13" fill="#6e6759" text-anchor="middle">dots per inch</text>
+  <text x="154" y="240" font-size="12" fill="#6e6759" text-anchor="middle">DPI = Pixels ÷ Inches</text>
+  <text x="450" y="240" font-size="12" fill="#6e6759" text-anchor="middle">Inches = Pixels ÷ DPI</text>
+  <text x="746" y="240" font-size="12" fill="#6e6759" text-anchor="middle">Pixels = Inches × DPI</text>
+  <text x="44" y="290" font-size="11" fill="#b0a895">setdpi.com/dpi-calculator — no signup, no upload</text>
+</svg>

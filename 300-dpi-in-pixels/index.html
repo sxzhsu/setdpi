@@ -182,6 +182,9 @@ img,svg{max-width:100%}
     <div class="ruler" aria-hidden="true"></div>
   </div>
 
+  <div style="overflow-x:auto;margin:1.5rem 0 2rem" class="block">
+    <img src="diagram.svg" alt="Table of common print sizes at 300 DPI showing pixel dimensions: 4×6 photo is 1200×1800 pixels, US Letter is 2550×3300, A4 is 2481×3507, 24×36 poster is 7200×10800" width="900" loading="lazy" style="width:100%;height:auto;min-width:680px;border-radius:12px;border:1px solid #e6e0d0;background:#fffdf9" />
+  </div>
   <section class="block" id="formula">
     <h2>The formula and why 300</h2>
     <p>300 DPI in pixels is inches times 300, rounded to a whole pixel. Millimetres convert first: inches = mm ÷ 25.4. Every cell on this page is <code>round(size_in × DPI)</code> with that conversion. A4 is 210 × 297 mm, so 210 ÷ 25.4 × 300 = 2480.31 → 2480, and 297 ÷ 25.4 × 300 = 3507.87 → 3508. Letter is already in inches: 8.5 × 300 = 2550, 11 × 300 = 3300. A 4 × 6 in photo is 1200 × 1800. That is the whole conversion.</p>

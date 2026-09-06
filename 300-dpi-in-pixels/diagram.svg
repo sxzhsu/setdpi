@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="900" height="380" fill="#fffdf9"/>
+  <text x="44" y="42" font-size="20" font-weight="bold" fill="#1b1f28">Common sizes at 300 DPI</text>
+  <text x="44" y="66" font-size="13" fill="#6e6759">Pixels = inches × 300. The tag says 300; the pixel count decides sharpness.</text>
+  <rect x="44" y="88" width="812" height="32" rx="6" fill="#f7f4ee"/>
+  <text x="64" y="109" font-size="12" font-weight="bold" fill="#6e6759">SIZE</text>
+  <text x="280" y="109" font-size="12" font-weight="bold" fill="#6e6759">INCHES</text>
+  <text x="450" y="109" font-size="12" font-weight="bold" fill="#6e6759">PIXELS AT 300 DPI</text>
+  <text x="680" y="109" font-size="12" font-weight="bold" fill="#6e6759">MEGAPIXELS</text>
+  <line x1="44" y1="124" x2="856" y2="124" stroke="#e6e0d0" stroke-width="1"/>
+  <text x="64" y="148" font-size="13" font-weight="600" fill="#1b1f28">4 × 6 photo</text>
+  <text x="280" y="148" font-size="13" fill="#6e6759">4 × 6</text>
+  <text x="450" y="148" font-size="13" font-weight="600" fill="#a03d28">1200 × 1800</text>
+  <text x="680" y="148" font-size="13" fill="#6e6759">2.2 MP</text>
+  <line x1="44" y1="164" x2="856" y2="164" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="188" font-size="13" font-weight="600" fill="#1b1f28">5 × 7 photo</text>
+  <text x="280" y="188" font-size="13" fill="#6e6759">5 × 7</text>
+  <text x="450" y="188" font-size="13" font-weight="600" fill="#a03d28">1500 × 2100</text>
+  <text x="680" y="188" font-size="13" fill="#6e6759">3.2 MP</text>
+  <line x1="44" y1="204" x2="856" y2="204" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="228" font-size="13" font-weight="600" fill="#1b1f28">8 × 10 photo</text>
+  <text x="280" y="228" font-size="13" fill="#6e6759">8 × 10</text>
+  <text x="450" y="228" font-size="13" font-weight="600" fill="#a03d28">2400 × 3000</text>
+  <text x="680" y="228" font-size="13" fill="#6e6759">7.2 MP</text>
+  <line x1="44" y1="244" x2="856" y2="244" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="268" font-size="13" font-weight="600" fill="#1b1f28">US Letter (A)</text>
+  <text x="280" y="268" font-size="13" fill="#6e6759">8.5 × 11</text>
+  <text x="450" y="268" font-size="13" font-weight="600" fill="#a03d28">2550 × 3300</text>
+  <text x="680" y="268" font-size="13" fill="#6e6759">8.4 MP</text>
+  <line x1="44" y1="284" x2="856" y2="284" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="308" font-size="13" font-weight="600" fill="#1b1f28">A4</text>
+  <text x="280" y="308" font-size="13" fill="#6e6759">8.27 × 11.69</text>
+  <text x="450" y="308" font-size="13" font-weight="600" fill="#a03d28">2481 × 3507</text>
+  <text x="680" y="308" font-size="13" fill="#6e6759">8.7 MP</text>
+  <line x1="44" y1="324" x2="856" y2="324" stroke="#e6e0d0" stroke-width="0.5"/>
+  <text x="64" y="348" font-size="13" font-weight="600" fill="#1b1f28">24 × 36 poster</text>
+  <text x="280" y="348" font-size="13" fill="#6e6759">24 × 36</text>
+  <text x="450" y="348" font-size="13" font-weight="600" fill="#a03d28">7200 × 10800</text>
+  <text x="680" y="348" font-size="13" fill="#6e6759">77.8 MP</text>
+  <text x="44" y="376" font-size="11" fill="#b0a895">setdpi.com — pixels ÷ DPI = print size in inches</text>
+</svg>
