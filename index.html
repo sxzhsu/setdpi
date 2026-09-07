@@ -151,6 +151,13 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* Mobile: long technical strings must not scroll the page — Google indexes mobile-first. */
 code,pre,kbd,samp{overflow-wrap:anywhere}
 pre{overflow-x:auto}
+
+/* Privacy section: the global reset zeroes margins and list indent, so scope them back. */
+#privacy{padding-bottom:10px}
+#privacy h3{font-size:16px;font-weight:700;margin:20px 0 6px}
+#privacy p{color:#374151;margin-bottom:12px;max-width:760px}
+#privacy ul{margin:0 0 12px;padding-left:22px;max-width:760px}
+#privacy li{color:#374151;margin-bottom:6px}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
@@ -360,13 +367,41 @@ pre{overflow-x:auto}
 
   <section id="privacy" class="wrap">
     <h2>Privacy</h2>
-    <p><strong>Your images never leave your device.</strong> SetDPI rewrites the DPI metadata entirely in your browser — there is no upload, no server-side processing, and no copy of your file anywhere but your own computer. There are no accounts and no forms, so there is nothing personal for this site to collect.</p>
+    <p><strong>Your images never leave your device.</strong> SetDPI rewrites the DPI metadata entirely in your browser — there is no upload, no server-side processing, and no copy of your file anywhere but your own computer. There are no accounts and no forms, so the site itself never asks you for anything about yourself &mdash; the analytics below are a separate matter.</p>
     <p>The site does use two third-party analytics services to see aggregate traffic:</p>
     <ul>
       <li><strong>Google Analytics 4</strong> — page views and events. GA4 uses your IP address to derive a coarse location (country, region, city); Google states it does not log or store individual IP addresses for visitors from the EU, Switzerland and the UK.</li>
-      <li><strong>Microsoft Clarity</strong> — aggregate interaction data such as scroll depth and clicks, used to spot usability problems.</li>
+      <li><strong>Microsoft Clarity</strong> &mdash; session replays and heatmaps, used to spot usability problems. Clarity reconstructs a visit rather than just counting it: pointer movement, clicks, scrolling, and the content shown on the page while you used it. On this site that can include the name of the file you picked, because the name is displayed beside its preview. The image data itself is never sent &mdash; only what is drawn on screen.</li>
     </ul>
     <p>Both set cookies, and neither is tied to a name or account because we don't have those. You can block them with a browser ad-blocker or by disabling cookies, with no effect on the DPI tool working. If ads are added here in future through a provider such as Google AdSense, that provider may also set cookies — you can opt out of personalised advertising via <a href="https://adssettings.google.com/" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+    <p>One more third party, for completeness: the footer on this page shows a badge image served from SaaSHub's CDN. Loading an image from another host lets that host see your IP address and browser string as it serves the file; this one sets no cookie, and it is on the homepage only.</p>
+
+    <h3>Your data rights</h3>
+    <p>Some of what those two analytics tools collect &mdash; an IP address, a browser and device string, a record of what was clicked and scrolled, a replay of the page as you saw it &mdash; counts as personal data under EU, UK and California law, even though nothing here ties it to a name. So the rights below apply. To be clear about what this section is: a description of those rights and of how to use them, not a claim that this one-person site has been certified compliant with anything.</p>
+    <p>Where the data actually sits matters for every request that follows. SetDPI runs no server and keeps no database &mdash; the pages are static files, there is no account, no sign-up and no form anywhere on the site. The only copies of the analytics data are the ones held inside Google Analytics and Microsoft Clarity, and how long each keeps it is set by that provider's own retention policy rather than by any setting here. Their terms are in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a> and <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">Microsoft's privacy statement</a>.</p>
+
+    <h3>EU and UK visitors (GDPR and UK GDPR)</h3>
+    <p>You have the right to <strong>access</strong> the data held about you, to have it <strong>rectified</strong> if it is wrong, to have it <strong>erased</strong>, to <strong>restrict</strong> how it is processed, to <strong>object</strong> to the processing, and to receive your data in a <strong>portable</strong> form. You also have the right to lodge a complaint with your national supervisory authority, and you do not need to go through this site first to do it.</p>
+    <p>Practically, an access or erasure request sent to this site has nothing to act on, because there is no record of you here to look up or delete. The parties that do hold something are Google and Microsoft, and both run their own request channels &mdash; the policies linked above are the route in. The step that takes effect immediately, without asking anyone, is in the last section below.</p>
+
+    <h3>California visitors (CCPA and CPRA)</h3>
+    <ul>
+      <li><strong>Right to know</strong> what is collected and who receives it. Two analytics recipients, both listed above: page views and events to Google Analytics, session replays and heatmaps to Microsoft Clarity. On this page only, SaaSHub's CDN additionally sees your IP address and browser string when it serves the badge image. This site itself stores nothing.</li>
+      <li><strong>Right to delete</strong> and <strong>right to correct</strong>. As above, the copies live with Google and Microsoft, so those requests have to go to them to reach anything.</li>
+      <li><strong>Right to opt out of the sale or sharing of personal information</strong>. See the note directly below.</li>
+      <li><strong>Right to non-discrimination</strong> for exercising any of these. Every tool and page here is free, with no account and no paid tier, so there is nothing that could be withheld from you. Blocking the analytics does not change what you can use.</li>
+    </ul>
+    <p><strong>On &ldquo;sale&rdquo; and &ldquo;sharing&rdquo;:</strong> nothing is sold for money, and this site carries no advertising &mdash; there is no ad script, ad network or ad slot anywhere in its source. The CCPA also counts disclosing identifiers for cross-context behavioural advertising as &ldquo;sharing&rdquo;, and SetDPI does not do that either. What is left is ordinary analytics: Google and Microsoft each receive an identifier when your browser loads their script, and what they may then do with it is governed by their own terms rather than by anything configured here. If you would rather they did not receive it at all, block it &mdash; that is a real opt-out, and it takes effect the moment you set it.</p>
+
+    <h3>How to stop the collection yourself</h3>
+    <p>All of it depends on third-party scripts and cookies, so blocking is effective and needs no request to anyone:</p>
+    <ul>
+      <li>Any content or ad blocker &mdash; uBlock Origin, AdGuard, Brave's shields, Safari's tracking prevention &mdash; stops both scripts from loading at all.</li>
+      <li>Blocking third-party cookies in your browser settings stops the cookies they set.</li>
+      <li>Google's <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Analytics opt-out browser add-on</a> disables Google Analytics on every site you visit, not just this one.</li>
+      <li>Turning on <a href="https://globalprivacycontrol.org/" target="_blank" rel="noopener">Global Privacy Control</a> in a browser that supports it sends an opt-out signal automatically; California law treats that signal as a valid opt-out request.</li>
+    </ul>
+    <p>None of this affects the tool. The DPI changer is plain JavaScript inside the page and never calls the analytics scripts, so with both blocked you can still drop a file in, set the DPI and download it &mdash; offline, too, once the page has loaded. And whichever way you set it, the image itself still goes nowhere: nothing in this site's code uploads your file.</p>
   </section>
 </main>
 
