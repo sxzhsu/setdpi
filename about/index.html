@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>About SetDPI — Who Runs This Site</title>
+<meta name="description" content="SetDPI is an independent, one-person project that rewrites image DPI metadata in the browser. No upload, no server, no account.">
+<link rel="canonical" href="https://setdpi.com/about/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://setdpi.com/about/">
+<meta property="og:title" content="About SetDPI — Who Runs This Site">
+<meta property="og:description" content="SetDPI is an independent, one-person project that rewrites image DPI metadata in the browser. No upload, no server, no account.">
+<meta property="og:image" content="https://setdpi.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234f46e5'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='bold' fill='white' text-anchor='middle'%3EDPI%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<style>
+:root{color-scheme:only light;--bg:#f7f4ee;--card:#fffdf9;--ink:#1b1f28;--muted:#6e6759;--line:#e6e0d0;--accent:#a03d28;--accent-ink:#ffffff;--accent-soft:#f5e9e3;--radius:12px;--shadow:0 1px 0 rgba(27,31,40,.04),0 12px 32px rgba(27,31,40,.05)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:15.5px}
+a{color:var(--accent);text-decoration:underline}
+a:hover{opacity:.85}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+h1{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;font-size:clamp(28px,5vw,38px);font-weight:800;letter-spacing:0;line-height:1.2;margin-bottom:8px}
+h2{font-family:'Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;margin:32px 0 10px;letter-spacing:0}
+p{color:#374151;margin-bottom:14px;max-width:680px}
+ul{margin:0 0 14px;padding-left:22px;max-width:680px}
+li{color:#374151;margin-bottom:8px}
+li strong{color:var(--ink)}
+nav.crumb{padding:18px 0 0;font-size:13px;color:var(--muted)}
+nav.crumb a{color:var(--muted);text-decoration:none}
+nav.crumb a:hover{text-decoration:underline}
+.author-card{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:24px 0 32px}
+.author-card .avatar{width:56px;height:56px;border-radius:50%;background:var(--accent-soft);border:1px solid rgba(160,61,40,.25);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.author-card h2{margin:0 0 6px;font-size:18px}
+.author-card p{font-size:14px;margin:0}
+footer.site{margin-top:48px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:13.5px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+code{overflow-wrap:anywhere}
+@media(max-width:560px){.author-card{flex-direction:column;align-items:center;text-align:center}}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="crumb"><a href="/">Home</a> / About</nav>
+
+<h1 style="margin-top:24px">About SetDPI</h1>
+
+<div class="author-card">
+  <div class="avatar">🔧</div>
+  <div>
+    <h2>Casey Marlin</h2>
+    <p>Builder of small, honest web tools. SetDPI exists because changing an image's DPI tag for a print shop or a form submission should not require installing Photoshop, paying a subscription, or uploading private photos to someone else's server.</p>
+  </div>
+</div>
+
+<h2>What SetDPI does</h2>
+<p>SetDPI rewrites the DPI/PPI metadata inside JPEG and PNG files — the tag that tells printers and layout software how many pixels map to a printed inch. It changes the label, not the pixels: your image's quality, dimensions, and file size stay the same.</p>
+<p>The entire process runs in your browser using the File API. Your images are never uploaded to a server. Go offline after loading the page and it still works — that is the proof.</p>
+
+<h2>Principles</h2>
+<ul>
+  <li><strong>Local-first, verifiably.</strong> There is no upload endpoint. The page is static HTML, JavaScript, and CSS served from GitHub Pages. No backend, no database, no image processing server.</li>
+  <li><strong>Honest claims only.</strong> The tool changes metadata, not resolution. Pages like "Convert Image to 300 DPI" explain plainly that increasing the DPI tag does not add pixels or improve print quality — it changes how printers interpret existing pixels.</li>
+  <li><strong>Format support is stated, not stretched.</strong> SetDPI handles JPEG (JFIF and EXIF) and PNG (pHYs chunk). It does not claim to handle TIFF, WebP, HEIC, or RAW. Unsupported formats are rejected with a clear message and, where possible, a redirect to a dedicated tool.</li>
+</ul>
+
+<h2>The guides</h2>
+<p>The topic pages (DPI for printing, DPI vs PPI, standard DPI settings, and others) are reference material written to answer the questions people actually search for. They are checked against current software versions and carry a last-checked date. Where a page states a fact, it cites the source — an ICC spec, an OS release note, a printer manufacturer's documentation.</p>
+
+<h2>Contact</h2>
+<p>Questions, corrections, or partnership inquiries: <a href="mailto:tomcharm168@gmail.com">tomcharm168@gmail.com</a>.</p>
+
+<h2>Disclaimer</h2>
+<p>SetDPI is an independent project. It is not affiliated with, endorsed by, or sponsored by Adobe, Apple, Microsoft, Google, Canon, Epson, or any printer manufacturer. Product names mentioned in the guides are trademarks of their respective owners, used only to describe compatibility. All writing on this site is original.</p>
+
+</div>
+
+<footer class="site">
+  <div class="wrap cols">
+    <span>© 2026 SetDPI · Free online image DPI converter</span>
+    <span><a href="/">Home</a> · <a href="/about/">About</a> · <a href="/#privacy">Privacy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
