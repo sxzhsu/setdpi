@@ -370,8 +370,8 @@ pre{overflow-x:auto}
     <p><strong>Your images never leave your device.</strong> SetDPI rewrites the DPI metadata entirely in your browser — there is no upload, no server-side processing, and no copy of your file anywhere but your own computer. There are no accounts and no forms, so the site itself never asks you for anything about yourself &mdash; the analytics below are a separate matter.</p>
     <p>The site does use two third-party analytics services to see aggregate traffic:</p>
     <ul>
-      <li><strong>Google Analytics 4</strong> — page views and events. GA4 uses your IP address to derive a coarse location (country, region, city); Google states it does not log or store individual IP addresses for visitors from the EU, Switzerland and the UK.</li>
-      <li><strong>Microsoft Clarity</strong> &mdash; session replays and heatmaps, used to spot usability problems. Clarity reconstructs a visit rather than just counting it: pointer movement, clicks, scrolling, and the content shown on the page while you used it. On this site that can include the name of the file you picked, because the name is displayed beside its preview. The image data itself is never sent &mdash; only what is drawn on screen.</li>
+      <li><strong>Google Analytics 4</strong> — page views and events. GA4 uses your IP address to derive a coarse location (country, region, city); Google states it does not log or store individual IP addresses for visitors from the EU, Switzerland and the UK. This site sends GA4 exactly one event of its own, and only when a file is rejected: it reports the file's <em>extension</em> and nothing else &mdash; not the name, not the size, not a single byte of the image. It exists to answer one question with real numbers rather than guesswork: which formats do people actually arrive with that this tool cannot yet read.</li>
+      <li><strong>Microsoft Clarity</strong> &mdash; session replays and heatmaps, used to spot usability problems. Clarity reconstructs a visit rather than just counting it: pointer movement, clicks, scrolling, and the content shown on the page while you used it. The file name shown beside each preview is marked so that Clarity records the space it occupies but not the text in it &mdash; people bring passport and ID scans here, and a file name on its own can carry a real one. The image data is never sent either; a replay shows the page, not your picture.</li>
     </ul>
     <p>Both set cookies, and neither is tied to a name or account because we don't have those. You can block them with a browser ad-blocker or by disabling cookies, with no effect on the DPI tool working. If ads are added here in future through a provider such as Google AdSense, that provider may also set cookies — you can opt out of personalised advertising via <a href="https://adssettings.google.com/" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
     <p>One more third party, for completeness: the footer on this page shows a badge image served from SaaSHub's CDN. Loading an image from another host lets that host see your IP address and browser string as it serves the file; this one sets no cookie, and it is on the homepage only.</p>
@@ -646,13 +646,44 @@ drop.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ 
 drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer.files); });
 input.addEventListener('change', function(){ addFiles(input.files); input.value=''; });
 
+// TIFF and BMP have their own pages with their own writers, so a file this tool
+// cannot take is often one the site can — say which page rather than dead-ending.
+var SENT_ELSEWHERE = {tif:'/tiff-dpi-changer/', tiff:'/tiff-dpi-changer/', bmp:'/bmp-dpi-changer/'};
+
+function rejectFile(f){
+  var name = f.name || 'File';
+  var i = name.lastIndexOf('.');
+  var ext = i > 0 ? name.slice(i + 1).toLowerCase() : '(none)';
+  // Only the extension goes to analytics — never the file name and never the bytes.
+  // This is here to answer one question with real visitors instead of guesswork:
+  // which formats do people actually arrive with? HEIC in particular is what an
+  // iPhone hands you, and this tool currently cannot read it.
+  if (typeof gtag === 'function') {
+    gtag('event', 'unsupported_drop', {ext: ext.slice(0, 12)});
+  }
+  var page = SENT_ELSEWHERE[ext];
+  if (page) {
+    if (confirm(name + ': this page handles JPG and PNG. There is a ' + ext.toUpperCase() +
+                ' tool on this site — open it now?')) { location.href = page; }
+    return;
+  }
+  if (ext === 'heic' || ext === 'heif') {
+    alert(name + ': HEIC is what an iPhone saves by default, and this tool cannot read it yet.\n\n' +
+          'On the iPhone: Settings > Camera > Formats > Most Compatible makes new photos JPG. ' +
+          'For a photo you already have, share it to Mail or Files and it converts to JPG on the way out.');
+    return;
+  }
+  alert(name + ': this page changes the DPI tag on JPG and PNG files. ' +
+        'TIFF and BMP have their own pages, linked in the menu above.');
+}
+
 function addFiles(list){
   var arr = Array.prototype.slice.call(list).slice(0, 50);
   arr.forEach(function(f){
     f.arrayBuffer().then(function(buf){
       var u = new Uint8Array(buf);
       var kind = isJpeg(u) ? 'jpeg' : (isPng(u) ? 'png' : null);
-      if(!kind){ alert((f.name||'File') + ': only JPG and PNG are supported.'); return; }
+      if(!kind){ rejectFile(f); return; }
       var item = {
         name: f.name || 'image',
         bytes: u,
@@ -698,12 +729,17 @@ function renderAll(){
       ? '<span class="badge">' + item.dpi + ' DPI</span>'
       : '<span class="badge warn">DPI not set</span>';
     row.innerHTML =
-      '<img class="thumb" width="52" height="52" alt="Preview of ' + item.name + '" src="' + item.url + '">' +
-      '<div class="meta"><div class="name"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + '</div></div>' +
+      '<img class="thumb" width="52" height="52" alt="" src="' + item.url + '">' +
+      '<div class="meta"><div class="name" data-clarity-mask="true"></div><div class="dims">' + (item.w ? item.w + ' × ' + item.h + ' px · ' : '') + item.kind.toUpperCase() + '</div></div>' +
       '<span>' + dpiBadge + ' <span class="arrow">→</span> <span class="badge">' + targetDpi + ' DPI</span></span>' +
       '<span class="print">' + printSize(item) + '</span>' +
       '<button class="btn primary" data-i="' + idx + '">Download</button>';
+    // Both set as properties, not interpolated into the innerHTML above: a file name
+    // is user-supplied and a quote in it would otherwise break out of the alt attribute.
+    // The visible name carries data-clarity-mask because people bring passport and ID
+    // scans to this tool and the file name alone can carry a real one.
     row.querySelector('.name').textContent = item.name;
+    row.querySelector('img.thumb').alt = 'Preview of ' + item.name;
     row.querySelector('button').addEventListener('click', function(){ convert(item); });
     box.appendChild(row);
   });
