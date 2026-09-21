@@ -1,0 +1,4 @@
+exclude:
+  - evidence
+  - README.md
+  - CURRENT_STATE.md
