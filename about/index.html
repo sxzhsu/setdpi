@@ -57,29 +57,29 @@ code{overflow-wrap:anywhere}
   <div class="avatar">🔧</div>
   <div>
     <h2>Casey Marlin</h2>
-    <p>Builder of small, honest web tools. SetDPI exists because changing an image's DPI tag for a print shop or a form submission should not require installing Photoshop, paying a subscription, or uploading private photos to someone else's server.</p>
+    <p>Casey Marlin maintains SetDPI as a one-person project. A print shop or an online form sometimes demands a DPI label, and changing that label should not require a large photo editor, a paid subscription, or an upload of a private photo. He publishes the tool, corrects errors readers report, and keeps the work limited to JPEG and PNG metadata.</p>
   </div>
 </div>
 
-<h2>What SetDPI does</h2>
-<p>SetDPI rewrites the DPI/PPI metadata inside JPEG and PNG files — the tag that tells printers and layout software how many pixels map to a printed inch. It changes the label, not the pixels: your image's quality, dimensions, and file size stay the same.</p>
-<p>The entire process runs in your browser using the File API. Your images are never uploaded to a server. Go offline after loading the page and it still works — that is the proof.</p>
+<h2>Why this site exists</h2>
+<p>The demand is usually the tag itself. A portal may reject a picture that already has enough pixels because the embedded number still says 72, or a shop form may ask for 300. SetDPI is that tag change and nothing broader: no print bureau, no account, and no separate company behind the name on this card.</p>
 
-<h2>Principles</h2>
-<ul>
-  <li><strong>Local-first, verifiably.</strong> There is no upload endpoint. The page is static HTML, JavaScript, and CSS served from GitHub Pages. No backend, no database, no image processing server.</li>
-  <li><strong>Honest claims only.</strong> The tool changes metadata, not resolution. Pages like "Convert Image to 300 DPI" explain plainly that increasing the DPI tag does not add pixels or improve print quality — it changes how printers interpret existing pixels.</li>
-  <li><strong>Format support is stated, not stretched.</strong> SetDPI handles JPEG (JFIF and EXIF) and PNG (pHYs chunk). It does not claim to handle TIFF, WebP, HEIC, or RAW. Unsupported formats are rejected with a clear message and, where possible, a redirect to a dedicated tool.</li>
-</ul>
+<h2>What the tool changes</h2>
+<p>SetDPI rewrites density metadata that a JPEG or a PNG already carries. In a JPEG the number sits in a JFIF density field or an EXIF resolution tag. In a PNG it sits in the pHYs chunk. The tool writes a new DPI or PPI value into that field. It does not resample, so the pixel width and pixel height stay as they were, and a blurry photo stays blurry. This is not an AI enlarger and it does not add detail that was never captured.</p>
+<p>Pixel dimensions, the DPI label, and the printed size are three different things. Dimensions count the samples in the file. The label is only metadata, such as 300. Printed size is the dimensions divided by that label. A shop that says 300 DPI may mean the label, a physical size, or both. The <a href="/dpi-calculator/">DPI calculator</a> and the <a href="/300-dpi-in-pixels/">300 DPI in pixels</a> page keep those questions apart. JPEG and PNG are the formats in scope. TIFF, WebP, HEIC, and RAW are outside this tool.</p>
 
-<h2>The guides</h2>
-<p>The topic pages (DPI for printing, DPI vs PPI, standard DPI settings, and others) are reference material written to answer the questions people actually search for. They are checked against current software versions and carry a last-checked date. Where a page states a fact, it cites the source — an ICC spec, an OS release note, a printer manufacturer's documentation.</p>
+<h2>What was checked, and what you can check</h2>
+<p>This repository has no automated image-regression suite. The evidence folder contains traffic screenshots, not before-and-after picture fixtures, so this page does not claim that every JPEG or PNG variant was tested.</p>
+<p>The A4 calculator rows and the matching FAQ follow one formula. A4 paper is 210 mm by 297 mm. At 300 DPI, round(210 / 25.4 × 300) is 2480 and round(297 / 25.4 × 300) is 3508. The same steps give 1240 by 1754 at 150 DPI and 4961 by 7016 at 600 DPI. You can repeat that arithmetic on a calculator.</p>
+<p>You can check a file yourself. Record the pixel width and height, set a new DPI, and save. Confirm elsewhere that the pixel dimensions are unchanged and that the density label matches. Compare the byte count too: rewriting JFIF, EXIF, or pHYs data can change the file size without resampling. After the page loads, turn networking off and repeat. If the new label still saves, that step did not use a conversion server. These are checks for you to run. They are not a completed test log. This About page was revised on 17 October 2026, and that date is not a site-wide retest.</p>
 
-<h2>Contact</h2>
-<p>Questions, corrections, or partnership inquiries: <a href="mailto:support@setdpi.com">support@setdpi.com</a>.</p>
+<h2>Privacy boundary</h2>
+<p>The image step runs in the browser on the file you choose. There is no upload form for that conversion, and the rewrite does not send the picture to a server. Loading the site is a separate matter. The pages request their own files, and they include analytics scripts from Google Analytics and Microsoft Clarity plus an advertising script. Those scripts can store cookies and send browser data to their providers. The <a href="/privacy/">privacy policy</a> describes that activity. This page does not promise a visit with no cookies and no analytics.</p>
+<p>Mail is a different channel. A message to <a href="mailto:support@setdpi.com">support@setdpi.com</a> sends what you typed, because you chose to send it. Do not attach the private photo. Use the <a href="/contact/">contact page</a> for the field list.</p>
 
-<h2>Disclaimer</h2>
-<p>SetDPI is an independent project. It is not affiliated with, endorsed by, or sponsored by Adobe, Apple, Microsoft, Google, Canon, Epson, or any printer manufacturer. Product names mentioned in the guides are trademarks of their respective owners, used only to describe compatibility. All writing on this site is original.</p>
+<h2>Independence and contact</h2>
+<p>SetDPI is an independent project. It is not affiliated with, endorsed by, or sponsored by Adobe, Apple, Microsoft, Google, Canon, Epson, or any printer maker. Product names appear only to describe a task a reader might be doing. All writing on this site is original. There is no paid plan on this site, and this page does not promise that later changes will stay free.</p>
+<p>Send corrections to <a href="mailto:support@setdpi.com">support@setdpi.com</a>. A useful note names the page URL, the browser and operating system, the file type, the pixel dimensions, the original DPI, the target DPI, and the expected result next to the actual result. No reply time is promised.</p>
 
 </div>
 
