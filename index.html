@@ -158,6 +158,10 @@ pre{overflow-x:auto}
 #privacy p{color:#374151;margin-bottom:12px;max-width:760px}
 #privacy ul{margin:0 0 12px;padding-left:22px;max-width:760px}
 #privacy li{color:#374151;margin-bottom:6px}
+.printful-aff{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fffdf9;font-size:14.5px}
+.printful-aff p{margin:0 0 8px}
+.printful-aff p:last-child{margin:0;color:var(--muted);font-size:13px}
+.printful-aff a{font-weight:700;color:var(--accent)}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
@@ -242,6 +246,7 @@ pre{overflow-x:auto}
         <button class="btn primary" id="dlAll">Download all</button>
       </div>
     </div>
+    <div id="printful-slot"></div>
   </div>
 
   <section class="block" id="more-tools">
@@ -418,11 +423,13 @@ pre{overflow-x:auto}
 <footer class="site">
   <div class="wrap cols">
     <span>© 2026 SetDPI · Free online image DPI converter</span>
+    <span>We may earn a commission</span>
     <span><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/contact/">Contact</a> · Images processed locally, never uploaded — <a href="/privacy/">privacy details</a>.</span>
     <a href="https://www.saashub.com/setdpi?utm_source=badge&utm_campaign=badge&utm_content=setdpi&badge_variant=color&badge_kind=approved" target="_blank" rel="noopener"><img src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1" alt="SetDPI badge" width="150" height="34" loading="lazy" style="max-width:150px;display:block"/></a>
   </div>
 </footer>
 
+<script src="/affiliates.js"></script>
 <script>
 (function(){
 "use strict";
@@ -755,6 +762,7 @@ function renderAll(){
   });
   $('toolbar').hidden = files.length === 0;
   $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
+  if (typeof setdpiMountPrintful === 'function') setdpiMountPrintful($('printful-slot'), files.length > 0);
 }
 $('dlAll').addEventListener('click', function(){
   files.forEach(function(item, i){ setTimeout(function(){ convert(item); }, i*350); });

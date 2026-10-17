@@ -134,6 +134,10 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 code,pre,kbd,samp{overflow-wrap:anywhere}
 pre{overflow-x:auto}
 img,svg{max-width:100%}
+.printful-aff{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fffdf9;font-size:14.5px}
+.printful-aff p{margin:0 0 8px}
+.printful-aff p:last-child{margin:0;color:var(--muted);font-size:13px}
+.printful-aff a{font-weight:700;color:var(--accent)}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
@@ -219,6 +223,7 @@ img,svg{max-width:100%}
         <button class="btn primary" id="dlAll" type="button">Download all</button>
       </div>
     </div>
+    <div id="printful-slot"></div>
   </div>
 
   <div style="overflow-x:auto;margin:1.5rem 0 2rem" class="block">
@@ -290,11 +295,13 @@ img,svg{max-width:100%}
 <footer class="site">
   <div class="wrap cols">
     <span>© 2026 SetDPI · Free online image DPI tools</span>
+    <span>We may earn a commission</span>
     <span>Images processed locally, never uploaded — <a href="/#privacy">privacy details</a>.</span>
     <span><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/contact/">Contact</a></span>
     <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
   </div>
 </footer>
+<script src="/affiliates.js"></script>
 <script>
 (function(){
 "use strict";
@@ -613,6 +620,7 @@ function renderAll(){
   });
   $('toolbar').hidden = files.length === 0;
   $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
+  if (typeof setdpiMountPrintful === 'function') setdpiMountPrintful($('printful-slot'), files.length > 0);
 }
 $('dlAll').addEventListener('click', function(){
   files.forEach(function(item, i){ setTimeout(function(){ convert(item); }, i*350); });
