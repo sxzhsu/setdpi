@@ -163,6 +163,7 @@ pre{overflow-x:auto}
 .printful-aff p:last-child{margin:0;color:var(--muted);font-size:13px}
 .printful-aff a{font-weight:700;color:var(--accent)}
 </style>
+<link rel="stylesheet" href="/press.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-D7MHQW8G6N');</script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xne51u96hs");</script>
@@ -217,7 +218,17 @@ pre{overflow-x:auto}
       <span>Lossless — pixels untouched</span>
       <span>Free — no signup, no watermark</span>
     </div>
-    <div class="ruler" aria-hidden="true"></div>
+    <div class="proof-demo" id="proofDemo" aria-hidden="true" style="background-image:url(/art/proof-table.jpg)">
+      <div class="sheet">
+        <span class="reg a"></span><span class="reg b"></span><span class="reg c"></span><span class="reg d"></span>
+        <span class="fit" id="pdFit">fits Letter</span>
+        <div class="trim"><div class="print" id="pdPrint" style="width:88.9%">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="none"><defs><linearGradient id="pdSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc7e8"/><stop offset="1" stop-color="#fde9b8"/></linearGradient></defs><rect width="400" height="300" fill="url(#pdSky)"/><circle cx="292" cy="96" r="38" fill="#f2c500"/><path d="M0 210 Q90 140 180 196 T400 170 V300 H0Z" fill="#0089c4" opacity=".85"/><path d="M0 250 Q120 196 240 240 T400 232 V300 H0Z" fill="#d4006f" opacity=".8"/><path d="M0 278 Q150 250 400 272 V300 H0Z" fill="#101317"/></svg>
+        </div></div>
+        <div class="slug"><span>2400 × 1800 px · untouched</span><span id="pdSize"><b>8.00 × 6.00 in</b> @ 300 DPI</span></div>
+      </div>
+      <div class="dial" id="pdDial"><span>72</span><span>150</span><span class="on">300</span><span>600</span></div>
+    </div>
   </div>
 
   <div class="tool" id="tool">
@@ -801,6 +812,24 @@ function calc2(){
 calc1(); calc2();
 /* test hook: byte-level API surface for automated verification */
 window.__setdpi = {readJpegDpi:readJpegDpi, writeJpegDpi:writeJpegDpi, readPngDpi:readPngDpi, writePngDpi:writePngDpi, isJpeg:isJpeg, isPng:isPng};
+})();
+</script>
+<script>
+/* Proof demo: same 2400×1800 px file, different DPI tag → different print size on a Letter sheet. Pixels never change. */
+(function(){
+  var d=document.getElementById('proofDemo'); if(!d) return;
+  var dpis=[72,150,300,600], i=2, W=2400, H=1800, TRIM=9;
+  var pr=document.getElementById('pdPrint'), sz=document.getElementById('pdSize'), fit=document.getElementById('pdFit'), dial=document.getElementById('pdDial').children;
+  function show(k){
+    var dpi=dpis[k], w=W/dpi, h=H/dpi;
+    pr.style.width=(w/TRIM*100).toFixed(1)+'%';
+    sz.innerHTML='<b>'+w.toFixed(2)+' × '+h.toFixed(2)+' in</b> @ '+dpi+' DPI';
+    var ok=w<=TRIM; fit.textContent=ok?'fits Letter':'bigger than the sheet'; fit.className='fit'+(ok?' ok':'');
+    for(var j=0;j<dial.length;j++) dial[j].className=j===k?'on':'';
+  }
+  show(i);
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function(){ i=(i+1)%dpis.length; show(i); },2200);
 })();
 </script>
 </body>
