@@ -140,6 +140,21 @@ footer .cols{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 code,pre,kbd,samp{overflow-wrap:anywhere}
 pre{overflow-x:auto}
 img,svg{max-width:100%}
+
+/* IND-20261102-06 paywall (bulk only) */
+.pw-backdrop{position:fixed;inset:0;background:rgba(28,24,20,.48);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(2px)}
+.pw-backdrop[hidden]{display:none!important}
+.pw-card{background:var(--card,#fffdf9);color:var(--ink,#1c1814);border:1px solid var(--line,#e6e0d0);border-radius:14px;max-width:440px;width:100%;padding:22px 22px 18px;box-shadow:0 18px 50px rgba(28,24,20,.18)}
+.pw-card h2{margin:0 0 8px;font-size:1.25rem;letter-spacing:-.02em}
+.pw-card p{margin:0 0 10px;color:var(--muted,#6b645a);font-size:14px;line-height:1.5}
+.pw-free{margin:0 0 14px;padding:10px 12px;border-radius:10px;background:rgba(61,122,74,.08);color:var(--ink,#1c1814);font-size:13px;line-height:1.45;border:1px solid rgba(61,122,74,.22)}
+.pw-actions{display:flex;flex-direction:column;gap:8px;margin:14px 0 10px}
+.pw-actions .btn{width:100%;justify-content:center;text-align:center}
+.pw-note{font-size:12px;color:var(--muted,#6b645a);margin:0}
+.pw-close{margin-top:12px}
+.pw-status{font-size:12px;color:var(--muted,#6b645a);margin:0 0 8px}
+.pw-status strong{color:var(--ink,#1c1814)}
+
 </style>
 <link rel="stylesheet" href="/press.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7MHQW8G6N"></script>
@@ -194,7 +209,7 @@ img,svg{max-width:100%}
     <div class="trust">
       <span>100% private — no upload</span>
       <span>Lossless — pixels untouched</span>
-      <span>Free — no signup, no watermark</span>
+      <span>First 5 free in a batch · no signup</span>
       <span>One zip for the whole batch</span>
     </div>
     <div class="ruler" aria-hidden="true"></div>
@@ -229,6 +244,22 @@ img,svg{max-width:100%}
       </div>
     </div>
     <div class="note" id="zipNotice" hidden></div>
+
+    <p class="pw-status" id="pwStatus" hidden></p>
+    <div class="pw-backdrop" id="paywall" hidden role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+      <div class="pw-card">
+        <h2 id="pwTitle">Unlock bulk download</h2>
+        <p>You&rsquo;ve processed more than <strong>5</strong> images. Download the whole batch as a zip with a Day Pass or Lifetime.</p>
+        <div class="pw-free"><strong>Single-file DPI tools stay free forever</strong> — no signup, no watermark. This wall is only for bulk zip download on this page.</div>
+        <div class="pw-actions">
+          <button type="button" class="btn primary" id="pwDayPass">Day Pass — $3.99</button>
+          <button type="button" class="btn" id="pwLifetime">Lifetime — $39.99</button>
+        </div>
+        <p class="pw-note">One-time checkout via Stripe. No monthly subscription. Cancel returns you here.</p>
+        <button type="button" class="btn ghost pw-close" id="pwClose">Not now</button>
+      </div>
+    </div>
+
   </div>
 
   <div style="overflow-x:auto;margin:1.5rem 0 2rem" class="block">
@@ -297,6 +328,7 @@ img,svg{max-width:100%}
     <span><a href="/">Image DPI Changer</a> on the homepage rewrites the tag losslessly.</span>
   </div>
 </footer>
+<script src="/paywall-config.js"></script>
 <script>
 (function(){
 "use strict";
@@ -304,6 +336,136 @@ img,svg{max-width:100%}
 var targetDpi = 300;
 var files = []; // {name, bytes:Uint8Array, kind:'jpeg'|'png', w, h, dpi, url, out, outDpi}
 var ZIP_MAX = 800 * 1024 * 1024;
+
+/* ---- IND-20261102-06 bulk paywall helpers (MVP; localStorage unlock is bypassable → phase 2) ---- */
+var PW = (typeof SETDPI_PAYWALL !== 'undefined' && SETDPI_PAYWALL) ? SETDPI_PAYWALL : {
+  FREE_LIMIT: 5, DAY_PASS_HOURS: 24, STORAGE_KEY: 'setdpi_bulk_unlock_v1',
+  PLACEHOLDER_DAY_PASS_URL: 'PLACEHOLDER_DAY_PASS_URL',
+  PLACEHOLDER_LIFETIME_URL: 'PLACEHOLDER_LIFETIME_URL',
+  DAY_PASS_URL: '', LIFETIME_URL: ''
+};
+var FREE_LIMIT = PW.FREE_LIMIT || 5;
+var processDoneSent = false;
+
+function track(name, params){
+  try {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  } catch (e) {}
+}
+
+function readUnlock(){
+  try {
+    var raw = localStorage.getItem(PW.STORAGE_KEY);
+    if (!raw) return null;
+    var rec = JSON.parse(raw);
+    if (!rec || !rec.tier) return null;
+    if (rec.tier === 'lifetime') return rec;
+    if (rec.tier === 'day' && typeof rec.until === 'number' && Date.now() < rec.until) return rec;
+    localStorage.removeItem(PW.STORAGE_KEY);
+    return null;
+  } catch (e) { return null; }
+}
+
+function writeUnlock(tier){
+  var rec = { tier: tier, unlockedAt: Date.now() };
+  if (tier === 'day') {
+    rec.until = Date.now() + (PW.DAY_PASS_HOURS || 24) * 3600 * 1000;
+  } else {
+    rec.until = null;
+  }
+  try { localStorage.setItem(PW.STORAGE_KEY, JSON.stringify(rec)); } catch (e) {}
+  return rec;
+}
+
+function isUnlocked(){
+  return !!readUnlock();
+}
+
+function updateUnlockStatus(){
+  var el = $('pwStatus');
+  if (!el) return;
+  var rec = readUnlock();
+  if (!rec) {
+    el.hidden = true;
+    el.textContent = '';
+    return;
+  }
+  el.hidden = false;
+  if (rec.tier === 'lifetime') {
+    el.innerHTML = 'Bulk zip unlocked: <strong>Lifetime</strong>.';
+  } else {
+    var left = Math.max(0, (rec.until || 0) - Date.now());
+    var hrs = Math.ceil(left / 3600000);
+    el.innerHTML = 'Bulk zip unlocked: <strong>Day Pass</strong> (~' + hrs + 'h left).';
+  }
+}
+
+function openPaywall(){
+  var pw = $('paywall');
+  if (!pw) return;
+  pw.hidden = false;
+  track('paywall_shown', { free_limit: FREE_LIMIT, file_count: files.length });
+}
+
+function closePaywall(){
+  var pw = $('paywall');
+  if (pw) pw.hidden = true;
+}
+
+function checkout(tier){
+  track('checkout_click', { tier: tier, price: tier === 'lifetime' ? 39.99 : 3.99 });
+  var url = typeof setdpiPaywallUrl === 'function' ? setdpiPaywallUrl(tier) : (tier === 'lifetime' ? PW.PLACEHOLDER_LIFETIME_URL : PW.PLACEHOLDER_DAY_PASS_URL);
+  var ready = typeof setdpiPaywallUrlReady === 'function' ? setdpiPaywallUrlReady(url) : /^https?:\/\//i.test(url || '');
+  if (!ready) {
+    alert('Payment Link not configured yet (' + (url || 'empty') + '). Paste the live buy.stripe.com URL into /paywall-config.js, then retry.');
+    return;
+  }
+  window.location.href = url;
+}
+
+function doZipDownload(){
+  if (!files.length) return;
+  var entries = [], total = 0, i, out;
+  for (i = 0; i < files.length; i++) {
+    out = ensureOut(files[i]);
+    total += out.length;
+    entries.push({ name: outName(files[i].name, targetDpi), data: out });
+  }
+  var notice = $('zipNotice');
+  if (total > ZIP_MAX) {
+    notice.hidden = false;
+    notice.textContent = 'This batch is over 800 MB. Split it into smaller batches instead of building one zip — the archive is assembled in RAM and a huge one can crash the tab.';
+    return;
+  }
+  notice.hidden = true;
+  notice.textContent = '';
+  var zip = zipStore(entries);
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([zip], { type: 'application/zip' }));
+  a.download = 'setdpi-' + targetDpi + 'dpi-batch.zip';
+  document.body.appendChild(a); a.click();
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+
+function handlePaidQuery(){
+  try {
+    var q = new URLSearchParams(window.location.search);
+    var paid = (q.get('paid') || '').toLowerCase();
+    var tier = (q.get('tier') || '').toLowerCase();
+    if (paid === '1' || paid === 'true' || paid === 'day' || paid === 'lifetime') {
+      if (paid === 'day' || paid === 'lifetime') tier = paid;
+      if (tier !== 'day' && tier !== 'lifetime') tier = 'lifetime';
+      writeUnlock(tier);
+      track('purchase_success', { tier: tier });
+      q.delete('paid'); q.delete('tier');
+      var next = window.location.pathname + (q.toString() ? ('?' + q.toString()) : '') + window.location.hash;
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, '', next);
+      }
+    }
+  } catch (e) {}
+}
+
 var $ = function(id){ return document.getElementById(id); };
 
 /* ---------- CRC32 (PNG + ZIP, table-driven) ---------- */
@@ -671,6 +833,22 @@ function renderAll(){
     box.appendChild(row);
   });
   $('toolbar').hidden = files.length === 0;
+  if(files.length && !processDoneSent){
+    processDoneSent = true;
+    track('process_done', { file_count: files.length });
+  }
+  if(!files.length){ processDoneSent = false; }
+  /* refresh free/paid hint on count */
+  if($('dlZip')){
+    if(isUnlocked()){
+      $('dlZip').textContent = 'Download all as .zip';
+    } else if(files.length > FREE_LIMIT){
+      $('dlZip').textContent = 'Download all as .zip (unlock)';
+    } else {
+      $('dlZip').textContent = 'Download all as .zip';
+    }
+  }
+  updateUnlockStatus();
   $('count').textContent = files.length ? (files.length + ' file' + (files.length>1?'s':'') + ' · processed locally') : '';
   var sum = $('summary');
   if(!files.length){
@@ -685,32 +863,26 @@ function renderAll(){
 }
 $('dlZip').addEventListener('click', function(){
   if(!files.length) return;
-  var entries = [], total = 0, i, out;
-  for(i=0;i<files.length;i++){
-    out = ensureOut(files[i]);
-    total += out.length;
-    entries.push({name: outName(files[i].name, targetDpi), data: out});
-  }
-  var notice = $('zipNotice');
-  if(total > ZIP_MAX){
-    notice.hidden = false;
-    notice.textContent = 'This batch is over 800 MB. Split it into smaller batches instead of building one zip — the archive is assembled in RAM and a huge one can crash the tab.';
+  if(isUnlocked() || files.length <= FREE_LIMIT){
+    doZipDownload();
     return;
   }
-  notice.hidden = true;
-  notice.textContent = '';
-  var zip = zipStore(entries);
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([zip], {type:'application/zip'}));
-  a.download = 'setdpi-' + targetDpi + 'dpi-batch.zip';
-  document.body.appendChild(a); a.click();
-  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+  openPaywall();
 });
+if($('pwClose')) $('pwClose').addEventListener('click', closePaywall);
+if($('paywall')) $('paywall').addEventListener('click', function(e){ if(e.target === $('paywall')) closePaywall(); });
+if($('pwDayPass')) $('pwDayPass').addEventListener('click', function(){ checkout('day'); });
+if($('pwLifetime')) $('pwLifetime').addEventListener('click', function(){ checkout('lifetime'); });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePaywall(); });
+handlePaidQuery();
+updateUnlockStatus();
+track('bulk_enter', { path: '/bulk-dpi-changer/' });
 $('clearBtn').addEventListener('click', function(){
   files.forEach(function(f){ URL.revokeObjectURL(f.url); });
   files = [];
   $('zipNotice').hidden = true;
   $('zipNotice').textContent = '';
+  closePaywall();
   renderAll();
 });
 /* sample photo: 让没带图的访客（和评委）零成本体验 */
@@ -727,7 +899,7 @@ $('sampleBtn').addEventListener('click', function(e){
   }, 'image/jpeg', 0.92);
 });
 /* test hook: byte-level API surface for automated verification */
-window.__setdpi = {readJpegDpi:readJpegDpi, writeJpegDpi:writeJpegDpi, readPngDpi:readPngDpi, writePngDpi:writePngDpi, isJpeg:isJpeg, isPng:isPng, zipStore:zipStore, outName:outName, crc32:crc32};
+window.__setdpi = {readJpegDpi:readJpegDpi, writeJpegDpi:writeJpegDpi, readPngDpi:readPngDpi, writePngDpi:writePngDpi, isJpeg:isJpeg, isPng:isPng, zipStore:zipStore, outName:outName, crc32:crc32, isUnlocked:isUnlocked, readUnlock:readUnlock, writeUnlock:writeUnlock, openPaywall:openPaywall, FREE_LIMIT:FREE_LIMIT};
 })();
 </script>
 </body>
