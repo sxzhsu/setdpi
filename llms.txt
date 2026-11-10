@@ -40,3 +40,9 @@
 - [Standard DPI Settings](https://setdpi.com/standard-dpi-settings/): Reference for 72, 96, 150, 200, 300, 600, and 1200 — what each value is for and how to set it
 - [DPI for Printing](https://setdpi.com/dpi-for-printing/): Decision guide by print product, plus pixels needed at 300 DPI for common sizes
 - [What 300 DPI Looks Like](https://setdpi.com/what-does-300-dpi-look-like/): Why a 300 DPI file and a 72 DPI file look identical on screen, and what 300 means on paper
+
+## Pricing (one-time, never a subscription)
+
+- Single-file DPI tools stay free forever — no signup, no watermark.
+- [Bulk Image DPI Changer](https://setdpi.com/bulk-dpi-changer/): First 5 free in a batch · no signup. After more than 5, download-all is a Day Pass — $3.99 or Lifetime — $39.99. One-time checkout via Stripe. No monthly subscription.
+- Changing the density tag on one JPEG, PNG, TIFF or BMP never hits that wall. The wall is only for bulk zip download on that page.
