@@ -42,6 +42,6 @@
     if (t && t.nodeType === 3) t = t.parentElement;
     var a = t && t.closest ? t.closest("a[data-bulk-footer]") : null;
     if (!a) return;
-    track("bulk_footer_click", params);
+    track("bulk_footer_click", Object.assign({}, params, { transport_type: "beacon" }));
   });
 })();
