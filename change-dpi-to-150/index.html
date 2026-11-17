@@ -465,8 +465,42 @@ function makeExif(dpi){
   a[t+8]=a[t]; a[t+9]=a[t+1]; a[t+10]=a[t+2]; a[t+11]=a[t+3]; a[t+12]=1;
   return a;
 }
+/* Photoshop ResolutionInfo (8BIM 0x03ED in APP13). Photoshop reads this before EXIF/JFIF,
+   so it must match too. Fixed-size record: edited in place, file length unchanged. */
+function psResFix(u, dpi){
+  var i = 2;
+  while(i + 4 <= u.length){
+    if(u[i] !== 0xFF){ i++; continue; }
+    var m = u[i+1];
+    if(m === 0xFF){ i++; continue; }
+    if(m === 0xD8 || m === 0x01 || (m >= 0xD0 && m <= 0xD7)){ i += 2; continue; }
+    if(m === 0xDA) break;
+    var L = be16(u, i+2);
+    if(L < 2 || i + 2 + L > u.length) break;
+    var end = i + 2 + L;
+    if(m === 0xED && L >= 16 && String.fromCharCode.apply(null, u.subarray(i+4, i+17)) === 'Photoshop 3.0' && u[i+17] === 0){
+      var p = i + 18;
+      while(p + 12 <= end && u[p]===0x38 && u[p+1]===0x42 && u[p+2]===0x49 && u[p+3]===0x4D){
+        var id = be16(u, p+4), nl = u[p+6], q = p + 7 + nl;
+        if((1 + nl) % 2) q++;
+        if(q + 4 > end) break;
+        var sz = be32(u, q), d = q + 4;
+        if(d + sz > end) break;
+        if(id === 0x03ED && sz >= 16){
+          var fx = (dpi * 65536) >>> 0;
+          wbe32(u, d, fx);   u[d+4] = 0;  u[d+5] = 1;   // hRes, unit = pixels/inch
+          wbe32(u, d+8, fx); u[d+12] = 0; u[d+13] = 1;  // vRes, unit = pixels/inch
+        }
+        p = d + sz + (sz % 2);
+      }
+    }
+    i = end;
+  }
+  return u;
+}
 function writeJpegDpi(src, dpi){
   var u = src.slice();
+  psResFix(u, dpi);
   var segs = jpegSegments(u);
   var jf = findJfif(u, segs), ex = findExif(u, segs);
   if(jf){

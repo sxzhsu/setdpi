@@ -25,7 +25,8 @@
 {"@type":"Question","name":"Will my file still fit under Etsy's 20 MB limit?","acceptedAnswer":{"@type":"Answer","text":"Yes, if it fit before. SetDPI changes a few bytes of metadata, so the file size stays essentially identical. If your file is already over 20 MB, re-export it as a high-quality JPG first — changing DPI won't shrink it."}},
 {"@type":"Question","name":"Does changing DPI change my pixel dimensions?","acceptedAnswer":{"@type":"Answer","text":"No. A 4800 × 6000 file stays 4800 × 6000. Only the DPI tag changes — which is exactly what you want for a printable you've already sized."}},
 {"@type":"Question","name":"My buyer says the print came out blurry. Will 300 DPI fix it?","acceptedAnswer":{"@type":"Answer","text":"Only if the pixels are there. DPI tells the printer how big to print; pixels decide how sharp it looks. If you're selling a 16×20 file, it needs 4800 × 6000 pixels. Check the chart above. If you're short, upscale first, then set the DPI."}},
-{"@type":"Question","name":"Is it safe to drop my original artwork here?","acceptedAnswer":{"@type":"Answer","text":"Your files never leave your computer. The conversion runs in your browser — nothing is uploaded to us or anyone else. Turn off your Wi-Fi after the page loads and it still works."}}
+{"@type":"Question","name":"Is it safe to drop my original artwork here?","acceptedAnswer":{"@type":"Answer","text":"Your files never leave your computer. The conversion runs in your browser — nothing is uploaded to us or anyone else. Turn off your Wi-Fi after the page loads and it still works."}},
+{"@type": "Question", "name": "My Canva download says 96 DPI. Is it print-ready?", "acceptedAnswer": {"@type": "Answer", "text": "Canva tags PNG and JPG downloads at 96 DPI no matter how big the design is. If you built the design in pixels (for example 2400 × 3000 px for an 8×10), the pixels are already there and only the tag is wrong. Set it to 300 here. If you built it in inches, check the pixel size first: a low pixel count won't get sharper with a new tag. Re-export with a larger size, or use Canva's PDF Print option."}}
 ]}
 </script>
 <script type="application/ld+json">
@@ -185,7 +186,7 @@ img,svg{max-width:100%}
   <div class="hero">
     <div class="kicker">No upload · Lossless · Built for Etsy Sellers</div>
     <h1>Etsy 300 DPI Converter for Printable Art</h1>
-    <p class="sub">Your buyers open the file, see 72 DPI, and message you. Fix the tag in seconds — right in your browser, without touching a single pixel.</p>
+    <p class="sub">Your buyers open the file, see 72 or 96 DPI, and message you. Fix the tag in seconds — right in your browser, without touching a single pixel.</p>
     <div class="trust">
       <span><strong>Stays on your device</strong> — never uploaded, no scraper</span>
       <span><strong>Zero quality loss</strong> — rewrite DPI tag only</span>
@@ -302,6 +303,10 @@ img,svg{max-width:100%}
         <summary>Is it safe to drop my original artwork here?</summary>
         <div class="a">Your files never leave your computer. The conversion runs in your browser — nothing is uploaded to us or anyone else. Turn off your Wi-Fi after the page loads and it still works.</div>
       </details>
+      <details>
+        <summary>My Canva download says 96 DPI. Is it print-ready?</summary>
+        <div class="a">Canva tags PNG and JPG downloads at 96 DPI no matter how big the design is. If you built the design in pixels (for example 2400 × 3000 px for an 8×10), the pixels are already there and only the tag is wrong. Set it to 300 here. If you built it in inches, check the pixel size first: a low pixel count won't get sharper with a new tag. Re-export with a larger size, or use Canva's PDF Print option.</div>
+      </details>
     </div>
   </section>
 </main>
@@ -347,47 +352,156 @@ function concat(parts){
 function isJpeg(u){ return u.length>3 && u[0]===0xFF && u[1]===0xD8 && u[2]===0xFF; }
 function isPng(u){ return u.length>8 && u[0]===0x89 && u[1]===0x50 && u[2]===0x4E && u[3]===0x47 && u[4]===0x0D && u[5]===0x0A && u[6]===0x1A && u[7]===0x0A; }
 
+/* JPEG engine: identical to homepage — updates BOTH JFIF and EXIF (Finder/Preview/Windows read EXIF) */
+function jpegSegments(u){
+  var segs = [], i = 2, m, L;
+  while(i+4 <= u.length){
+    if(u[i]!==0xFF){ i++; continue; }
+    m = u[i+1];
+    if(m===0xFF){ i++; continue; }
+    if(m===0xD8 || m===0x01 || (m>=0xD0 && m<=0xD7)){ i+=2; continue; }
+    if(m===0xDA) break; // start of scan — stop
+    L = be16(u, i+2);
+    if(L < 2 || i+2+L > u.length) break;
+    segs.push({marker:m, start:i, len:L});
+    i += 2 + L;
+  }
+  return segs;
+}
+function findJfif(u, segs){
+  for(var k=0;k<segs.length;k++){ var s=segs[k];
+    if(s.marker===0xE0 && s.len>=14 && u[s.start+4]===0x4A && u[s.start+5]===0x46 && u[s.start+6]===0x49 && u[s.start+7]===0x46 && u[s.start+8]===0) return s;
+  } return null;
+}
+function findExif(u, segs){
+  for(var k=0;k<segs.length;k++){ var s=segs[k];
+    if(s.marker===0xE1 && s.len>=10 && u[s.start+4]===0x45 && u[s.start+5]===0x78 && u[s.start+6]===0x69 && u[s.start+7]===0x66 && u[s.start+8]===0 && u[s.start+9]===0) return s;
+  } return null;
+}
+/* walk EXIF IFD0, return {xres,yres,unit} entry positions + reader */
+function exifRes(u, seg){
+  var base = seg.start + 10;                       // TIFF header
+  var end  = seg.start + 2 + seg.len;
+  if(base+8 > end) return null;
+  var le = (u[base]===0x49 && u[base+1]===0x49);
+  if(!le && !(u[base]===0x4D && u[base+1]===0x4D)) return null;
+  function r16(i){ return le ? (u[i]|(u[i+1]<<8)) : ((u[i]<<8)|u[i+1]); }
+  function r32(i){ return le ? ((u[i]|(u[i+1]<<8)|(u[i+2]<<16)|(u[i+3]<<24))>>>0) : be32(u,i); }
+  function w32(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; u[i+2]=(v>>>16)&255; u[i+3]=(v>>>24)&255; } else wbe32(u,i,v); }
+  function w16(i,v){ if(le){ u[i]=v&255; u[i+1]=(v>>>8)&255; } else { u[i]=(v>>>8)&255; u[i+1]=v&255; } }
+  if(r16(base+2)!==42) return null;
+  var ifd = base + r32(base+4);
+  if(ifd+2 > end) return null;
+  var n = r16(ifd), res = {le:le, r16:r16, r32:r32, w32:w32, w16:w16, base:base, end:end};
+  for(var k=0;k<n;k++){
+    var e = ifd + 2 + k*12;
+    if(e+12 > end) break;
+    var tag = r16(e), type = r16(e+2);
+    if(tag===0x011A && type===5) res.x = e;
+    if(tag===0x011B && type===5) res.y = e;
+    if(tag===0x0128 && type===3) res.unit = e;
+  }
+  return (res.x || res.y || res.unit) ? res : null;
+}
 function readJpegDpi(u){
-  var i = 2;
-  while(i < u.length - 4){
-    if(u[i] !== 0xFF) { i++; continue; }
-    var m = u[i+1];
-    if(m === 0xDA || m === 0xD9) break;
-    var len = be16(u, i+2);
-    if(m === 0xE0 && len >= 16){
-      if(u[i+4]===0x4A && u[i+5]===0x46 && u[i+6]===0x49 && u[i+7]===0x46 && u[i+8]===0){
-        var units = u[i+11], xd = be16(u, i+12), yd = be16(u, i+14);
-        if(units === 1) return Math.round((xd+yd)/2);
-        if(units === 2) return Math.round(((xd+yd)/2) * 2.54);
+  var segs = jpegSegments(u);
+  var ex = findExif(u, segs);
+  if(ex){
+    var r = exifRes(u, ex);
+    if(r && r.x){
+      var off = r.base + r.r32(r.x+8);
+      if(off+8 <= r.end){
+        var num = r.r32(off), den = r.r32(off+4) || 1;
+        var unit = r.unit ? r.r16(r.unit+8) : 2;
+        var v = num/den;
+        if(unit===3) v *= 2.54;
+        if(v>0 && v<100000) return Math.round(v);
       }
     }
-    i += 2 + len;
   }
-  return null;
+  var jf = findJfif(u, segs);
+  if(jf){
+    var units = u[jf.start+11], X = be16(u, jf.start+12);
+    if(units===1 && X>0) return X;
+    if(units===2 && X>0) return Math.round(X*2.54);
+  }
+  return null; // not set
 }
-function writeJpegDpi(u, dpi){
-  var jfif = new Uint8Array([
-    0xFF, 0xE0, 0x00, 0x10,
-    0x4A, 0x46, 0x49, 0x46, 0x00,
-    0x01, 0x01,
-    0x01,
-    (dpi>>8)&255, dpi&255,
-    (dpi>>8)&255, dpi&255,
-    0x00, 0x00
-  ]);
-  var i = 2, hasJfif = false;
-  if(u.length > 4 && u[2] === 0xFF && u[3] === 0xE0){
-    var len = be16(u, 4);
-    if(len >= 16 && u[6]===0x4A && u[7]===0x46 && u[8]===0x49 && u[9]===0x46 && u[10]===0) hasJfif = true;
+function makeJfif(dpi){
+  return new Uint8Array([0xFF,0xE0,0x00,0x10,0x4A,0x46,0x49,0x46,0x00,0x01,0x02,0x01,(dpi>>8)&255,dpi&255,(dpi>>8)&255,dpi&255,0x00,0x00]);
+}
+function makeExif(dpi){
+  // little-endian TIFF, IFD0 with XRes/YRes/ResUnit, rationals at offset 50/58
+  var a = new Uint8Array(76);
+  a.set([0xFF,0xE1,0x00,0x4A,0x45,0x78,0x69,0x66,0x00,0x00, 0x49,0x49,0x2A,0x00,0x08,0x00,0x00,0x00, 0x03,0x00]);
+  var e = 20;
+  a.set([0x1A,0x01,0x05,0x00,0x01,0x00,0x00,0x00,0x32,0x00,0x00,0x00], e);       // XResolution -> 50
+  a.set([0x1B,0x01,0x05,0x00,0x01,0x00,0x00,0x00,0x3A,0x00,0x00,0x00], e+12);    // YResolution -> 58
+  a.set([0x28,0x01,0x03,0x00,0x01,0x00,0x00,0x00,0x02,0x00,0x00,0x00], e+24);    // ResolutionUnit = inches
+  // next IFD = 0 at 56..59 (10+8+2+36 = 56)
+  var t = 60; // rationals live at tiff-offset 50 => abs 10+50 = 60
+  a[t]=dpi&255; a[t+1]=(dpi>>8)&255; a[t+2]=(dpi>>16)&255; a[t+3]=(dpi>>24)&255; a[t+4]=1;
+  a[t+8]=a[t]; a[t+9]=a[t+1]; a[t+10]=a[t+2]; a[t+11]=a[t+3]; a[t+12]=1;
+  return a;
+}
+/* Photoshop ResolutionInfo (8BIM 0x03ED in APP13). Photoshop reads this before EXIF/JFIF,
+   so it must match too. Fixed-size record: edited in place, file length unchanged. */
+function psResFix(u, dpi){
+  var i = 2;
+  while(i + 4 <= u.length){
+    if(u[i] !== 0xFF){ i++; continue; }
+    var m = u[i+1];
+    if(m === 0xFF){ i++; continue; }
+    if(m === 0xD8 || m === 0x01 || (m >= 0xD0 && m <= 0xD7)){ i += 2; continue; }
+    if(m === 0xDA) break;
+    var L = be16(u, i+2);
+    if(L < 2 || i + 2 + L > u.length) break;
+    var end = i + 2 + L;
+    if(m === 0xED && L >= 16 && String.fromCharCode.apply(null, u.subarray(i+4, i+17)) === 'Photoshop 3.0' && u[i+17] === 0){
+      var p = i + 18;
+      while(p + 12 <= end && u[p]===0x38 && u[p+1]===0x42 && u[p+2]===0x49 && u[p+3]===0x4D){
+        var id = be16(u, p+4), nl = u[p+6], q = p + 7 + nl;
+        if((1 + nl) % 2) q++;
+        if(q + 4 > end) break;
+        var sz = be32(u, q), d = q + 4;
+        if(d + sz > end) break;
+        if(id === 0x03ED && sz >= 16){
+          var fx = (dpi * 65536) >>> 0;
+          wbe32(u, d, fx);   u[d+4] = 0;  u[d+5] = 1;   // hRes, unit = pixels/inch
+          wbe32(u, d+8, fx); u[d+12] = 0; u[d+13] = 1;  // vRes, unit = pixels/inch
+        }
+        p = d + sz + (sz % 2);
+      }
+    }
+    i = end;
   }
-  if(hasJfif){
-    var copy = new Uint8Array(u);
-    copy[13] = 1;
-    copy[14] = (dpi>>8)&255; copy[15] = dpi&255;
-    copy[16] = (dpi>>8)&255; copy[17] = dpi&255;
-    return copy;
+  return u;
+}
+function writeJpegDpi(src, dpi){
+  var u = src.slice();
+  psResFix(u, dpi);
+  var segs = jpegSegments(u);
+  var jf = findJfif(u, segs), ex = findExif(u, segs);
+  if(jf){
+    u[jf.start+11] = 1;
+    u[jf.start+12] = (dpi>>8)&255; u[jf.start+13] = dpi&255;
+    u[jf.start+14] = (dpi>>8)&255; u[jf.start+15] = dpi&255;
   }
-  return concat([u.subarray(0, 2), jfif, u.subarray(2)]);
+  if(ex){
+    var r = exifRes(u, ex);
+    if(r){
+      if(r.x){ var ox = r.base + r.r32(r.x+8); if(ox+8<=r.end){ r.w32(ox,dpi); r.w32(ox+4,1); } }
+      if(r.y){ var oy = r.base + r.r32(r.y+8); if(oy+8<=r.end){ r.w32(oy,dpi); r.w32(oy+4,1); } }
+      if(r.unit){ r.w16(r.unit+8, 2); }
+    }
+  }
+  var inserts = [];
+  if(!jf) inserts.push(makeJfif(dpi));
+  if(!ex) inserts.push(makeExif(dpi));
+  if(inserts.length){
+    return concat([u.slice(0,2)].concat(inserts, [u.slice(2)]));
+  }
+  return u;
 }
 
 function readPngDpi(u){
